@@ -1,0 +1,15 @@
+{
+  "originHash" : "ac648997c32c1aa570a695a5ababfcf78ba9b60e35a25a09a285f74773d2cd51",
+  "pins" : [
+    {
+      "identity" : "router-kit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/BerkSpar/router-kit.git",
+      "state" : {
+        "revision" : "59324f9e7777a747d37625c514f3b3dc7b696184",
+        "version" : "1.0.0"
+      }
+    }
+  ],
+  "version" : 3
+}
