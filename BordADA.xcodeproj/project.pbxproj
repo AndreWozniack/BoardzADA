@@ -6,6 +6,15 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		AF362CBF2CACB02100506443 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AF362CBE2CACB02100506443 /* GoogleService-Info.plist */; };
+		AF362CC32CACB14900506443 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = AF362CC22CACB14900506443 /* FirebaseAnalytics */; };
+		AF362CC52CACB14900506443 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = AF362CC42CACB14900506443 /* FirebaseAnalyticsOnDeviceConversion */; };
+		AF362CC72CACB14900506443 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = AF362CC62CACB14900506443 /* FirebaseAnalyticsWithoutAdIdSupport */; };
+		AF362CC92CACB14900506443 /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = AF362CC82CACB14900506443 /* FirebaseAppCheck */; };
+		AF362CCB2CACB14900506443 /* FirebaseAppDistribution-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = AF362CCA2CACB14900506443 /* FirebaseAppDistribution-Beta */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		AF362C9C2CACAAB700506443 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,6 +36,7 @@
 		AF362C8B2CACAAB400506443 /* BordADA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BordADA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF362C9B2CACAAB700506443 /* BordADATests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BordADATests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF362CA52CACAAB700506443 /* BordADAUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BordADAUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF362CBE2CACB02100506443 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -52,6 +62,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF362CC92CACB14900506443 /* FirebaseAppCheck in Frameworks */,
+				AF362CC32CACB14900506443 /* FirebaseAnalytics in Frameworks */,
+				AF362CCB2CACB14900506443 /* FirebaseAppDistribution-Beta in Frameworks */,
+				AF362CC72CACB14900506443 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
+				AF362CC52CACB14900506443 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,6 +94,7 @@
 				AF362C9E2CACAAB700506443 /* BordADATests */,
 				AF362CA82CACAAB700506443 /* BordADAUITests */,
 				AF362C8C2CACAAB400506443 /* Products */,
+				AF362CBE2CACB02100506443 /* GoogleService-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -112,6 +128,11 @@
 			);
 			name = BordADA;
 			packageProductDependencies = (
+				AF362CC22CACB14900506443 /* FirebaseAnalytics */,
+				AF362CC42CACB14900506443 /* FirebaseAnalyticsOnDeviceConversion */,
+				AF362CC62CACB14900506443 /* FirebaseAnalyticsWithoutAdIdSupport */,
+				AF362CC82CACB14900506443 /* FirebaseAppCheck */,
+				AF362CCA2CACB14900506443 /* FirebaseAppDistribution-Beta */,
 			);
 			productName = BordADA;
 			productReference = AF362C8B2CACAAB400506443 /* BordADA.app */;
@@ -195,6 +216,9 @@
 			);
 			mainGroup = AF362C822CACAAB400506443;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				AF362CC12CACB14900506443 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = AF362C8C2CACAAB400506443 /* Products */;
 			projectDirPath = "";
@@ -212,6 +236,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF362CBF2CACB02100506443 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -558,6 +583,45 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		AF362CC12CACB14900506443 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.3.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		AF362CC22CACB14900506443 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AF362CC12CACB14900506443 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		AF362CC42CACB14900506443 /* FirebaseAnalyticsOnDeviceConversion */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AF362CC12CACB14900506443 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsOnDeviceConversion;
+		};
+		AF362CC62CACB14900506443 /* FirebaseAnalyticsWithoutAdIdSupport */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AF362CC12CACB14900506443 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsWithoutAdIdSupport;
+		};
+		AF362CC82CACB14900506443 /* FirebaseAppCheck */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AF362CC12CACB14900506443 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAppCheck;
+		};
+		AF362CCA2CACB14900506443 /* FirebaseAppDistribution-Beta */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AF362CC12CACB14900506443 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseAppDistribution-Beta";
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = AF362C832CACAAB400506443 /* Project object */;
 }

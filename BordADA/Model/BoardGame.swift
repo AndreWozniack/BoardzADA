@@ -7,13 +7,13 @@
 import Foundation
 
 struct BoardGame: Codable, Identifiable, Equatable {
-    let id: String
-    let name: String
-    let owner: String
-    let status: GameStatus
-    let numPlayersMax: Int
-    let numPlayersMin: Int
-    let description: String
+    var id: String
+    var name: String
+    var owner: String
+    var status: GameStatus
+    var numPlayersMax: Int
+    var numPlayersMin: Int
+    var description: String
 }
 
 enum GameStatus: String, Codable, CaseIterable {
