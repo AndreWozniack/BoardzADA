@@ -6,40 +6,58 @@
 //
 
 import Foundation
+import FirebaseFirestore
 
 class GamesCollectionManager: ObservableObject {
     @Published var games: [BoardGame] = []
     
-    // Create (add a new game to the collection)
+    private var db = Firestore.firestore()
     func addGame(_ game: BoardGame) {
-        games.append(game)
+        do {
+            let _ = try db.collection("games").document(game.id).setData(from: game)
+            games.append(game)
+        } catch {
+            print("Erro ao salvar jogo: \(error.localizedDescription)")
+        }
     }
-
-    // Read (get all games or find a specific game by id)
-    func getAllGames() -> [BoardGame] {
-        return games
+    func fetchGames() {
+        db.collection("games").addSnapshotListener { (querySnapshot, error) in
+            guard let documents = querySnapshot?.documents else {
+                print("Nenhum documento encontrado")
+                return
+            }
+            
+            self.games = documents.compactMap { (queryDocumentSnapshot) -> BoardGame? in
+                return try? queryDocumentSnapshot.data(as: BoardGame.self)
+            }
+        }
     }
     
-    func getGameById(_ id: String) -> BoardGame? {
-        return games.first { $0.id == id }
-    }
-
-    // Update (using the GameManager)
     func updateGame(_ id: String, with changes: (GameManager) -> Void) {
         if let gameIndex = games.firstIndex(where: { $0.id == id }) {
             let gameManager = GameManager(boardGame: games[gameIndex])
             changes(gameManager)
             games[gameIndex] = gameManager.getGame()
+            
+            do {
+                let _ = try db.collection("games").document(id).setData(from: games[gameIndex])
+            } catch {
+                print("Erro ao atualizar jogo: \(error.localizedDescription)")
+            }
         }
     }
-
-    // Delete (remove a game from the collection)
+    
     func removeGame(by id: String) {
-        games.removeAll { $0.id == id }
+        db.collection("games").document(id).delete { error in
+            if let error = error {
+                print("Erro ao remover o jogo: \(error.localizedDescription)")
+            } else {
+                self.games.removeAll { $0.id == id }
+            }
+        }
     }
-
-    // Get all available games
     func getAvailableGames() -> [BoardGame] {
         return games.filter { $0.status == .free }
     }
+
 }
