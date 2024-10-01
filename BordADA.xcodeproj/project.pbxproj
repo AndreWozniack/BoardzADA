@@ -13,7 +13,7 @@
 		AF362CC72CACB14900506443 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = AF362CC62CACB14900506443 /* FirebaseAnalyticsWithoutAdIdSupport */; };
 		AF362CC92CACB14900506443 /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = AF362CC82CACB14900506443 /* FirebaseAppCheck */; };
 		AF362CCB2CACB14900506443 /* FirebaseAppDistribution-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = AF362CCA2CACB14900506443 /* FirebaseAppDistribution-Beta */; };
-		AF362CD02CACB91E00506443 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = AF362CCF2CACB91E00506443 /* FirebaseFirestore */; };
+		AF362D5F2CACBF9600506443 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = AF362D5E2CACBF9600506443 /* FirebaseFirestore */; };
 		F7756DF52CACB951008B1389 /* RouterKit in Frameworks */ = {isa = PBXBuildFile; productRef = F7756DF42CACB951008B1389 /* RouterKit */; };
 /* End PBXBuildFile section */
 
@@ -70,7 +70,7 @@
 				AF362CC72CACB14900506443 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				F7756DF52CACB951008B1389 /* RouterKit in Frameworks */,
 				AF362CC52CACB14900506443 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
-				AF362CD02CACB91E00506443 /* FirebaseFirestore in Frameworks */,
+				AF362D5F2CACBF9600506443 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,7 +99,7 @@
 				AF362CA82CACAAB700506443 /* BordADAUITests */,
 				AF362C8C2CACAAB400506443 /* Products */,
 				AF362CBE2CACB02100506443 /* GoogleService-Info.plist */,
-				AF362CCE2CACB91E00506443 /* Frameworks */,
+				AF362D5D2CACBF9600506443 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -113,7 +113,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		AF362CCE2CACB91E00506443 /* Frameworks */ = {
+		AF362D5D2CACBF9600506443 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 			);
@@ -145,8 +145,8 @@
 				AF362CC62CACB14900506443 /* FirebaseAnalyticsWithoutAdIdSupport */,
 				AF362CC82CACB14900506443 /* FirebaseAppCheck */,
 				AF362CCA2CACB14900506443 /* FirebaseAppDistribution-Beta */,
-				AF362CCF2CACB91E00506443 /* FirebaseFirestore */,
 				F7756DF42CACB951008B1389 /* RouterKit */,
+				AF362D5E2CACBF9600506443 /* FirebaseFirestore */,
 			);
 			productName = BordADA;
 			productReference = AF362C8B2CACAAB400506443 /* BordADA.app */;
@@ -644,10 +644,11 @@
 			package = AF362CC12CACB14900506443 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = "FirebaseAppDistribution-Beta";
 		};
-		AF362CCF2CACB91E00506443 /* FirebaseFirestore */ = {
+		AF362D5E2CACBF9600506443 /* FirebaseFirestore */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = AF362CC12CACB14900506443 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
+		};
 		F7756DF42CACB951008B1389 /* RouterKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = F7756DF32CACB951008B1389 /* XCRemoteSwiftPackageReference "router-kit" */;
