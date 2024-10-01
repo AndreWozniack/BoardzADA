@@ -9,12 +9,12 @@ import RouterKit
 import SwiftUI
 
 enum AppRoute: Routable {
-    case game
+    case game(BoardGame)
     case gameList
     
     var view: any View {
         switch self {
-            case .game: GameView()
+            case .game(let boardGame): GameView(boardGame: boardGame)
             case .gameList: GameListView()
         }
     }
