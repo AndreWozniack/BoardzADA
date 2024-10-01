@@ -25,7 +25,7 @@ class GameListViewModel: ObservableObject {
                 id: "12345",
                 name: "Ito",
                 owner: "JoyJoy",
-                status: .free,
+                status: .occupied,
                 numPlayersMax: 2,
                 numPlayersMin: 10,
                 description: "Conta até 100... 99..."
