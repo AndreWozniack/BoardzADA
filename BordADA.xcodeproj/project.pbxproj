@@ -7,12 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+<<<<<<< HEAD
+		F74D5BDA2CACAD81006E7FAE /* RouterKit in Frameworks */ = {isa = PBXBuildFile; productRef = F74D5BD92CACAD81006E7FAE /* RouterKit */; };
+=======
 		AF362CBF2CACB02100506443 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AF362CBE2CACB02100506443 /* GoogleService-Info.plist */; };
 		AF362CC32CACB14900506443 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = AF362CC22CACB14900506443 /* FirebaseAnalytics */; };
 		AF362CC52CACB14900506443 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = AF362CC42CACB14900506443 /* FirebaseAnalyticsOnDeviceConversion */; };
 		AF362CC72CACB14900506443 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = AF362CC62CACB14900506443 /* FirebaseAnalyticsWithoutAdIdSupport */; };
 		AF362CC92CACB14900506443 /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = AF362CC82CACB14900506443 /* FirebaseAppCheck */; };
 		AF362CCB2CACB14900506443 /* FirebaseAppDistribution-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = AF362CCA2CACB14900506443 /* FirebaseAppDistribution-Beta */; };
+>>>>>>> 54ea6634f6ac180402fe685b947a7e91c7cddfa9
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,11 +66,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+<<<<<<< HEAD
+				F74D5BDA2CACAD81006E7FAE /* RouterKit in Frameworks */,
+=======
 				AF362CC92CACB14900506443 /* FirebaseAppCheck in Frameworks */,
 				AF362CC32CACB14900506443 /* FirebaseAnalytics in Frameworks */,
 				AF362CCB2CACB14900506443 /* FirebaseAppDistribution-Beta in Frameworks */,
 				AF362CC72CACB14900506443 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				AF362CC52CACB14900506443 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
+>>>>>>> 54ea6634f6ac180402fe685b947a7e91c7cddfa9
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -128,11 +136,15 @@
 			);
 			name = BordADA;
 			packageProductDependencies = (
+<<<<<<< HEAD
+				F74D5BD92CACAD81006E7FAE /* RouterKit */,
+=======
 				AF362CC22CACB14900506443 /* FirebaseAnalytics */,
 				AF362CC42CACB14900506443 /* FirebaseAnalyticsOnDeviceConversion */,
 				AF362CC62CACB14900506443 /* FirebaseAnalyticsWithoutAdIdSupport */,
 				AF362CC82CACB14900506443 /* FirebaseAppCheck */,
 				AF362CCA2CACB14900506443 /* FirebaseAppDistribution-Beta */,
+>>>>>>> 54ea6634f6ac180402fe685b947a7e91c7cddfa9
 			);
 			productName = BordADA;
 			productReference = AF362C8B2CACAAB400506443 /* BordADA.app */;
@@ -217,7 +229,11 @@
 			mainGroup = AF362C822CACAAB400506443;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
+<<<<<<< HEAD
+				F74D5BD82CACAD81006E7FAE /* XCRemoteSwiftPackageReference "router-kit" */,
+=======
 				AF362CC12CACB14900506443 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+>>>>>>> 54ea6634f6ac180402fe685b947a7e91c7cddfa9
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = AF362C8C2CACAAB400506443 /* Products */;
@@ -585,17 +601,32 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+<<<<<<< HEAD
+		F74D5BD82CACAD81006E7FAE /* XCRemoteSwiftPackageReference "router-kit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/BerkSpar/router-kit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+=======
 		AF362CC12CACB14900506443 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 11.3.0;
+>>>>>>> 54ea6634f6ac180402fe685b947a7e91c7cddfa9
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+<<<<<<< HEAD
+		F74D5BD92CACAD81006E7FAE /* RouterKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F74D5BD82CACAD81006E7FAE /* XCRemoteSwiftPackageReference "router-kit" */;
+			productName = RouterKit;
+=======
 		AF362CC22CACB14900506443 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = AF362CC12CACB14900506443 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
@@ -620,6 +651,7 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AF362CC12CACB14900506443 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = "FirebaseAppDistribution-Beta";
+>>>>>>> 54ea6634f6ac180402fe685b947a7e91c7cddfa9
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

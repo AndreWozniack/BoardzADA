@@ -6,7 +6,7 @@
 //
 import Foundation
 
-struct BoardGame: Codable, Identifiable, Equatable {
+struct BoardGame: Codable, Identifiable, Equatable, Hashable {
     var id: String
     var name: String
     var owner: String
@@ -16,7 +16,7 @@ struct BoardGame: Codable, Identifiable, Equatable {
     var description: String
 }
 
-enum GameStatus: String, Codable, CaseIterable {
+enum GameStatus: String, Codable, CaseIterable, Hashable {
     case free
     case occupied
     case reserved
