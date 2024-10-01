@@ -5,20 +5,25 @@
 //  Created by André Wozniack on 01/10/24.
 //
 
+import AVFoundation  //import to access barcode types you want to scan
+import CarBode
 import SwiftUI
 
 struct ContentView: View {
-    var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-        }
-        .padding()
-    }
+	@State var isShowing: Bool = false
+	var body: some View {
+		ZStack {
+			Button(action: { self.isShowing.toggle() }) {
+				Text("Scan")
+			}
+		}
+			.sheet(isPresented: $isShowing) {
+				ScannerView(isShowing: $isShowing)
+					.presentationDetents([.medium, .large])
+			}
+	}
 }
 
 #Preview {
-    ContentView()
+	ContentView()
 }
