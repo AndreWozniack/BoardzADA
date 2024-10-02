@@ -17,6 +17,7 @@ class GameListViewModel: ObservableObject {
                 name: "Quest",
                 owner: "Felipe",
                 status: .free,
+                difficult: .easy,
                 numPlayersMax: 5,
                 numPlayersMin: 3,
                 description: "É um jogo mt foda aaaaaaaa"
@@ -25,7 +26,8 @@ class GameListViewModel: ObservableObject {
                 id: "12345",
                 name: "Ito",
                 owner: "JoyJoy",
-                status: .free,
+                status: .occupied,
+                difficult: .easy,
                 numPlayersMax: 2,
                 numPlayersMin: 10,
                 description: "Conta até 100... 99..."
