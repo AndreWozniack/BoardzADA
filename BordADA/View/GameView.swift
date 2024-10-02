@@ -27,7 +27,6 @@ struct GameView: View {
 
 #Preview {
     GameView(game: BoardGame(
-        id: "1234",
         name: "Quest",
         owner: "Felipe",
         status: .free,
