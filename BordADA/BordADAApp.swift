@@ -21,7 +21,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
 @main
 struct BordADAApp: App {
-    
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
     var body: some Scene {

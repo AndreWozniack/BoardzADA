@@ -10,6 +10,7 @@ import RouterKit
 
 struct GameListView: View {
     @ObservedObject var vm = GameListViewModel()
+    @State var isShowing: Bool = false
     
     @EnvironmentObject var router: Router<AppRoute>
     
@@ -25,8 +26,16 @@ struct GameListView: View {
                     await vm.load()
                 }
             }
+            
+            Button(action: { self.isShowing.toggle() }) {
+                 Text("Scan")
+             }
         }
         .toolbar { EditButton() }
+        .sheet(isPresented: $isShowing) {
+             ScannerView(isShowing: $isShowing)
+                 .presentationDetents([.medium, .large])
+         }
     }
 }
 
