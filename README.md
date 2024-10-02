@@ -1,6 +1,6 @@
 
 <h3 align="center">
-  <a href="https://github.com/AndreWozniack/Bordada"><img src="https://user-images.githubusercontent.com/47111228/178317244-1f3b5ea6-2d61-45db-a7e4-0090ec3c157f.png" alt="OctoCoin Logo" width="300"></a>
+  <a href="https://github.com/AndreWozniack/Bordada"><img src="/BoarzADA.png" alt="OctoCoin Logo" width="300"></a>
 </h3>
 
 <p align="center">
