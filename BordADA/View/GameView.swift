@@ -14,6 +14,7 @@ struct GameView: View {
         VStack {
             Text(boardGame.owner)
             Text(boardGame.description)
+            
         }
         .navigationTitle(boardGame.name)
     }

@@ -9,11 +9,13 @@ import SwiftUI
 import RouterKit
 
 struct GameListView: View {
-    @ObservedObject var vm = GameListViewModel()
+    @ObservedObject var vm = GamesCollectionManager()
     
     @EnvironmentObject var router: Router<AppRoute>
     
     var body: some View {
+        Text("Lista de Jogos")
+        
         List {
             ForEach(vm.gameList) { game in
                 Button(game.name) {
@@ -23,9 +25,10 @@ struct GameListView: View {
         }
         .onAppear {
             Task {
-                await vm.load()
+                await vm.fetchGames()
             }
         }
+        .navigationBarBackButtonHidden()
     }
 }
 
