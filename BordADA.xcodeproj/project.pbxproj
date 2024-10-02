@@ -448,9 +448,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BordADA/Preview Content\"";
-				DEVELOPMENT_TEAM = K6W38SA3SY;
+				DEVELOPMENT_TEAM = L2AH2M48T4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = BoardzADA;
 				INFOPLIST_KEY_NSCameraUsageDescription = "We want to add the game to the library";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -479,9 +480,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BordADA/Preview Content\"";
-				DEVELOPMENT_TEAM = K6W38SA3SY;
+				DEVELOPMENT_TEAM = L2AH2M48T4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = BoardzADA;
 				INFOPLIST_KEY_NSCameraUsageDescription = "We want to add the game to the library";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -689,7 +691,7 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AF362CC12CACB14900506443 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
-    };
+		};
 		F74327012CACE7EE00E9608F /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = F74327002CACE7EE00E9608F /* XCRemoteSwiftPackageReference "Alamofire" */;

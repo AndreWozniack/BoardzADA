@@ -9,7 +9,7 @@ import SwiftUI
 import RouterKit
 
 struct GameListView: View {
-    @ObservedObject var vm = GamesCollectionManager()
+    @ObservedObject var vm = GameCreateViewModel()
     @State var isShowing: Bool = false
     
     @EnvironmentObject var router: Router<AppRoute>
@@ -23,21 +23,30 @@ struct GameListView: View {
                     router.push(to: .game(game))
                 }
             }
-            .onAppear {
-                Task {
-                    await vm.load()
-                }
-            }
+
             
             Button(action: { self.isShowing.toggle() }) {
                  Text("Scan")
              }
+            Button {
+                router.push(to: .gameCreate)
+            } label: {
+                Text("Criar Jogo")
+            }
+
+        }
+        .onAppear {
+            Task {
+                await vm.fetchGames()
+                print(vm.gameList)
+            }
         }
         .toolbar { EditButton() }
         .sheet(isPresented: $isShowing) {
              ScannerView(isShowing: $isShowing)
                  .presentationDetents([.medium, .large])
          }
+        .navigationBarBackButtonHidden()
     }
 }
 

@@ -13,7 +13,6 @@ class GameListViewModel: ObservableObject {
     func load() async {
         gameList = [
             BoardGame(
-                id: "1234",
                 name: "Quest",
                 owner: "Felipe",
                 status: .free,
@@ -23,7 +22,6 @@ class GameListViewModel: ObservableObject {
                 description: "É um jogo mt foda aaaaaaaa"
             ),
             BoardGame(
-                id: "12345",
                 name: "Ito",
                 owner: "JoyJoy",
                 status: .occupied,
