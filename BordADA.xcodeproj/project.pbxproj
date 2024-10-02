@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A912DE482CACB06700E9DE4E /* CarBode in Frameworks */ = {isa = PBXBuildFile; productRef = A912DE472CACB06700E9DE4E /* CarBode */; };
 		AF362CBF2CACB02100506443 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AF362CBE2CACB02100506443 /* GoogleService-Info.plist */; };
 		AF362CC32CACB14900506443 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = AF362CC22CACB14900506443 /* FirebaseAnalytics */; };
 		AF362CC52CACB14900506443 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = AF362CC42CACB14900506443 /* FirebaseAnalyticsOnDeviceConversion */; };
@@ -64,6 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A912DE482CACB06700E9DE4E /* CarBode in Frameworks */,
 				AF362CC92CACB14900506443 /* FirebaseAppCheck in Frameworks */,
 				AF362CC32CACB14900506443 /* FirebaseAnalytics in Frameworks */,
 				AF362CCB2CACB14900506443 /* FirebaseAppDistribution-Beta in Frameworks */,
@@ -140,6 +142,7 @@
 			);
 			name = BordADA;
 			packageProductDependencies = (
+				A912DE472CACB06700E9DE4E /* CarBode */,
 				AF362CC22CACB14900506443 /* FirebaseAnalytics */,
 				AF362CC42CACB14900506443 /* FirebaseAnalyticsOnDeviceConversion */,
 				AF362CC62CACB14900506443 /* FirebaseAnalyticsWithoutAdIdSupport */,
@@ -231,6 +234,7 @@
 			mainGroup = AF362C822CACAAB400506443;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
+				A912DE462CACAFE200E9DE4E /* XCRemoteSwiftPackageReference "CarBode-Barcode-Scanner-For-SwiftUI" */,
 				AF362CC12CACB14900506443 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				F7756DF32CACB951008B1389 /* XCRemoteSwiftPackageReference "router-kit" */,
 			);
@@ -436,9 +440,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BordADA/Preview Content\"";
-				DEVELOPMENT_TEAM = L2AH2M48T4;
+				DEVELOPMENT_TEAM = K6W38SA3SY;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "We want to add the game to the library";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -465,9 +470,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BordADA/Preview Content\"";
-				DEVELOPMENT_TEAM = L2AH2M48T4;
+				DEVELOPMENT_TEAM = K6W38SA3SY;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "We want to add the game to the library";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -616,6 +622,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		A912DE462CACAFE200E9DE4E /* XCRemoteSwiftPackageReference "CarBode-Barcode-Scanner-For-SwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/heart/CarBode-Barcode-Scanner-For-SwiftUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.2.3;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -653,6 +667,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = F7756DF32CACB951008B1389 /* XCRemoteSwiftPackageReference "router-kit" */;
 			productName = RouterKit;
+		};
+		A912DE472CACB06700E9DE4E /* CarBode */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A912DE462CACAFE200E9DE4E /* XCRemoteSwiftPackageReference "CarBode-Barcode-Scanner-For-SwiftUI" */;
+			productName = CarBode;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
