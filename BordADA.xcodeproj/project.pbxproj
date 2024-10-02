@@ -15,6 +15,7 @@
 		AF362CC92CACB14900506443 /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = AF362CC82CACB14900506443 /* FirebaseAppCheck */; };
 		AF362CCB2CACB14900506443 /* FirebaseAppDistribution-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = AF362CCA2CACB14900506443 /* FirebaseAppDistribution-Beta */; };
 		AF362D5F2CACBF9600506443 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = AF362D5E2CACBF9600506443 /* FirebaseFirestore */; };
+		AFE5D42F2CACDC7300503572 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = AFE5D42E2CACDC7300503572 /* FirebaseAuth */; };
 		F74327022CACE7EE00E9608F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = F74327012CACE7EE00E9608F /* Alamofire */; };
 		F7756DF52CACB951008B1389 /* RouterKit in Frameworks */ = {isa = PBXBuildFile; productRef = F7756DF42CACB951008B1389 /* RouterKit */; };
 /* End PBXBuildFile section */
@@ -75,6 +76,7 @@
 				F7756DF52CACB951008B1389 /* RouterKit in Frameworks */,
 				AF362CC52CACB14900506443 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
 				AF362D5F2CACBF9600506443 /* FirebaseFirestore in Frameworks */,
+				AFE5D42F2CACDC7300503572 /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -152,6 +154,7 @@
 				AF362CCA2CACB14900506443 /* FirebaseAppDistribution-Beta */,
 				F7756DF42CACB951008B1389 /* RouterKit */,
 				AF362D5E2CACBF9600506443 /* FirebaseFirestore */,
+				AFE5D42E2CACDC7300503572 /* FirebaseAuth */,
 				F74327012CACE7EE00E9608F /* Alamofire */,
 			);
 			productName = BordADA;
@@ -441,6 +444,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = BordADA/BordADA.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BordADA/Preview Content\"";
@@ -471,6 +475,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = BordADA/BordADA.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BordADA/Preview Content\"";
@@ -680,6 +685,11 @@
 			package = AF362CC12CACB14900506443 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
 		};
+		AFE5D42E2CACDC7300503572 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AF362CC12CACB14900506443 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+    };
 		F74327012CACE7EE00E9608F /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = F74327002CACE7EE00E9608F /* XCRemoteSwiftPackageReference "Alamofire" */;

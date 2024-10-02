@@ -9,16 +9,18 @@ import SwiftUI
 import RouterKit
 
 struct GameListView: View {
-    @ObservedObject var vm = GameListViewModel()
+    @ObservedObject var vm = GamesCollectionManager()
     @State var isShowing: Bool = false
     
     @EnvironmentObject var router: Router<AppRoute>
     
     var body: some View {
-        VStack {
-            List {
-                ForEach(vm.gameList) { game in
-                    GameListTile(game: game)
+        Text("Lista de Jogos")
+        
+        List {
+            ForEach(vm.gameList) { game in
+                Button(game.name) {
+                    router.push(to: .game(game))
                 }
             }
             .onAppear {
@@ -36,35 +38,6 @@ struct GameListView: View {
              ScannerView(isShowing: $isShowing)
                  .presentationDetents([.medium, .large])
          }
-    }
-}
-
-struct GameListTile: View {
-    let game: BoardGame
-    
-    func getColor() -> Color {
-        switch(game.status) {
-            case .free: .green
-            case .occupied: .red
-            case .reserved: .red
-            case .waiting: .yellow
-        }
-    }
-    
-    var body: some View {
-        VStack(alignment: .leading) {
-            HStack {
-                Text(game.name)
-                    .font(.headline)
-                
-                Circle()
-                    .foregroundStyle(.red)
-                    .frame(height: 10)
-            }
-            
-            Text(game.description)
-                .font(.subheadline)
-        }
     }
 }
 
