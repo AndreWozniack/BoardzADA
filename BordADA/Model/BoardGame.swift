@@ -11,6 +11,7 @@ struct BoardGame: Codable, Identifiable, Equatable, Hashable {
     var name: String
     var owner: String
     var status: GameStatus
+    var difficult: GameDifficult
     var numPlayersMax: Int
     var numPlayersMin: Int
     var description: String
@@ -21,5 +22,11 @@ enum GameStatus: String, Codable, CaseIterable, Hashable {
     case occupied
     case reserved
     case waiting
+}
+
+enum GameDifficult: String, Codable, CaseIterable, Hashable {
+    case easy
+    case medium
+    case hard
 }
 

@@ -37,6 +37,12 @@ struct GameCreateView: View {
                 Text("Esperando").tag(GameStatus.waiting)
             }
             
+            Picker("Dificuldade", selection: $vm.game.difficult) {
+                Text("Fácil").tag(GameDifficult.easy)
+                Text("Médio").tag(GameDifficult.medium)
+                Text("Dificil").tag(GameDifficult.hard)
+            }
+            
             Button("Criar") {
                 Task {
                     await vm.create()
