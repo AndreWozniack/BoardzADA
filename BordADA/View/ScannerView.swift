@@ -8,18 +8,26 @@
 import SwiftUI
 import AVFoundation
 import CarBode
+import RouterKit
 
 struct ScannerView: View {
 	@Binding var isShowing: Bool
+    
+    var onScan: (String) -> Void?
+    
     var body: some View {
 		ZStack{
 			CBScanner(
 				supportBarcode: .constant([.qr]),
 				scanInterval: .constant(5.0)
-			){
-				print("Value =",$0.value)
+			) {
+				print("QRCode: ", $0.value)
+                
 				isShowing = false
+                
+                onScan($0.value)
 			}
+            
 			Rectangle()
 				.fill(Color.black)
 				.opacity(0.5)

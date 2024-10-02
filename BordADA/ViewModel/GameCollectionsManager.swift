@@ -70,6 +70,7 @@ class GamesCollectionManager: ObservableObject {
             name: name,
             owner: owner,
             status: .free,
+            difficult: .easy,
             numPlayersMax: numPlayersMax,
             numPlayersMin: numPlayersMin,
             description: description

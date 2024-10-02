@@ -20,24 +20,30 @@ struct GameListView: View {
         List {
             ForEach(vm.gameList) { game in
                 Button(game.name) {
-                    router.push(to: .game(game))
+                    router.push(to: .game(game.id))
                 }
             }
             .onAppear {
                 Task {
-                    await vm.load()
+                    await vm.fetchGames()
                 }
             }
             
             Button(action: { self.isShowing.toggle() }) {
-                 Text("Scan")
-             }
+                Text("Scan")
+            }
         }
-        .toolbar { EditButton() }
+        .toolbar {
+            Button("Adicionar") {
+                router.push(to: .gameCreate)
+            }
+        }
         .sheet(isPresented: $isShowing) {
-             ScannerView(isShowing: $isShowing)
-                 .presentationDetents([.medium, .large])
-         }
+            ScannerView(isShowing: $isShowing) { value in
+                router.push(to: .game(value))
+            }
+            .presentationDetents([.medium, .large])
+        }
     }
 }
 

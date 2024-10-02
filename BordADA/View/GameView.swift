@@ -6,34 +6,45 @@
 //
 
 import SwiftUI
+import RouterKit
 
 struct GameView: View {
-    var game: BoardGame
+    var id: String
+    
+    @State var apiResult: String = ""
+    @State var isShowing: Bool = false
+    
+    @EnvironmentObject var router: Router<AppRoute>
     
     var body: some View {
         VStack {
-            Text(game.owner)
+            Text(id)
             
-            Text(game.description)
+            Text("Jogadores: 3 a 5")
+            Text("Quest é um jogo foda de fazer coisas fodas bla bla bla bla")
+            
+            Text(apiResult)
+            
+            Button(action: { self.isShowing.toggle() }) {
+                Text("Entrar no jogo")
+            }
         }
-        .navigationTitle(game.name)
+        .navigationTitle("Quest")
         .task {
-            let result = await LudopediaManager().jogos()
-            
-            print(result)
+            let result = await LudopediaManager().jogo(id: 1)
+                        
+            apiResult = result.debugDescription
+        }
+        .sheet(isPresented: $isShowing) {
+            ScannerView(isShowing: $isShowing) { value in
+                router.popToRoot()
+                router.push(to: .status(value))
+            }
+            .presentationDetents([.medium, .large])
         }
     }
 }
 
 #Preview {
-    GameView(game: BoardGame(
-        id: "1234",
-        name: "Quest",
-        owner: "Felipe",
-        status: .free,
-        difficult: .easy,
-        numPlayersMax: 5,
-        numPlayersMin: 3,
-        description: "É um jogo mt foda aaaaaaaa"
-    ))
+    GameView(id: "1234")
 }
