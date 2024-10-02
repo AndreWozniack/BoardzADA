@@ -15,7 +15,8 @@ class GameCreateViewModel: ObservableObject {
         status: .free,
         numPlayersMax: 1,
         numPlayersMin: 4,
-        description: ""
+        description: "",
+        difficult: .easy
     )
     
     func create() async {
