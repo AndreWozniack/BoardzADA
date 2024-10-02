@@ -21,10 +21,13 @@ struct LDGameResponse: Codable {
     let total: Int
 }
 
+//APP_ID: dbd21ab8f20a64de
+//APP_KEY: f4d37c06a607a4f0fa501453d291cd64
+//ACESS_TOKEN (Usuário): 803a4569d210a5d3e15016c8d831cf1f
 class LudopediaManager {
     let url = "https://ludopedia.com.br/api/v1"
     
-    func jogos(search: String) async -> LDGameResponse? {
+    func jogos() async -> LDGameResponse? {
         let result = await AF.request(
             "\(url)/jogos",
             method: .get,
@@ -32,6 +35,7 @@ class LudopediaManager {
         )
         .serializingDecodable(LDGameResponse.self)
         .result
+        
         
         switch(result) {
             case .success(let value): return value

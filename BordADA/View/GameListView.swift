@@ -15,8 +15,6 @@ struct GameListView: View {
     
     var body: some View {
         VStack {
-            Text("1* BoarADA")
-            
             List {
                 ForEach(vm.gameList) { game in
                     GameListTile(game: game)
