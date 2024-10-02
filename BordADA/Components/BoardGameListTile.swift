@@ -69,7 +69,6 @@ struct BoardGameListTile: View {
     VStack {
         BoardGameListTile(
             game: BoardGame(
-                id: "1234",
                 name: "Coup",
                 owner: "André",
                 status: .free,
