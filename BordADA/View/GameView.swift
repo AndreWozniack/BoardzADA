@@ -8,19 +8,25 @@
 import SwiftUI
 
 struct GameView: View {
-    var boardGame: BoardGame
+    var game: BoardGame
     
     var body: some View {
         VStack {
-            Text(boardGame.owner)
-            Text(boardGame.description)
+            Text(game.owner)
+            
+            Text(game.description)
         }
-        .navigationTitle(boardGame.name)
+        .navigationTitle(game.name)
+        .task {
+            let result = await LudopediaManager().jogos()
+            
+            print(result)
+        }
     }
 }
 
 #Preview {
-    GameView(boardGame: BoardGame(
+    GameView(game: BoardGame(
         id: "1234",
         name: "Quest",
         owner: "Felipe",
