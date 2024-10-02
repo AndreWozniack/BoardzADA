@@ -7,14 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A912DE482CACB06700E9DE4E /* CarBode in Frameworks */ = {isa = PBXBuildFile; productRef = A912DE472CACB06700E9DE4E /* CarBode */; };
 		AF362CBF2CACB02100506443 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AF362CBE2CACB02100506443 /* GoogleService-Info.plist */; };
 		AF362CC32CACB14900506443 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = AF362CC22CACB14900506443 /* FirebaseAnalytics */; };
 		AF362CC52CACB14900506443 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = AF362CC42CACB14900506443 /* FirebaseAnalyticsOnDeviceConversion */; };
 		AF362CC72CACB14900506443 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = AF362CC62CACB14900506443 /* FirebaseAnalyticsWithoutAdIdSupport */; };
 		AF362CC92CACB14900506443 /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = AF362CC82CACB14900506443 /* FirebaseAppCheck */; };
 		AF362CCB2CACB14900506443 /* FirebaseAppDistribution-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = AF362CCA2CACB14900506443 /* FirebaseAppDistribution-Beta */; };
+		AF362D5F2CACBF9600506443 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = AF362D5E2CACBF9600506443 /* FirebaseFirestore */; };
+		F74327022CACE7EE00E9608F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = F74327012CACE7EE00E9608F /* Alamofire */; };
 		F7756DF52CACB951008B1389 /* RouterKit in Frameworks */ = {isa = PBXBuildFile; productRef = F7756DF42CACB951008B1389 /* RouterKit */; };
-		F7F8DDCB2CACD18C00105711 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = F7F8DDCA2CACD18C00105711 /* Alamofire */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,13 +66,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F74327022CACE7EE00E9608F /* Alamofire in Frameworks */,
+				A912DE482CACB06700E9DE4E /* CarBode in Frameworks */,
 				AF362CC92CACB14900506443 /* FirebaseAppCheck in Frameworks */,
-				F7F8DDCB2CACD18C00105711 /* Alamofire in Frameworks */,
 				AF362CC32CACB14900506443 /* FirebaseAnalytics in Frameworks */,
 				AF362CCB2CACB14900506443 /* FirebaseAppDistribution-Beta in Frameworks */,
 				AF362CC72CACB14900506443 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				F7756DF52CACB951008B1389 /* RouterKit in Frameworks */,
 				AF362CC52CACB14900506443 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
+				AF362D5F2CACBF9600506443 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,6 +103,7 @@
 				AF362CA82CACAAB700506443 /* BordADAUITests */,
 				AF362C8C2CACAAB400506443 /* Products */,
 				AF362CBE2CACB02100506443 /* GoogleService-Info.plist */,
+				AF362D5D2CACBF9600506443 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -110,6 +115,13 @@
 				AF362CA52CACAAB700506443 /* BordADAUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		AF362D5D2CACBF9600506443 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -132,13 +144,15 @@
 			);
 			name = BordADA;
 			packageProductDependencies = (
+				A912DE472CACB06700E9DE4E /* CarBode */,
 				AF362CC22CACB14900506443 /* FirebaseAnalytics */,
 				AF362CC42CACB14900506443 /* FirebaseAnalyticsOnDeviceConversion */,
 				AF362CC62CACB14900506443 /* FirebaseAnalyticsWithoutAdIdSupport */,
 				AF362CC82CACB14900506443 /* FirebaseAppCheck */,
 				AF362CCA2CACB14900506443 /* FirebaseAppDistribution-Beta */,
 				F7756DF42CACB951008B1389 /* RouterKit */,
-				F7F8DDCA2CACD18C00105711 /* Alamofire */,
+				AF362D5E2CACBF9600506443 /* FirebaseFirestore */,
+				F74327012CACE7EE00E9608F /* Alamofire */,
 			);
 			productName = BordADA;
 			productReference = AF362C8B2CACAAB400506443 /* BordADA.app */;
@@ -223,9 +237,10 @@
 			mainGroup = AF362C822CACAAB400506443;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
+				A912DE462CACAFE200E9DE4E /* XCRemoteSwiftPackageReference "CarBode-Barcode-Scanner-For-SwiftUI" */,
 				AF362CC12CACB14900506443 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				F7756DF32CACB951008B1389 /* XCRemoteSwiftPackageReference "router-kit" */,
-				F7F8DDC92CACD18C00105711 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				F74327002CACE7EE00E9608F /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = AF362C8C2CACAAB400506443 /* Products */;
@@ -429,9 +444,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BordADA/Preview Content\"";
-				DEVELOPMENT_TEAM = L2AH2M48T4;
+				DEVELOPMENT_TEAM = K6W38SA3SY;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "We want to add the game to the library";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -458,9 +474,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BordADA/Preview Content\"";
-				DEVELOPMENT_TEAM = L2AH2M48T4;
+				DEVELOPMENT_TEAM = K6W38SA3SY;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "We want to add the game to the library";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -593,12 +610,28 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		A912DE462CACAFE200E9DE4E /* XCRemoteSwiftPackageReference "CarBode-Barcode-Scanner-For-SwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/heart/CarBode-Barcode-Scanner-For-SwiftUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.2.3;
+			};
+		};
 		AF362CC12CACB14900506443 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 11.3.0;
+			};
+		};
+		F74327002CACE7EE00E9608F /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.9.1;
 			};
 		};
 		F7756DF32CACB951008B1389 /* XCRemoteSwiftPackageReference "router-kit" */ = {
@@ -609,17 +642,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
-		F7F8DDC92CACD18C00105711 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.9.1;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		A912DE472CACB06700E9DE4E /* CarBode */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A912DE462CACAFE200E9DE4E /* XCRemoteSwiftPackageReference "CarBode-Barcode-Scanner-For-SwiftUI" */;
+			productName = CarBode;
+		};
 		AF362CC22CACB14900506443 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = AF362CC12CACB14900506443 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
@@ -645,15 +675,20 @@
 			package = AF362CC12CACB14900506443 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = "FirebaseAppDistribution-Beta";
 		};
+		AF362D5E2CACBF9600506443 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AF362CC12CACB14900506443 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		F74327012CACE7EE00E9608F /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F74327002CACE7EE00E9608F /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
 		F7756DF42CACB951008B1389 /* RouterKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = F7756DF32CACB951008B1389 /* XCRemoteSwiftPackageReference "router-kit" */;
 			productName = RouterKit;
-		};
-		F7F8DDCA2CACD18C00105711 /* Alamofire */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = F7F8DDC92CACD18C00105711 /* XCRemoteSwiftPackageReference "Alamofire" */;
-			productName = Alamofire;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
