@@ -15,11 +15,9 @@ struct GameListView: View {
     
     var body: some View {
         VStack {
-            
+            Text("1* BoarADA")
             
             List {
-                Text("1* BoarADA")
-                
                 ForEach(vm.gameList) { game in
                     GameListTile(game: game)
                 }
@@ -30,6 +28,7 @@ struct GameListView: View {
                 }
             }
         }
+        .toolbar { EditButton() }
     }
 }
 

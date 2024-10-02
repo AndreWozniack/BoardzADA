@@ -14,6 +14,7 @@
 		AF362CC92CACB14900506443 /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = AF362CC82CACB14900506443 /* FirebaseAppCheck */; };
 		AF362CCB2CACB14900506443 /* FirebaseAppDistribution-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = AF362CCA2CACB14900506443 /* FirebaseAppDistribution-Beta */; };
 		F7756DF52CACB951008B1389 /* RouterKit in Frameworks */ = {isa = PBXBuildFile; productRef = F7756DF42CACB951008B1389 /* RouterKit */; };
+		F7F8DDCB2CACD18C00105711 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = F7F8DDCA2CACD18C00105711 /* Alamofire */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF362CC92CACB14900506443 /* FirebaseAppCheck in Frameworks */,
+				F7F8DDCB2CACD18C00105711 /* Alamofire in Frameworks */,
 				AF362CC32CACB14900506443 /* FirebaseAnalytics in Frameworks */,
 				AF362CCB2CACB14900506443 /* FirebaseAppDistribution-Beta in Frameworks */,
 				AF362CC72CACB14900506443 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
@@ -136,6 +138,7 @@
 				AF362CC82CACB14900506443 /* FirebaseAppCheck */,
 				AF362CCA2CACB14900506443 /* FirebaseAppDistribution-Beta */,
 				F7756DF42CACB951008B1389 /* RouterKit */,
+				F7F8DDCA2CACD18C00105711 /* Alamofire */,
 			);
 			productName = BordADA;
 			productReference = AF362C8B2CACAAB400506443 /* BordADA.app */;
@@ -222,6 +225,7 @@
 			packageReferences = (
 				AF362CC12CACB14900506443 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				F7756DF32CACB951008B1389 /* XCRemoteSwiftPackageReference "router-kit" */,
+				F7F8DDC92CACD18C00105711 /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = AF362C8C2CACAAB400506443 /* Products */;
@@ -605,6 +609,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		F7F8DDC92CACD18C00105711 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.9.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -637,6 +649,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = F7756DF32CACB951008B1389 /* XCRemoteSwiftPackageReference "router-kit" */;
 			productName = RouterKit;
+		};
+		F7F8DDCA2CACD18C00105711 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F7F8DDC92CACD18C00105711 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -16,6 +16,10 @@ struct GameView: View {
             Text(boardGame.description)
         }
         .navigationTitle(boardGame.name)
+        .task {
+            let result = await LudopediaManager().jogos(search: "Quest")
+            print(result!)
+        }
     }
 }
 
