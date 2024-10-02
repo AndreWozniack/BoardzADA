@@ -26,7 +26,8 @@ class GameManager {
         status: GameStatus? = nil,
         numPlayersMax: Int? = nil,
         numPlayersMin: Int? = nil,
-        description: String? = nil
+        description: String? = nil,
+        imageUrl: String? = nil
     ) {
         if let name = name {
             boardGame.name = name
@@ -46,10 +47,17 @@ class GameManager {
         if let description = description {
             boardGame.description = description
         }
+        if let imageUrl = imageUrl {
+            boardGame.imageUrl = imageUrl
+        }
     }
     
     func updateGame(name: String) {
         boardGame.name = name
+    }
+    
+    func updateGame(imageUrl: String) {
+        boardGame.imageUrl = imageUrl
     }
     
     func updateGame(owner: String) {
@@ -72,7 +80,6 @@ class GameManager {
         boardGame.description = description
     }
     
-
     func deleteGame() {
         print("\(boardGame.name) deleted.")
     }

@@ -31,6 +31,7 @@ class GamesCollectionManager: ObservableObject {
             }
             DispatchQueue.main.async {
                 self.gameList = games
+                print(games)
             }
         } catch {
             print("Erro ao buscar jogos: \(error.localizedDescription)")
@@ -65,7 +66,7 @@ class GamesCollectionManager: ObservableObject {
         }
     }
     
-    func addNewGame(name: String, owner: String, numPlayersMin: Int, numPlayersMax: Int, description: String) async {
+    func addNewGame(name: String, owner: String, numPlayersMin: Int, numPlayersMax: Int, description: String, imageUrl: String) async {
         let newGame = BoardGame(
             name: name,
             owner: owner,
@@ -73,7 +74,8 @@ class GamesCollectionManager: ObservableObject {
             difficult: .easy,
             numPlayersMax: numPlayersMax,
             numPlayersMin: numPlayersMin,
-            description: description
+            description: description,
+            imageUrl: imageUrl
         )
         await addGame(newGame)
     }

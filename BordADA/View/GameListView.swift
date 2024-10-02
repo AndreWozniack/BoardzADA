@@ -23,15 +23,13 @@ struct GameListView: View {
                     router.push(to: .game(game.id))
                 }
             }
-            .onAppear {
-                Task {
-                    await vm.fetchGames()
-                }
-            }
             
             Button(action: { self.isShowing.toggle() }) {
                 Text("Scan")
             }
+        }
+        .task {
+            await vm.fetchGames()
         }
         .toolbar {
             Button("Adicionar") {

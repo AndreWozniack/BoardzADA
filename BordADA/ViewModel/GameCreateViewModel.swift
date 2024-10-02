@@ -16,7 +16,8 @@ class GameCreateViewModel: ObservableObject {
         difficult: .easy,
         numPlayersMax: 1,
         numPlayersMin: 4,
-        description: ""
+        description: "",
+        imageUrl: ""
     )
     
     func create() async {
