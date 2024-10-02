@@ -19,7 +19,8 @@ class GameListViewModel: ObservableObject {
                 difficult: .easy,
                 numPlayersMax: 5,
                 numPlayersMin: 3,
-                description: "É um jogo mt foda aaaaaaaa"
+                description: "É um jogo mt foda aaaaaaaa",
+                imageUrl: ""
             ),
             BoardGame(
                 name: "Ito",
@@ -28,7 +29,8 @@ class GameListViewModel: ObservableObject {
                 difficult: .easy,
                 numPlayersMax: 2,
                 numPlayersMin: 10,
-                description: "Conta até 100... 99..."
+                description: "Conta até 100... 99...",
+                imageUrl: ""
             )
         ]
         

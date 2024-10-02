@@ -7,7 +7,7 @@
 import Foundation
 
 struct BoardGame: Codable, Identifiable, Equatable, Hashable {
-    var id = UUID()
+    var id = UUID().uuidString
     var name: String
     var owner: String
     var status: GameStatus
@@ -15,6 +15,7 @@ struct BoardGame: Codable, Identifiable, Equatable, Hashable {
     var numPlayersMax: Int
     var numPlayersMin: Int
     var description: String
+    var imageUrl: String
 }
 
 enum GameStatus: String, Codable, CaseIterable, Hashable {
