@@ -13,10 +13,10 @@ class GameCreateViewModel: ObservableObject {
         name: "",
         owner: "",
         status: .free,
+        difficult: .easy,
         numPlayersMax: 1,
         numPlayersMin: 4,
-        description: "",
-        difficult: .easy
+        description: ""
     )
     
     func create() async {

@@ -31,6 +31,7 @@ struct GameView: View {
         name: "Quest",
         owner: "Felipe",
         status: .free,
+        difficult: .easy,
         numPlayersMax: 5,
         numPlayersMin: 3,
         description: "É um jogo mt foda aaaaaaaa"
