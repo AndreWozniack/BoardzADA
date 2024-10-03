@@ -49,6 +49,7 @@ class GameCreateViewModel: ObservableObject {
         status: GameStatus,
         difficult: GameDifficult,
         duration: Int
+        imageUrl: String
     ) async throws -> BoardGame {
         let newGame = BoardGame(
             name: name,
@@ -59,6 +60,7 @@ class GameCreateViewModel: ObservableObject {
             numPlayersMin: numPlayersMin,
             description: description,
             duration: duration
+            imageUrl: imageUrl
         )
 
         await addGame(newGame)
@@ -73,7 +75,7 @@ class GameCreateViewModel: ObservableObject {
             return
         }
         do {
-            try db.collection("games").document(game.id.uuidString).setData(from: game) { error in
+            try db.collection("games").document(game.id).setData(from: game) { error in
                 if let error {
                     print("Erro ao salvar jogo: \(error.localizedDescription)")
                 } else {
@@ -102,7 +104,7 @@ class GameCreateViewModel: ObservableObject {
     }
     
     func updateGame(_ id: String, with changes: (GameManager) -> Void) async {
-        if let gameIndex = gameList.firstIndex(where: { $0.id.uuidString == id }) {
+        if let gameIndex = gameList.firstIndex(where: { $0.id == id }) {
             let gameManager = GameManager(boardGame: gameList[gameIndex])
             changes(gameManager)
             let updatedGame = gameManager.getGame()
@@ -122,14 +124,14 @@ class GameCreateViewModel: ObservableObject {
         do {
             try await db.collection("games").document(id).delete()
             DispatchQueue.main.async {
-                self.gameList.removeAll { $0.id.uuidString == id }
+                self.gameList.removeAll { $0.id == id }
             }
         } catch {
             print("Erro ao remover o jogo: \(error.localizedDescription)")
         }
     }
     
-    func addNewGame(name: String, owner: String,gameDifficult: GameDifficult, numPlayersMin: Int, numPlayersMax: Int, description: String, duration: Int) async {
+    func addNewGame(name: String, owner: String,gameDifficult: GameDifficult, numPlayersMin: Int, numPlayersMax: Int, description: String, duration: Int, imageUrl: String) async {
         let newGame = BoardGame(
             name: name,
             owner: owner,
@@ -139,6 +141,7 @@ class GameCreateViewModel: ObservableObject {
             numPlayersMin: numPlayersMin,
             description: description,
             duration: duration
+            imageUrl: imageUrl
         )
         await addGame(newGame)
     }

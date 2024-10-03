@@ -21,6 +21,7 @@ class GameListViewModel: ObservableObject {
                 numPlayersMin: 3,
                 description: "É um jogo mt foda aaaaaaaa",
                 duration: 5
+                imageUrl: ""
             ),
             BoardGame(
                 name: "Ito",
@@ -31,6 +32,7 @@ class GameListViewModel: ObservableObject {
                 numPlayersMin: 10,
                 description: "Conta até 100... 99...",
                 duration: 5
+                imageUrl: ""
             )
         ]
         

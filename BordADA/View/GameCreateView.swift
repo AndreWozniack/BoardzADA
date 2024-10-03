@@ -18,7 +18,7 @@ struct GameCreateView: View {
     @State private var errorMessage: String?
     @State private var isSaving: Bool = false
     @State private var duration: Int = 10
-    
+    @State private var imageUrl: String = ""
     
     var body: some View {
         VStack {
@@ -36,6 +36,10 @@ struct GameCreateView: View {
 
             TextField("Quantidade mínima de jogadores", value: $numPlayersMin, format: .number)
                 .keyboardType(.decimalPad)
+                .padding()
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+            
+            TextField("Image URL", text: $imageUrl)
                 .padding()
                 .textFieldStyle(RoundedBorderTextFieldStyle())
 
@@ -82,6 +86,7 @@ struct GameCreateView: View {
                                 status: status,
                                 difficult: difficult,
                                 duration: <#T##Int#>
+                                imageUrl: imageUrl
                             )
                             print("Jogo criado: \(game)")
                             resetFields()
