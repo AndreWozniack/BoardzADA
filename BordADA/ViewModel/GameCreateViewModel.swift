@@ -12,6 +12,7 @@ import FirebaseAuth
 class GameCreateViewModel: ObservableObject {
     @Published var gameList: [BoardGame] = []
     
+    
     private var listener: ListenerRegistration?
     
     func listenToGameUpdates() {
@@ -46,7 +47,8 @@ class GameCreateViewModel: ObservableObject {
         numPlayersMin: Int,
         numPlayersMax: Int,
         status: GameStatus,
-        difficult: GameDifficult
+        difficult: GameDifficult,
+        duration: Int
     ) async throws -> BoardGame {
         let newGame = BoardGame(
             name: name,
@@ -55,7 +57,8 @@ class GameCreateViewModel: ObservableObject {
             difficult: difficult,
             numPlayersMax: numPlayersMax,
             numPlayersMin: numPlayersMin,
-            description: description
+            description: description,
+            duration: duration
         )
 
         await addGame(newGame)
@@ -126,7 +129,7 @@ class GameCreateViewModel: ObservableObject {
         }
     }
     
-    func addNewGame(name: String, owner: String,gameDifficult: GameDifficult, numPlayersMin: Int, numPlayersMax: Int, description: String) async {
+    func addNewGame(name: String, owner: String,gameDifficult: GameDifficult, numPlayersMin: Int, numPlayersMax: Int, description: String, duration: Int) async {
         let newGame = BoardGame(
             name: name,
             owner: owner,
@@ -134,7 +137,8 @@ class GameCreateViewModel: ObservableObject {
             difficult: gameDifficult,
             numPlayersMax: numPlayersMax,
             numPlayersMin: numPlayersMin,
-            description: description
+            description: description,
+            duration: duration
         )
         await addGame(newGame)
     }

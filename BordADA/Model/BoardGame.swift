@@ -6,6 +6,16 @@
 //
 import Foundation
 
+struct Player: Codable, Identifiable, Equatable, Hashable {
+    var id = UUID()
+    var name: String
+    var email: String
+    var currentGameId: String?
+    var isPlaying: Bool = false
+    var waitingForGameIds: [String] = []
+}
+
+
 struct BoardGame: Codable, Identifiable, Equatable, Hashable {
     var id = UUID()
     var name: String
@@ -15,6 +25,9 @@ struct BoardGame: Codable, Identifiable, Equatable, Hashable {
     var numPlayersMax: Int
     var numPlayersMin: Int
     var description: String
+    var duration: Int
+    var currentPlayer: Player?
+    var waitingPlayers: [Player] = []
 }
 
 enum GameStatus: String, Codable, CaseIterable, Hashable {
@@ -29,3 +42,4 @@ enum GameDifficult: String, Codable, CaseIterable, Hashable {
     case medium
     case hard
 }
+

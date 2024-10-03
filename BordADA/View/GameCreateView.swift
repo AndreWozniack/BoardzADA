@@ -17,6 +17,8 @@ struct GameCreateView: View {
     @State private var difficult: GameDifficult = .easy
     @State private var errorMessage: String?
     @State private var isSaving: Bool = false
+    @State private var duration: Int = 10
+    
     
     var body: some View {
         VStack {
@@ -78,7 +80,8 @@ struct GameCreateView: View {
                                 numPlayersMin: numPlayersMin,
                                 numPlayersMax: numPlayersMax,
                                 status: status,
-                                difficult: difficult
+                                difficult: difficult,
+                                duration: <#T##Int#>
                             )
                             print("Jogo criado: \(game)")
                             resetFields()

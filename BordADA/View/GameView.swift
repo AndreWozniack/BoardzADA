@@ -33,6 +33,7 @@ struct GameView: View {
         difficult: .easy,
         numPlayersMax: 5,
         numPlayersMin: 3,
-        description: "É um jogo mt foda aaaaaaaa"
+        description: "É um jogo mt foda aaaaaaaa",
+        duration: 10
     ))
 }
