@@ -17,6 +17,7 @@ struct GameCreateView: View {
     @State private var difficult: GameDifficult = .easy
     @State private var errorMessage: String?
     @State private var isSaving: Bool = false
+    @State private var duration: Int = 10
     @State private var imageUrl: String = ""
     
     var body: some View {
@@ -84,6 +85,7 @@ struct GameCreateView: View {
                                 numPlayersMax: numPlayersMax,
                                 status: status,
                                 difficult: difficult,
+                                duration: <#T##Int#>
                                 imageUrl: imageUrl
                             )
                             print("Jogo criado: \(game)")

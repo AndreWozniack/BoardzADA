@@ -41,6 +41,7 @@ struct GameListView: View {
                         .font(.title)
                         .foregroundStyle(.white)
                 }
+            
 
             }
             .padding(.horizontal, 24)
@@ -88,6 +89,15 @@ struct GameListView: View {
             .presentationDetents([.medium, .large])
         }
         .navigationBarBackButtonHidden()
+        
+        Button(action: { self.isShowing.toggle() }) {
+             Text("Scan")
+         }
+        Button {
+            router.push(to: .gameCreate)
+        } label: {
+            Text("Criar Jogo")
+        }
     }
 }
 
