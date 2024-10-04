@@ -20,7 +20,7 @@ class GameListViewModel: ObservableObject {
                 numPlayersMax: 5,
                 numPlayersMin: 3,
                 description: "É um jogo mt foda aaaaaaaa",
-                duration: 5
+                duration: 5,
                 imageUrl: ""
             ),
             BoardGame(
@@ -31,7 +31,7 @@ class GameListViewModel: ObservableObject {
                 numPlayersMax: 2,
                 numPlayersMin: 10,
                 description: "Conta até 100... 99...",
-                duration: 5
+                duration: 5,
                 imageUrl: ""
             )
         ]

@@ -66,7 +66,7 @@ class GamesCollectionManager: ObservableObject {
         }
     }
     
-    func addNewGame(name: String, owner: String, numPlayersMin: Int, numPlayersMax: Int, description: String, imageUrl: String) async {
+    func addNewGame(name: String, owner: String, numPlayersMin: Int, numPlayersMax: Int, description: String, duration: Int, imageUrl: String) async {
         let newGame = BoardGame(
             name: name,
             owner: owner,
@@ -75,6 +75,7 @@ class GamesCollectionManager: ObservableObject {
             numPlayersMax: numPlayersMax,
             numPlayersMin: numPlayersMin,
             description: description,
+            duration: duration,
             imageUrl: imageUrl
         )
         await addGame(newGame)

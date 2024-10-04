@@ -22,6 +22,7 @@ struct GameView: View {
         difficult: .easy, numPlayersMax: 10, numPlayersMin: 4,
         description:
             "Quest é um jogo mt bom para jogar com amigos, bla bla bla",
+        duration: 10,
         imageUrl:
             "https://storage.googleapis.com/ludopedia-capas/35643_t.jpg"
     )

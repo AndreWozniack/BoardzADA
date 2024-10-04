@@ -76,6 +76,7 @@ struct BoardGameListTile: View {
                 numPlayersMax: 2,
                 numPlayersMin: 8,
                 description: "",
+                duration: 10,
                 imageUrl: "https://storasge.googleapis.com/ludopedia-capas/35643_t.jpg"
             )
         )

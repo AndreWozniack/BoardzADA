@@ -48,7 +48,7 @@ class GameCreateViewModel: ObservableObject {
         numPlayersMax: Int,
         status: GameStatus,
         difficult: GameDifficult,
-        duration: Int
+        duration: Int,
         imageUrl: String
     ) async throws -> BoardGame {
         let newGame = BoardGame(
@@ -59,7 +59,7 @@ class GameCreateViewModel: ObservableObject {
             numPlayersMax: numPlayersMax,
             numPlayersMin: numPlayersMin,
             description: description,
-            duration: duration
+            duration: duration,
             imageUrl: imageUrl
         )
 
@@ -131,7 +131,16 @@ class GameCreateViewModel: ObservableObject {
         }
     }
     
-    func addNewGame(name: String, owner: String,gameDifficult: GameDifficult, numPlayersMin: Int, numPlayersMax: Int, description: String, duration: Int, imageUrl: String) async {
+    func addNewGame(
+        name: String,
+        owner: String,
+        gameDifficult: GameDifficult,
+        numPlayersMin: Int,
+        numPlayersMax: Int,
+        description: String,
+        duration: Int,
+        imageUrl: String
+    ) async {
         let newGame = BoardGame(
             name: name,
             owner: owner,
@@ -140,7 +149,7 @@ class GameCreateViewModel: ObservableObject {
             numPlayersMax: numPlayersMax,
             numPlayersMin: numPlayersMin,
             description: description,
-            duration: duration
+            duration: duration,
             imageUrl: imageUrl
         )
         await addGame(newGame)

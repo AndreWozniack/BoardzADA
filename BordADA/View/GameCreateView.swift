@@ -85,7 +85,7 @@ struct GameCreateView: View {
                                 numPlayersMax: numPlayersMax,
                                 status: status,
                                 difficult: difficult,
-                                duration: <#T##Int#>
+                                duration: duration,
                                 imageUrl: imageUrl
                             )
                             print("Jogo criado: \(game)")

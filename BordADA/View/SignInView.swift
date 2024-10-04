@@ -72,7 +72,7 @@ struct SignInView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .ignoresSafeArea()
-        .background(Color.purple)
+        .background(Color(uiColor: .roxo))
     }
 }
 
