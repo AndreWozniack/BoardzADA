@@ -7,27 +7,21 @@
 
 import RouterKit
 import SwiftUI
+import FirebaseAuth
+
 
 struct GameListView: View {
-    @ObservedObject var vm = GameCreateViewModel()
+    @StateObject var vm = GamesCollectionManager()
     @State var isShowing: Bool = false
+    @State private var userName: String = "Player"
+
 
     @EnvironmentObject var router: Router<AppRoute>
 
     var body: some View {
-//        Button(action: { self.isShowing.toggle() }) {
-//            Text("Scan")
-//        }
-//        
-//        Button {
-//            router.push(to: .gameCreate)
-//        } label: {
-//            Text("Criar Jogo")
-//        }
-
         VStack {
             HStack {
-                Text("Felipe")
+                Text(userName)
                     .font(.title)
                     .foregroundStyle(.white)
                     .bold()
@@ -50,21 +44,9 @@ struct GameListView: View {
             
             ScrollView {
                 LazyVStack {
-                    ForEach([
-                        // TODO: Remover o mock
-                        // vm.gameList
-                        BoardGame(
-                            name: "Quest", owner: "Felipe", status: .free,
-                            difficult: .easy, numPlayersMax: 10, numPlayersMin: 4,
-                            description:
-                                "Quest é um jogo mt bom para jogar com amigos, bla bla bla",
-                            duration: 10,
-                            imageUrl:
-                                "https://storage.googleapis.com/ludopedia-capas/35643_t.jpg"
-                        )
-                    ]) { game in
+                    ForEach(vm.gameList) { game in
                         Button {
-                            router.push(to: .game(game.id))
+                            router.push(to: .game(game))
                         } label: {
                             BoardGameListTile(game: game)
                         }
@@ -78,14 +60,21 @@ struct GameListView: View {
         }
         .background(Color.uiBackground)
         .onAppear {
+            if let user = Auth.auth().currentUser {
+                self.userName = user.displayName ?? "Usuário"
+            } else {
+                self.userName = "Usuário não logado"
+            }
             Task {
                 await vm.fetchGames()
-                print(vm.gameList)
+                print(vm.gameList.count)
             }
         }
+
         .sheet(isPresented: $isShowing) {
             ScannerView(isShowing: $isShowing) { value in
-                router.push(to: .game(value))
+//                router.push(to: .game(value))
+                print(value)
             }
             .presentationDetents([.medium, .large])
         }

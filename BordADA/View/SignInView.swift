@@ -1,14 +1,14 @@
 //
-//  SingIn.swift
+//  SignInView.swift
 //  BordADA
 //
 //  Created by André Wozniack on 01/10/24.
 //
 
-import Foundation
 import SwiftUI
+import AuthenticationServices
+import FirebaseAuth
 import RouterKit
-import _AuthenticationServices_SwiftUI
 
 struct SignInView: View {
     @StateObject var signInManager = AppleSignInManager()
@@ -33,7 +33,6 @@ struct SignInView: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 160)
-                        
                 }
 
                 if let errorMessage = errorMessage {
@@ -44,40 +43,49 @@ struct SignInView: View {
                 
                 SignInWithAppleButton(
                     .signIn,
-                    onRequest: { _ in },
-                    onCompletion: { _ in }
+                    onRequest: { request in
+                        signInManager.startSignInWithAppleFlow(request: request)
+                    },
+                    onCompletion: { result in
+                        handleAuthorization(result: result)
+                    }
                 )
                 .signInWithAppleButtonStyle(.black)
                 .frame(width: 280, height: 45)
                 .padding()
-                .onTapGesture {
-                    isLoading = true
-                    signInManager.startSignInWithAppleFlow { result in
-                        isLoading = false
-                        switch result {
-                        case .success(let authResult):
-                            Task {
-                                let user = authResult.user
-                                let player = Player(name: user.displayName ?? "Usuário", email: user.email ?? "")
-                                await userManager.addOrUpdatePlayer(player: player)
-                            }
-                            print("Login bem-sucedido: \(authResult.user.uid)")
-                            router.push(to: .gameList)
-                        case .failure(let error):
-                            errorMessage = error.localizedDescription
-                        }
-                    }
-                }
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .ignoresSafeArea()
-        .background(Color(uiColor: .roxo))
+        .background(Color.roxo)
+    }
+    
+    private func handleAuthorization(result: Result<ASAuthorization, Error>) {
+        isLoading = true
+        switch result {
+        case .success(let authorization):
+            signInManager.handle(authorization: authorization) { firebaseResult in
+                isLoading = false
+                switch firebaseResult {
+                case .success(let authResult):
+                    Task {
+                        let playerExists = await userManager.checkIfPlayerExists()
+                        if !playerExists {
+                            await userManager.createPlayer()
+                        }
+                        router.push(to: .gameList)
+                    }
+                case .failure(let error):
+                    errorMessage = error.localizedDescription
+                }
+            }
+        case .failure(let error):
+            isLoading = false
+            errorMessage = error.localizedDescription
+        }
     }
 }
 
 #Preview {
     SignInView()
 }
-
-

@@ -9,23 +9,12 @@ import RouterKit
 import SwiftUI
 
 struct GameView: View {
-    var id: String
+    var game: BoardGame
 
     @State var apiResult: String = ""
     @State var isShowing: Bool = false
 
     @EnvironmentObject var router: Router<AppRoute>
-
-    // TODO: Remover mock
-    @State var game: BoardGame = BoardGame(
-        name: "Quest", owner: "Felipe", status: .free,
-        difficult: .easy, numPlayersMax: 10, numPlayersMin: 4,
-        description:
-            "Quest é um jogo mt bom para jogar com amigos, bla bla bla",
-        duration: 10,
-        imageUrl:
-            "https://storage.googleapis.com/ludopedia-capas/35643_t.jpg"
-    )
 
     var body: some View {
         VStack {
@@ -48,12 +37,18 @@ struct GameView: View {
                         image
                             .resizable()
                             .scaledToFill()
+                    case .empty:
+                        Rectangle()
+                            .foregroundStyle(.purple)
+                    case .failure(_):
+                        Rectangle()
+                            .foregroundStyle(.red)
                     @unknown default:
                         Rectangle()
                             .foregroundStyle(.purple)
                     }
                 }
-                .clipShape(.rect(cornerRadius: 12))
+                .clipShape(RoundedRectangle(cornerRadius: 12))
 
                 HStack(spacing: 4) {
                     Image(systemName: "checkmark.seal.fill")
@@ -96,10 +91,8 @@ struct GameView: View {
         }
         .background(Color.uiBackground)
         .task {
-
-            let result = await LudopediaManager().jogo(id: 1)
-
-            apiResult = result.debugDescription
+            // Se precisar fazer alguma operação assíncrona com o game
+            // Por exemplo, carregar detalhes adicionais
         }
         .sheet(isPresented: $isShowing) {
             ScannerView(isShowing: $isShowing) { value in
@@ -108,10 +101,23 @@ struct GameView: View {
             }
             .presentationDetents([.medium, .large])
         }
-
     }
 }
 
 #Preview {
-    GameView(id: "1234")
+    GameView(
+        game:
+            BoardGame(
+                name: "Quest",
+                owner: "Felipe",
+                status: .free,
+                difficult: .easy,
+                numPlayersMax: 5,
+                numPlayersMin: 3,
+                description: "É um jogo mt foda aaaaaaaa",
+                duration: 5,
+                waitingPlayers: [],
+                imageUrl: ""
+            )
+    )
 }
