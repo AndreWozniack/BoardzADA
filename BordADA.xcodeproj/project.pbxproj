@@ -8,14 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		A912DE482CACB06700E9DE4E /* CarBode in Frameworks */ = {isa = PBXBuildFile; productRef = A912DE472CACB06700E9DE4E /* CarBode */; };
-		AF362CBF2CACB02100506443 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AF362CBE2CACB02100506443 /* GoogleService-Info.plist */; };
-		AF362CC32CACB14900506443 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = AF362CC22CACB14900506443 /* FirebaseAnalytics */; };
-		AF362CC52CACB14900506443 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = AF362CC42CACB14900506443 /* FirebaseAnalyticsOnDeviceConversion */; };
-		AF362CC72CACB14900506443 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = AF362CC62CACB14900506443 /* FirebaseAnalyticsWithoutAdIdSupport */; };
-		AF362CC92CACB14900506443 /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = AF362CC82CACB14900506443 /* FirebaseAppCheck */; };
-		AF362CCB2CACB14900506443 /* FirebaseAppDistribution-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = AF362CCA2CACB14900506443 /* FirebaseAppDistribution-Beta */; };
-		AF362D5F2CACBF9600506443 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = AF362D5E2CACBF9600506443 /* FirebaseFirestore */; };
-		AFE5D42F2CACDC7300503572 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = AFE5D42E2CACDC7300503572 /* FirebaseAuth */; };
+		AFD6E87B2CB0D2D70079F460 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AFD6E87A2CB0D2D70079F460 /* GoogleService-Info.plist */; };
+		AFD6E87E2CB0E6420079F460 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = AFD6E87D2CB0E6420079F460 /* FirebaseAuth */; };
+		AFD6E8802CB0E6420079F460 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = AFD6E87F2CB0E6420079F460 /* FirebaseFirestore */; };
 		F74327022CACE7EE00E9608F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = F74327012CACE7EE00E9608F /* Alamofire */; };
 		F7756DF52CACB951008B1389 /* RouterKit in Frameworks */ = {isa = PBXBuildFile; productRef = F7756DF42CACB951008B1389 /* RouterKit */; };
 /* End PBXBuildFile section */
@@ -41,7 +36,7 @@
 		AF362C8B2CACAAB400506443 /* BordADA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BordADA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF362C9B2CACAAB700506443 /* BordADATests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BordADATests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF362CA52CACAAB700506443 /* BordADAUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BordADAUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		AF362CBE2CACB02100506443 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		AFD6E87A2CB0D2D70079F460 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -69,14 +64,9 @@
 			files = (
 				F74327022CACE7EE00E9608F /* Alamofire in Frameworks */,
 				A912DE482CACB06700E9DE4E /* CarBode in Frameworks */,
-				AF362CC92CACB14900506443 /* FirebaseAppCheck in Frameworks */,
-				AF362CC32CACB14900506443 /* FirebaseAnalytics in Frameworks */,
-				AF362CCB2CACB14900506443 /* FirebaseAppDistribution-Beta in Frameworks */,
-				AF362CC72CACB14900506443 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				F7756DF52CACB951008B1389 /* RouterKit in Frameworks */,
-				AF362CC52CACB14900506443 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
-				AF362D5F2CACBF9600506443 /* FirebaseFirestore in Frameworks */,
-				AFE5D42F2CACDC7300503572 /* FirebaseAuth in Frameworks */,
+				AFD6E8802CB0E6420079F460 /* FirebaseFirestore in Frameworks */,
+				AFD6E87E2CB0E6420079F460 /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -100,11 +90,11 @@
 		AF362C822CACAAB400506443 = {
 			isa = PBXGroup;
 			children = (
+				AFD6E87A2CB0D2D70079F460 /* GoogleService-Info.plist */,
 				AF362C8D2CACAAB400506443 /* BordADA */,
 				AF362C9E2CACAAB700506443 /* BordADATests */,
 				AF362CA82CACAAB700506443 /* BordADAUITests */,
 				AF362C8C2CACAAB400506443 /* Products */,
-				AF362CBE2CACB02100506443 /* GoogleService-Info.plist */,
 				AF362D5D2CACBF9600506443 /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -147,15 +137,10 @@
 			name = BordADA;
 			packageProductDependencies = (
 				A912DE472CACB06700E9DE4E /* CarBode */,
-				AF362CC22CACB14900506443 /* FirebaseAnalytics */,
-				AF362CC42CACB14900506443 /* FirebaseAnalyticsOnDeviceConversion */,
-				AF362CC62CACB14900506443 /* FirebaseAnalyticsWithoutAdIdSupport */,
-				AF362CC82CACB14900506443 /* FirebaseAppCheck */,
-				AF362CCA2CACB14900506443 /* FirebaseAppDistribution-Beta */,
 				F7756DF42CACB951008B1389 /* RouterKit */,
-				AF362D5E2CACBF9600506443 /* FirebaseFirestore */,
-				AFE5D42E2CACDC7300503572 /* FirebaseAuth */,
 				F74327012CACE7EE00E9608F /* Alamofire */,
+				AFD6E87D2CB0E6420079F460 /* FirebaseAuth */,
+				AFD6E87F2CB0E6420079F460 /* FirebaseFirestore */,
 			);
 			productName = BordADA;
 			productReference = AF362C8B2CACAAB400506443 /* BordADA.app */;
@@ -241,9 +226,9 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				A912DE462CACAFE200E9DE4E /* XCRemoteSwiftPackageReference "CarBode-Barcode-Scanner-For-SwiftUI" */,
-				AF362CC12CACB14900506443 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				F7756DF32CACB951008B1389 /* XCRemoteSwiftPackageReference "router-kit" */,
 				F74327002CACE7EE00E9608F /* XCRemoteSwiftPackageReference "Alamofire" */,
+				AFD6E87C2CB0E6420079F460 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = AF362C8C2CACAAB400506443 /* Products */;
@@ -262,7 +247,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AF362CBF2CACB02100506443 /* GoogleService-Info.plist in Resources */,
+				AFD6E87B2CB0D2D70079F460 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -445,10 +430,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = BordADA/BordADA.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BordADA/Preview Content\"";
-				DEVELOPMENT_TEAM = R9V648Y475;
+				DEVELOPMENT_TEAM = L2AH2M48T4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = BoardzADA;
@@ -458,21 +444,17 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = academy.pucpr.BoardzADA;
+				PRODUCT_BUNDLE_IDENTIFIER = academy.pucpr.BordADA;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -482,10 +464,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = BordADA/BordADA.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BordADA/Preview Content\"";
-				DEVELOPMENT_TEAM = R9V648Y475;
+				DEVELOPMENT_TEAM = L2AH2M48T4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = BoardzADA;
@@ -495,21 +478,17 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = academy.pucpr.BoardzADA;
+				PRODUCT_BUNDLE_IDENTIFIER = academy.pucpr.BordADA;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -635,7 +614,7 @@
 				minimumVersion = 2.2.3;
 			};
 		};
-		AF362CC12CACB14900506443 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+		AFD6E87C2CB0E6420079F460 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
 			requirement = {
@@ -667,40 +646,15 @@
 			package = A912DE462CACAFE200E9DE4E /* XCRemoteSwiftPackageReference "CarBode-Barcode-Scanner-For-SwiftUI" */;
 			productName = CarBode;
 		};
-		AF362CC22CACB14900506443 /* FirebaseAnalytics */ = {
+		AFD6E87D2CB0E6420079F460 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = AF362CC12CACB14900506443 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAnalytics;
-		};
-		AF362CC42CACB14900506443 /* FirebaseAnalyticsOnDeviceConversion */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = AF362CC12CACB14900506443 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAnalyticsOnDeviceConversion;
-		};
-		AF362CC62CACB14900506443 /* FirebaseAnalyticsWithoutAdIdSupport */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = AF362CC12CACB14900506443 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAnalyticsWithoutAdIdSupport;
-		};
-		AF362CC82CACB14900506443 /* FirebaseAppCheck */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = AF362CC12CACB14900506443 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAppCheck;
-		};
-		AF362CCA2CACB14900506443 /* FirebaseAppDistribution-Beta */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = AF362CC12CACB14900506443 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = "FirebaseAppDistribution-Beta";
-		};
-		AF362D5E2CACBF9600506443 /* FirebaseFirestore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = AF362CC12CACB14900506443 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseFirestore;
-		};
-		AFE5D42E2CACDC7300503572 /* FirebaseAuth */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = AF362CC12CACB14900506443 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = AFD6E87C2CB0E6420079F460 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
+		};
+		AFD6E87F2CB0E6420079F460 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AFD6E87C2CB0E6420079F460 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
 		};
 		F74327012CACE7EE00E9608F /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;

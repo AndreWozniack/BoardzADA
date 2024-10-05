@@ -9,7 +9,7 @@ import RouterKit
 import SwiftUI
 
 enum AppRoute: Routable {
-    case game(String)
+    case game(BoardGame)
     case gameList
     case signIn
     case gameCreate
@@ -17,7 +17,7 @@ enum AppRoute: Routable {
     
     var view: any View {
         switch self {
-            case .game(let id): GameView(id: id)
+            case .game(let game): GameView(game: game)
             case .gameList: GameListView()
             case .signIn: SignInView()
             case .gameCreate: GameCreateView()

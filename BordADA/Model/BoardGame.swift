@@ -5,19 +5,19 @@
 //  Created by André Wozniack on 01/10/24.
 //
 import Foundation
+import FirebaseFirestore
 
 struct Player: Codable, Identifiable, Equatable, Hashable {
-    var id = UUID()
+    @DocumentID var id: String?
     var name: String
     var email: String
     var currentGameId: String?
     var isPlaying: Bool = false
-    var waitingForGameIds: [String] = []
 }
 
 
 struct BoardGame: Codable, Identifiable, Equatable, Hashable {
-    var id = UUID().uuidString
+    var id = UUID()
     var name: String
     var owner: String
     var status: GameStatus
@@ -29,6 +29,32 @@ struct BoardGame: Codable, Identifiable, Equatable, Hashable {
     var currentPlayer: Player?
     var waitingPlayers: [Player] = []
     var imageUrl: String
+    
+    init(
+        name: String,
+        owner: String,
+        status: GameStatus,
+        difficult: GameDifficult,
+        numPlayersMax: Int,
+        numPlayersMin: Int,
+        description: String,
+        duration: Int,
+        currentPlayer: Player? = nil,
+        waitingPlayers: [Player],
+        imageUrl: String
+    ) {
+        self.name = name
+        self.owner = owner
+        self.status = status
+        self.difficult = difficult
+        self.numPlayersMax = numPlayersMax
+        self.numPlayersMin = numPlayersMin
+        self.description = description
+        self.duration = duration
+        self.currentPlayer = currentPlayer
+        self.waitingPlayers = waitingPlayers
+        self.imageUrl = imageUrl
+    }
 }
 
 enum GameStatus: String, Codable, CaseIterable, Hashable {

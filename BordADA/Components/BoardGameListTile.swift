@@ -23,13 +23,19 @@ struct BoardGameListTile: View {
         HStack(alignment: .top, spacing: 0) {
             AsyncImage(url: URL(string: game.imageUrl)) { result in
                 switch result {
-                    case .success(let image):
-                        image
-                            .resizable()
-                            .scaledToFill()
-                    @unknown default:
-                        Rectangle()
-                            .foregroundStyle(.purple)
+                case .success(let image):
+                    image
+                        .resizable()
+                        .scaledToFill()
+                case .empty:
+                    Rectangle()
+                        .foregroundStyle(.yellow)
+                case .failure(_):
+                    Rectangle()
+                        .foregroundStyle(.red)
+                @unknown default:
+                    Rectangle()
+                        .foregroundStyle(.purple)
                 }
             }
             .frame(width: 100, height: 100)
@@ -76,6 +82,8 @@ struct BoardGameListTile: View {
                 numPlayersMax: 2,
                 numPlayersMin: 8,
                 description: "",
+                duration: 10,
+                waitingPlayers: [],
                 imageUrl: "https://storasge.googleapis.com/ludopedia-capas/35643_t.jpg"
             )
         )
