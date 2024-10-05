@@ -12,16 +12,15 @@ import FirebaseAuth
 
 struct GameListView: View {
     @StateObject var vm = GamesCollectionManager()
+    @ObservedObject var userManager = UserManager.shared
     @State var isShowing: Bool = false
-    @State private var userName: String = "Player"
-
 
     @EnvironmentObject var router: Router<AppRoute>
 
     var body: some View {
         VStack {
             HStack {
-                Text(userName)
+                Text(userManager.currentUser?.name ?? "Usuario nao logado")
                     .font(.title)
                     .foregroundStyle(.white)
                     .bold()
@@ -60,17 +59,10 @@ struct GameListView: View {
         }
         .background(Color.uiBackground)
         .onAppear {
-            if let user = Auth.auth().currentUser {
-                self.userName = user.displayName ?? "Usuário"
-            } else {
-                self.userName = "Usuário não logado"
-            }
             Task {
                 await vm.fetchGames()
-                print(vm.gameList.count)
             }
         }
-
         .sheet(isPresented: $isShowing) {
             ScannerView(isShowing: $isShowing) { value in
 //                router.push(to: .game(value))
@@ -82,6 +74,7 @@ struct GameListView: View {
         
         Button(action: { self.isShowing.toggle() }) {
              Text("Scan")
+
          }
         Button {
             router.push(to: .gameCreate)
