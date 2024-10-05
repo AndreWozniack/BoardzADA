@@ -12,7 +12,7 @@ import RouterKit
 
 struct SignInView: View {
     @StateObject var signInManager = AppleSignInManager()
-    @StateObject var userManager = UserManager()
+    @StateObject var userManager = UserManager.shared
     
     @EnvironmentObject var router: Router<AppRoute>
     @State private var isLoading = false
@@ -67,7 +67,7 @@ struct SignInView: View {
             signInManager.handle(authorization: authorization) { firebaseResult in
                 isLoading = false
                 switch firebaseResult {
-                case .success(let authResult):
+                case .success(_):
                     Task {
                         let playerExists = await userManager.checkIfPlayerExists()
                         if !playerExists {
