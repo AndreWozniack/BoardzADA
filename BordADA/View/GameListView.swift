@@ -39,7 +39,7 @@ struct GameListView: View {
             }
             .padding(.horizontal, 24)
             .padding(.vertical, 24)
-            .background(.purple)
+            .background(.roxo)
             
             ScrollView {
                 LazyVStack {
@@ -72,15 +72,8 @@ struct GameListView: View {
         }
         .navigationBarBackButtonHidden()
         
-        Button(action: { self.isShowing.toggle() }) {
-             Text("Scan")
-
-         }
-        Button {
-            router.push(to: .gameCreate)
-        } label: {
-            Text("Criar Jogo")
-        }
+        DefaultButton(action: {self.isShowing.toggle()}, text: "Scan")
+        DefaultButton(action: {router.push(to: .gameSearch)}, text: "Crair Jogo")
     }
 }
 

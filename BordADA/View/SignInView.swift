@@ -17,44 +17,58 @@ struct SignInView: View {
     @EnvironmentObject var router: Router<AppRoute>
     @State private var isLoading = false
     @State private var errorMessage: String?
+    @State private var isFetchUser = false
     
     var body: some View {
         VStack {
-            if isLoading {
-                ProgressView("Autenticando...")
-            } else {
-                VStack {
-                    Text("BoardzADA")
-                        .font(.title)
-                        .fontDesign(.rounded)
-                        .bold()
-                        .padding()
-                    Image("boardzada")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 160)
-                }
-
-                if let errorMessage = errorMessage {
-                    Text(errorMessage)
-                        .foregroundColor(.red)
-                        .padding()
-                }
-                
-                SignInWithAppleButton(
-                    .signIn,
-                    onRequest: { request in
-                        signInManager.startSignInWithAppleFlow(request: request)
-                    },
-                    onCompletion: { result in
-                        handleAuthorization(result: result)
+            if isFetchUser {
+                if isLoading {
+                    ProgressView("Autenticando...")
+                } else {
+                    VStack {
+                        Text("BoardzADA")
+                            .font(.title)
+                            .fontDesign(.rounded)
+                            .bold()
+                            .padding()
+                        Image("boardzada")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 160)
                     }
-                )
-                .signInWithAppleButtonStyle(.black)
-                .frame(width: 280, height: 45)
-                .padding()
+
+                    if let errorMessage = errorMessage {
+                        Text(errorMessage)
+                            .foregroundColor(.red)
+                            .padding()
+                    }
+                    
+                    SignInWithAppleButton(
+                        .signIn,
+                        onRequest: { request in
+                            signInManager.startSignInWithAppleFlow(request: request)
+                        },
+                        onCompletion: { result in
+                            handleAuthorization(result: result)
+                        }
+                    )
+                    .signInWithAppleButtonStyle(.black)
+                    .frame(width: 280, height: 45)
+                    .padding()
+                }
+            } else {
+                ProgressView("Entrando...")
             }
+            
         }
+        .onAppear(perform: {
+            Task {
+                isFetchUser = await userManager.fetchPlayer()
+                if isFetchUser {
+                    router.push(to: .gameList)
+                }
+            }
+        })
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .ignoresSafeArea()
         .background(Color.roxo)
