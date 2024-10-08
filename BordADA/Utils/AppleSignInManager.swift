@@ -77,7 +77,7 @@ class AppleSignInManager: NSObject, ObservableObject {
                         }
 
                         // Buscar os dados do jogador e atualizar currentUser
-                        await userManager.fetchPlayer()
+                        _ = await userManager.fetchPlayer()
 
                         // Autenticação bem-sucedida
                         print("Usuário autenticado com sucesso: \(authResult.user.uid)")

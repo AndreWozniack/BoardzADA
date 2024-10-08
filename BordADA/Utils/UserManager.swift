@@ -12,7 +12,7 @@ import FirebaseAuth
 class UserManager: ObservableObject {
     static let shared = UserManager()
     private var db = Firestore.firestore()
-    @Published var currentUser: Player?
+    @Published var currentUser: Player = Player(id: "", name: "Jon", email: "teste@emai.com", isPlaying: false)
     
     private init() {
         if Auth.auth().currentUser != nil {
@@ -21,7 +21,6 @@ class UserManager: ObservableObject {
             }
         }
     }
-    
     
     func createPlayer() async {
         guard let user = Auth.auth().currentUser else {
@@ -49,10 +48,10 @@ class UserManager: ObservableObject {
         }
     }
 
-    func fetchPlayer() async {
+    func fetchPlayer() async -> Bool {
         guard let userId = Auth.auth().currentUser?.uid else {
             print("Usuário não está logado.")
-            return
+            return false
         }
 
         do {
@@ -63,8 +62,10 @@ class UserManager: ObservableObject {
                 self.currentUser = player
             }
             print("Jogador encontrado: \(player.name)")
+            return true
         } catch {
             print("Jogador não encontrado ou erro ao decodificar: \(error.localizedDescription)")
+            return false
         }
     }
 
@@ -83,7 +84,7 @@ class UserManager: ObservableObject {
         }
     }
     
-    func updatePlayer(name: String? = nil, email: String? = nil, isPlaying: Bool? = nil, currentGameId: String? = nil) async {
+    func updatePlayer(name: String? = nil, email: String? = nil, isPlaying: Bool? = nil) async {
         guard let userId = Auth.auth().currentUser?.uid else {
             print("Usuário não está logado.")
             return
@@ -99,9 +100,7 @@ class UserManager: ObservableObject {
             if let isPlaying = isPlaying {
                 dataToUpdate["isPlaying"] = isPlaying
             }
-            if let currentGameId = currentGameId {
-                dataToUpdate["currentGameId"] = currentGameId
-            }
+
             if !dataToUpdate.isEmpty {
                 let document = db.collection("players").document(userId)
                 try await document.updateData(dataToUpdate)
@@ -114,8 +113,8 @@ class UserManager: ObservableObject {
         }
     }
     
-    func updatePlayerStatus(isPlaying: Bool, currentGameId: String?) async {
-        await updatePlayer(isPlaying: isPlaying, currentGameId: currentGameId)
+    func updatePlayerStatus(isPlaying: Bool) async {
+        await updatePlayer(isPlaying: isPlaying)
     }
 }
 
