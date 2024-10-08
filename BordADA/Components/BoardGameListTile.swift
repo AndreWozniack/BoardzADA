@@ -44,14 +44,14 @@ struct BoardGameListTile: View {
                 HStack {
                     Text(game.name)
                         .font(.title2)
-                        .foregroundStyle(.purple)
+                        .foregroundStyle(.roxo)
                         .bold()
                     
                     Spacer()
                     
                     Circle()
                         .frame(width: 10, height: 10)
-                        .foregroundStyle(.green)
+                        .foregroundStyle(getColor())
                 }
                 
                 HStack(spacing: 4) {
@@ -60,6 +60,7 @@ struct BoardGameListTile: View {
                     
                     Text("\(game.numPlayersMin) - \(game.numPlayersMax) jogadores")
                         .font(.caption2)
+                        .foregroundStyle(.roxo)
                 }
             }
             .padding(.horizontal, 16)
