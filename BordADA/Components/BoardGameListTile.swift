@@ -84,7 +84,7 @@ struct BoardGameListTile: View {
                 numPlayersMin: 8,
                 description: "",
                 duration: 10,
-                waitingPlayers: [],
+                waitingPlayerRefs: [],
                 imageUrl: "https://storasge.googleapis.com/ludopedia-capas/35643_t.jpg"
             )
         )

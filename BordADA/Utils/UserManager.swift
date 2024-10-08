@@ -12,7 +12,7 @@ import FirebaseAuth
 class UserManager: ObservableObject {
     static let shared = UserManager()
     private var db = Firestore.firestore()
-    @Published var currentUser: Player?
+    @Published var currentUser: Player = Player(id: "", name: "Jon", email: "teste@emai.com", isPlaying: false)
     
     private init() {
         if Auth.auth().currentUser != nil {
@@ -21,7 +21,6 @@ class UserManager: ObservableObject {
             }
         }
     }
-    
     
     func createPlayer() async {
         guard let user = Auth.auth().currentUser else {

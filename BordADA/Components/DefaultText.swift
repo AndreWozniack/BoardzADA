@@ -8,11 +8,16 @@
 import SwiftUI
 
 struct DefaultText: View {
+    var text: String
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text(text)
+            .font(.title2)
+            .bold()
+            .foregroundColor(.roxo)
     }
 }
 
 #Preview {
-    DefaultText()
+    DefaultText(text: "Texto padrão")
 }

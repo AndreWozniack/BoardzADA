@@ -11,16 +11,16 @@ struct DefaultButton: View {
     
     var action: () -> Void = {}
     var text: String = "Default Button"
+    var isDestructive: Bool = false
     
     var body: some View {
         Button(action: action) {
             Text(text)
                 .foregroundColor(.white)
-//                .font(.title2)
                 .fontWeight(.bold)
                 .padding()
-                .frame(width: 342)
-                .background(Color.roxo)
+                .frame(maxWidth: 342)
+                .background(isDestructive ? Color.vermelho : Color.roxo)
                 .cornerRadius(16)
         }
 
