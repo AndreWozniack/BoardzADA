@@ -8,6 +8,7 @@ import Foundation
 import FirebaseFirestore
 
 class GamesCollectionManager: ObservableObject {
+    static let shared = GamesCollectionManager()
     @Published var gameList: [BoardGame] = []
 
     private var db = Firestore.firestore()

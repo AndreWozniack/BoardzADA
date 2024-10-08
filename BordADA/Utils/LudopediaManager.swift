@@ -8,7 +8,7 @@
 import Alamofire
 import Foundation
 
-struct LDGame: Codable, Identifiable {
+struct LDGame: Codable, Identifiable, Equatable, Hashable {
     var id: Int { id_jogo }
     let id_jogo: Int
     let nm_jogo: String
@@ -16,6 +16,7 @@ struct LDGame: Codable, Identifiable {
     let thumb: String?
     let link: String?
     let tp_jogo: String?
+
 }
 
 struct LDGameResponse: Codable {
@@ -82,7 +83,6 @@ class LudopediaManager {
            var urlComponents = URLComponents(string: "\(url)/jogos")
            urlComponents?.queryItems = [
                URLQueryItem(name: "search", value: nome),
-               URLQueryItem(name: "rows", value: "3")
            ]
 
            guard let url = urlComponents?.url else {

@@ -49,10 +49,10 @@ class UserManager: ObservableObject {
         }
     }
 
-    func fetchPlayer() async {
+    func fetchPlayer() async -> Bool {
         guard let userId = Auth.auth().currentUser?.uid else {
             print("Usuário não está logado.")
-            return
+            return false
         }
 
         do {
@@ -63,8 +63,10 @@ class UserManager: ObservableObject {
                 self.currentUser = player
             }
             print("Jogador encontrado: \(player.name)")
+            return true
         } catch {
             print("Jogador não encontrado ou erro ao decodificar: \(error.localizedDescription)")
+            return false
         }
     }
 
