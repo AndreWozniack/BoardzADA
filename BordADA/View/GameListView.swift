@@ -18,9 +18,8 @@ struct GameListView: View {
 
     var body: some View {
         VStack {
-            // Cabeçalho com nome de usuário e botão de QRCode
             HStack {
-                Text(userManager.currentUser?.name ?? "Usuário não logado")
+                Text(userManager.currentUser.name)
                     .font(.title)
                     .foregroundStyle(.white)
                     .bold()
@@ -40,36 +39,37 @@ struct GameListView: View {
             .background(.roxo)
             
             ScrollView {
-                // Seção de jogos livres
-                Text("Jogos Livres")
-                    .font(.headline)
-                    .padding(.top)
-                
-                LazyVStack {
-                    ForEach(vm.freeGames) { game in
-                        Button {
-                            router.push(to: .game(game))
-                        } label: {
-                            BoardGameListTile(game: game)
+
+                VStack(alignment: .leading) {
+                    DefaultText(text: "Jogos livres")
+                    LazyVStack {
+                        ForEach(vm.freeGames) { game in
+                            Button {
+                                router.push(to: .game(game))
+                            } label: {
+                                BoardGameListTile(game: game)
+                            }
+                            .buttonStyle(.plain)
                         }
-                        .buttonStyle(.plain)
                     }
                 }
-                
-                Text("Jogos Ocupados")
-                    .font(.headline)
-                    .padding(.top)
-                
-                LazyVStack {
-                    ForEach(vm.occupiedGames) { occupiedGame in
-                        Button {
-                            router.push(to: .game(occupiedGame.game))
-                        } label: {
-                            BoardGameListTile(game: occupiedGame.game)
+                .padding(.bottom, 16)
+                if !vm.occupiedGames.isEmpty {
+                    VStack(alignment: .leading){
+                        DefaultText(text: "Jogos Ocupados")
+                        LazyVStack {
+                            ForEach(vm.occupiedGames) { occupiedGame in
+                                Button {
+                                    router.push(to: .game(occupiedGame.game))
+                                } label: {
+                                    BoardGameListTile(game: occupiedGame.game)
+                                }
+                                
+                            }
                         }
-                        
                     }
                 }
+
             }
             .padding(.top, 16)
             .padding(.horizontal, 24)
@@ -78,6 +78,15 @@ struct GameListView: View {
                     await vm.fetchGamesWithPlayers()
                 }
             }
+            
+            HStack{
+                DefaultButton(action: { self.isShowing.toggle() }, text: "Scan")
+                    .shadow(radius: 5)
+                DefaultButton(action: { router.push(to: .gameSearch) }, text: "Criar Jogo")
+                    .shadow(radius: 5)
+            }
+            .padding(.horizontal)
+            .padding(.vertical)
         }
         .background(Color.uiBackground)
         .onAppear {
@@ -94,7 +103,7 @@ struct GameListView: View {
                     }
                     await GamesCollectionManager.shared.addCurrentPlayer(
                         to: game.id.uuidString,
-                        playerId: userManager.currentUser?.id ?? ""
+                        playerID: userManager.currentUser.id ?? ""
                     )
                     router.push(to: .game(game))
                 }
@@ -102,9 +111,6 @@ struct GameListView: View {
             .presentationDetents([.medium, .large])
         }
         .navigationBarBackButtonHidden()
-        
-        DefaultButton(action: {self.isShowing.toggle()}, text: "Scan")
-        DefaultButton(action: {router.push(to: .gameSearch)}, text: "Criar Jogo")
     }
 }
 

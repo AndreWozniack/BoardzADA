@@ -129,7 +129,7 @@ struct GameFormView: View {
                 numPlayersMin: numPlayersMin ?? 4,
                 description: description,
                 duration: duration,
-                waitingPlayers: [],
+                waitingPlayerRefs: [],
                 imageUrl: selectedGame.thumb ?? "no_image"
             )
             await vm.addGame(game)

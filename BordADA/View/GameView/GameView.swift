@@ -14,7 +14,8 @@ struct GameView: View {
     @State private var apiResult: String = ""
     @State private var isShowing: Bool = false
     @State private var currentPlayer: Player?
-    @State private var showSuccess = true
+    @State private var waitingPlayers: [Player] = []
+    @State private var showSuccess = false
     @State private var showError = false
 
     @EnvironmentObject var router: Router<AppRoute>
@@ -36,31 +37,48 @@ struct GameView: View {
                     systemImage: "person.2.fill"
                 )
                 
-                if game.status == .occupied {
-                    if let currentPlayer = currentPlayer {
-                        GameInfoSection(title: "Jogador Atual", text: currentPlayer.name, systemImage: "person.fill")
-                    }
+                if game.status == .occupied, let currentPlayer = currentPlayer {
+                    GameInfoSection(title: "Jogador Atual", text: currentPlayer.name, systemImage: "person.fill")
+                    
+                    GameQueueView(currentPlayer: currentPlayer, waitingPlayers: waitingPlayers)
+                }
+                
+                if game.status == .occupied && currentPlayer?.id == UserManager.shared.currentUser.id {
+                    DefaultButton(action: {
+                        Task {
+                            await GamesCollectionManager.shared.removeCurrentPlayer(
+                                from: game.id.uuidString
+                            )
+                            router.pop()
+                        }
+                    }, text: "Sair do jogo", isDestructive: true)
+
+                } else if game.status == .occupied {
+                    DefaultButton(
+                        action: {
+                            if currentPlayer?.id != UserManager.shared.currentUser.id && !waitingPlayers.contains(where: { $0.id == UserManager.shared.currentUser.id }) {
+                                Task {
+                                    await GamesCollectionManager.shared.addPlayerToWaitingList(
+                                        gameId: game.id.uuidString,
+                                        playerID: UserManager.shared.currentUser.id ?? ""
+                                    )
+                                    print("Você foi adicionado à lista de espera")
+                                }
+                            } else {
+                                print("Jogador já está jogando ou na fila!")
+                            }
+                        },
+                        text: "Entrar na fila")
+                    
+                } else if game.status == .free {
+                    DefaultButton(action: {self.isShowing.toggle()}, text: "Entrar no jogo")
                 }
             }
             .padding(24)
-
-            if game.status == .occupied && currentPlayer?.id == UserManager.shared.currentUser?.id {
-                DefaultButton(action: {
-                    Task {
-                        await GamesCollectionManager.shared.removeCurrentPlayer(
-                            from: game.id.uuidString,
-                            playerId: UserManager.shared.currentUser?.id ?? ""
-                        )
-                        router.pop()
-                    }
-                }, text: "Sair do jogo")
-            } else if game.status == .free {
-                DefaultButton(action: {self.isShowing.toggle()}, text: "Entrar no jogo")
-            }
         }
         .background(Color.uiBackground)
         .task {
-            await loadCurrentPlayer()
+            await loadCurrentPlayerAndWaitingList()
         }
         .sheet(isPresented: $isShowing) {
             ScannerView(isShowing: $isShowing) { value in
@@ -76,13 +94,17 @@ struct GameView: View {
         .sheet(isPresented: $showError) {
             ErrorView(isShowing: $showError)
         }
-
     }
     
-    func loadCurrentPlayer() async {
+    func loadCurrentPlayerAndWaitingList() async {
         if game.status == .occupied {
-            GamesCollectionManager.shared.fetchPlayer(for: game) { player in
+            // Carregar o jogador atual através da referência
+            GamesCollectionManager.shared.fetchPlayer(from: game.currentPlayerRef!) { player in
                 self.currentPlayer = player
+            }
+            // Carregar os jogadores da fila de espera
+            GamesCollectionManager.shared.fetchWaitingPlayers(from: game.waitingPlayerRefs) { players in
+                self.waitingPlayers = players
             }
         }
     }
@@ -92,7 +114,7 @@ struct GameView: View {
             print(scannedGame.name)
             await GamesCollectionManager.shared.addCurrentPlayer(
                 to: scannedGame.id.uuidString,
-                playerId: UserManager.shared.currentUser?.id ?? ""
+                playerID: UserManager.shared.currentUser.id ?? ""
             )
             showSuccess = true
         } else {
@@ -100,7 +122,6 @@ struct GameView: View {
             showError = true
         }
     }
-
 }
 
 #Preview {
@@ -108,13 +129,13 @@ struct GameView: View {
         game: BoardGame(
             name: "Quest",
             owner: "Felipe",
-            status: .free,
+            status: .occupied,
             difficult: .easy,
             numPlayersMax: 5,
             numPlayersMin: 3,
             description: "É um jogo mt foda aaaaaaaa",
             duration: 5,
-            waitingPlayers: [],
+            waitingPlayerRefs: [],
             imageUrl: ""
         )
     )
