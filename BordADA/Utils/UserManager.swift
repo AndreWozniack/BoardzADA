@@ -85,7 +85,7 @@ class UserManager: ObservableObject {
         }
     }
     
-    func updatePlayer(name: String? = nil, email: String? = nil, isPlaying: Bool? = nil, currentGameId: String? = nil) async {
+    func updatePlayer(name: String? = nil, email: String? = nil, isPlaying: Bool? = nil) async {
         guard let userId = Auth.auth().currentUser?.uid else {
             print("Usuário não está logado.")
             return
@@ -101,9 +101,7 @@ class UserManager: ObservableObject {
             if let isPlaying = isPlaying {
                 dataToUpdate["isPlaying"] = isPlaying
             }
-            if let currentGameId = currentGameId {
-                dataToUpdate["currentGameId"] = currentGameId
-            }
+
             if !dataToUpdate.isEmpty {
                 let document = db.collection("players").document(userId)
                 try await document.updateData(dataToUpdate)
@@ -116,8 +114,8 @@ class UserManager: ObservableObject {
         }
     }
     
-    func updatePlayerStatus(isPlaying: Bool, currentGameId: String?) async {
-        await updatePlayer(isPlaying: isPlaying, currentGameId: currentGameId)
+    func updatePlayerStatus(isPlaying: Bool) async {
+        await updatePlayer(isPlaying: isPlaying)
     }
 }
 

@@ -26,7 +26,7 @@ struct BoardGame: Codable, Identifiable, Equatable, Hashable {
     var numPlayersMin: Int
     var description: String
     var duration: Int
-    var currentPlayer: Player?
+    var currentPlayer: DocumentReference?
     var waitingPlayers: [Player] = []
     var imageUrl: String
     
@@ -39,7 +39,7 @@ struct BoardGame: Codable, Identifiable, Equatable, Hashable {
         numPlayersMin: Int,
         description: String,
         duration: Int,
-        currentPlayer: Player? = nil,
+        currentPlayer: DocumentReference? = nil,
         waitingPlayers: [Player],
         imageUrl: String
     ) {

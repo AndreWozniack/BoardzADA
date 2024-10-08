@@ -10,6 +10,8 @@ import FirebaseFirestore
 class GamesCollectionManager: ObservableObject {
     static let shared = GamesCollectionManager()
     @Published var gameList: [BoardGame] = []
+    @Published var freeGames: [BoardGame] = []
+    @Published var occupiedGames: [OccupiedGames] = []
 
     private var db = Firestore.firestore()
 
@@ -160,7 +162,15 @@ class GamesCollectionManager: ObservableObject {
         }
     }
     
-    func addNewGame(name: String, owner: String, numPlayersMin: Int, numPlayersMax: Int, description: String, duration: Int, imageUrl: String) async {
+    func addNewGame(
+        name: String,
+        owner: String,
+        numPlayersMin: Int,
+        numPlayersMax: Int,
+        description: String,
+        duration: Int,
+        imageUrl: String
+    ) async {
         let newGame = BoardGame(
             name: name,
             owner: owner,
@@ -176,9 +186,72 @@ class GamesCollectionManager: ObservableObject {
         await addGame(newGame)
     }
 
-    
     func getAvailableGames() -> [BoardGame] {
         return gameList.filter { $0.status == .free }
+    }
+    
+    func fetchPlayer(for game: BoardGame, completion: @escaping (Player?) -> Void) {
+        guard let playerRef = game.currentPlayer else {
+            completion(nil)
+            return
+        }
+        
+        playerRef.getDocument { document, error in
+            if let document = document, document.exists {
+                do {
+                    let player = try document.data(as: Player.self)
+                    completion(player)
+                } catch {
+                    print("Erro ao decodificar Player: \(error.localizedDescription)")
+                    completion(nil)
+                }
+            } else {
+                print("Erro ao buscar jogador: \(error?.localizedDescription ?? "Unknown error")")
+                completion(nil)
+            }
+        }
+    }
+    func fetchGamesWithPlayers() async {
+        do {
+            let snapshot = try await db.collection("games").getDocuments()
+            let games = snapshot.documents.compactMap { document -> BoardGame? in
+                return try? document.data(as: BoardGame.self)
+            }
+
+            // Limpa as listas antes de recarregar
+            DispatchQueue.main.async {
+                self.freeGames = []
+                self.occupiedGames = []
+            }
+
+            // Percorre os jogos e separa entre ocupados e livres
+            for game in games {
+                if game.status == .occupied {
+                    if let currentPlayerRef = game.currentPlayer {
+                        currentPlayerRef.getDocument { document, error in
+                            if let document = document, document.exists {
+                                do {
+                                    let player = try document.data(as: Player.self)
+                                    DispatchQueue.main.async {
+                                        self.occupiedGames.append(OccupiedGames(player: player, game: game))
+                                    }
+                                } catch {
+                                    print("Erro ao decodificar jogador: \(error.localizedDescription)")
+                                }
+                            } else {
+                                print("Erro ao buscar jogador: \(error?.localizedDescription ?? "Unknown error")")
+                            }
+                        }
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        self.freeGames.append(game)
+                    }
+                }
+            }
+        } catch {
+            print("Erro ao buscar jogos: \(error.localizedDescription)")
+        }
     }
 }
 
