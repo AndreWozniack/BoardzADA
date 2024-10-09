@@ -1,3 +1,12 @@
+//
+//  GameViewModel.swift
+//  BordADA
+//
+//  Created by André Wozniack on 08/10/24.
+//
+import SwiftUI
+import FirebaseFirestore
+
 class GameViewModel: ObservableObject {
     @Published var game: BoardGame
     @Published var currentPlayer: Player?
@@ -11,21 +20,28 @@ class GameViewModel: ObservableObject {
     }
     
     @MainActor
-    func loadCurrentPlayerAndWaitingList() async {
+    func loadCurrentPlayerAndWaitingList() {
         if game.status == .occupied {
-            self.currentPlayer = await GamesCollectionManager.shared.fetchPlayer(from: game.currentPlayerRef!)
-            self.waitingPlayers = await GamesCollectionManager.shared.fetchWaitingPlayers(from: game.waitingPlayerRefs)
+            if let currentPlayerRef = game.currentPlayerRef {
+                GamesCollectionManager.shared.fetchPlayer(from: currentPlayerRef) { [weak self] player in
+                    guard let self = self else { return }
+                    self.currentPlayer = player
+                }
+            }
+            GamesCollectionManager.shared.fetchWaitingPlayers(from: game.waitingPlayerRefs) { [weak self] players in
+                guard let self = self else { return }
+                self.waitingPlayers = players
+            }
         }
     }
     
     func joinGame() async {
         await GamesCollectionManager.shared.addCurrentPlayer(
             to: game.id.uuidString,
-            playerID: UserManager.shared.currentUser.id ?? ""
+            playerID: UserManager.shared.currentUser!.id ?? ""
         )
         await MainActor.run {
             self.game.status = .occupied
-            self.game.currentPlayerRef = UserManager.shared.currentUser.id
         }
     }
     
@@ -33,18 +49,14 @@ class GameViewModel: ObservableObject {
         await GamesCollectionManager.shared.removeCurrentPlayer(from: game.id.uuidString)
         await MainActor.run {
             self.game.status = .free
-            self.game.currentPlayerRef = nil
         }
     }
     
     func joinWaitingList() async {
         await GamesCollectionManager.shared.addPlayerToWaitingList(
             gameId: game.id.uuidString,
-            playerID: UserManager.shared.currentUser.id ?? ""
+            playerID: UserManager.shared.currentUser!.id ?? ""
         )
-        await MainActor.run {
-            self.game.waitingPlayerRefs.append(UserManager.shared.currentUser.id ?? "")
-        }
     }
     
     func updateGame() async {
