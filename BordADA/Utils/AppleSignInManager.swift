@@ -70,16 +70,9 @@ class AppleSignInManager: NSObject, ObservableObject {
                             displayName = authResult.user.displayName
                         }
 
-                        // Verificar se o jogador existe no Firestore
                         if await !userManager.checkIfPlayerExists() {
-                            // Criar novo jogador no Firestore com displayName
                             await userManager.createPlayer()
                         }
-
-                        // Buscar os dados do jogador e atualizar currentUser
-                        await userManager.fetchPlayer()
-
-                        // Autenticação bem-sucedida
                         print("Usuário autenticado com sucesso: \(authResult.user.uid)")
                         completion(.success(authResult))
                     }
