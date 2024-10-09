@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A912DE482CACB06700E9DE4E /* CarBode in Frameworks */ = {isa = PBXBuildFile; productRef = A912DE472CACB06700E9DE4E /* CarBode */; };
+		AF41FB652CB5D8FC00C6E7A5 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = AF41FB642CB5D8FC00C6E7A5 /* Config.xcconfig */; };
 		AFD6E87B2CB0D2D70079F460 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AFD6E87A2CB0D2D70079F460 /* GoogleService-Info.plist */; };
 		AFD6E87E2CB0E6420079F460 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = AFD6E87D2CB0E6420079F460 /* FirebaseAuth */; };
 		AFD6E8802CB0E6420079F460 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = AFD6E87F2CB0E6420079F460 /* FirebaseFirestore */; };
@@ -36,6 +37,7 @@
 		AF362C8B2CACAAB400506443 /* BordADA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BordADA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF362C9B2CACAAB700506443 /* BordADATests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BordADATests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF362CA52CACAAB700506443 /* BordADAUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BordADAUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF41FB642CB5D8FC00C6E7A5 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		AFD6E87A2CB0D2D70079F460 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -90,6 +92,7 @@
 		AF362C822CACAAB400506443 = {
 			isa = PBXGroup;
 			children = (
+				AF41FB642CB5D8FC00C6E7A5 /* Config.xcconfig */,
 				AFD6E87A2CB0D2D70079F460 /* GoogleService-Info.plist */,
 				AF362C8D2CACAAB400506443 /* BordADA */,
 				AF362C9E2CACAAB700506443 /* BordADATests */,
@@ -247,6 +250,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF41FB652CB5D8FC00C6E7A5 /* Config.xcconfig in Resources */,
 				AFD6E87B2CB0D2D70079F460 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -454,9 +458,13 @@
 				PRODUCT_BUNDLE_IDENTIFIER = academy.pucpr.BordADA;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -490,9 +498,13 @@
 				PRODUCT_BUNDLE_IDENTIFIER = academy.pucpr.BordADA;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
