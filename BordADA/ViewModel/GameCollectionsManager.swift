@@ -172,7 +172,6 @@ class GamesCollectionManager: ObservableObject {
         }
     }
     
-    // Converter referência de jogador em objeto Player
     func fetchPlayer(from reference: DocumentReference, completion: @escaping (Player?) -> Void) {
         reference.getDocument { snapshot, error in
             guard let document = snapshot, document.exists, let player = try? document.data(as: Player.self) else {

@@ -22,9 +22,7 @@ struct ScannerView: View {
 				scanInterval: .constant(5.0)
 			) {
 				print("QRCode: ", $0.value)
-                
 				isShowing = false
-                
                 onScan($0.value)
 			}
             
