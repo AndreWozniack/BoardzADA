@@ -12,17 +12,16 @@ enum AppRoute: Routable {
     case game(BoardGame)
     case gameList
     case signIn
-    case gameSearch
-    case gameForm(LDGame)
+    case gameCreate
+    case status(String)
     
     var view: any View {
         switch self {
             case .game(let game): GameView(game: game)
             case .gameList: GameListView()
             case .signIn: SignInView()
-            case .gameSearch: GameSearchView()
-            case .gameForm(let game): GameFormView(selectedGame: game)
-            
+            case .gameCreate: GameCreateView()
+            case .status(let id): StatusView(id: id)
         }
     }
 }

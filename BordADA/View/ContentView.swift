@@ -13,7 +13,6 @@ import RouterKit
 struct ContentView: View {
     var body: some View {
         RouterView<AppRoute>(rootView: .signIn)
-            
     }
 }
 

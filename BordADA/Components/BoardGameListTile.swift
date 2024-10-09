@@ -44,14 +44,14 @@ struct BoardGameListTile: View {
                 HStack {
                     Text(game.name)
                         .font(.title2)
-                        .foregroundStyle(.roxo)
+                        .foregroundStyle(.purple)
                         .bold()
                     
                     Spacer()
                     
                     Circle()
                         .frame(width: 10, height: 10)
-                        .foregroundStyle(getColor())
+                        .foregroundStyle(.green)
                 }
                 
                 HStack(spacing: 4) {
@@ -60,7 +60,6 @@ struct BoardGameListTile: View {
                     
                     Text("\(game.numPlayersMin) - \(game.numPlayersMax) jogadores")
                         .font(.caption2)
-                        .foregroundStyle(.roxo)
                 }
             }
             .padding(.horizontal, 16)
@@ -84,7 +83,7 @@ struct BoardGameListTile: View {
                 numPlayersMin: 8,
                 description: "",
                 duration: 10,
-                waitingPlayerRefs: [],
+                waitingPlayers: [],
                 imageUrl: "https://storasge.googleapis.com/ludopedia-capas/35643_t.jpg"
             )
         )
