@@ -1,5 +1,5 @@
 //
-//  UserManagaer.swift
+//  UserManager.swift
 //  BordADA
 //
 //  Created by André Wozniack on 02/10/24.
@@ -13,16 +13,13 @@ class UserManager: ObservableObject {
     static let shared = UserManager()
     private var db = Firestore.firestore()
     @Published var currentUser: Player?
-    
+
     private init() {
-        if Auth.auth().currentUser != nil {
-            Task {
-                await fetchPlayer()
-            }
+        Task {
+            await fetchPlayer()
         }
     }
-    
-    
+
     func createPlayer() async {
         guard let user = Auth.auth().currentUser else {
             print("Usuário não está logado.")
@@ -32,7 +29,7 @@ class UserManager: ObservableObject {
         let userId = user.uid
         let name = user.displayName ?? "Usuário"
         let email = user.email ?? ""
-        
+
         do {
             let playerRef = db.collection("players").document(userId)
             let document = try await playerRef.getDocument()
@@ -43,32 +40,40 @@ class UserManager: ObservableObject {
             
             let newPlayer = Player(id: userId, name: name, email: email)
             try playerRef.setData(from: newPlayer)
+            await MainActor.run {
+                self.currentUser = newPlayer
+            }
             print("Jogador criado com sucesso!")
         } catch let error {
             print("Erro ao criar o jogador: \(error.localizedDescription)")
         }
     }
 
-    func fetchPlayer() async {
+    @discardableResult
+    func fetchPlayer() async -> Player? {
         guard let userId = Auth.auth().currentUser?.uid else {
             print("Usuário não está logado.")
-            return
+            return nil
         }
 
         do {
             let document = try await db.collection("players").document(userId).getDocument()
-            let player = try document.data(as: Player.self)
-            
-            await MainActor.run {
-                self.currentUser = player
+            if let player = try? document.data(as: Player.self) {
+                await MainActor.run {
+                    self.currentUser = player
+                }
+                print("Jogador encontrado: \(player.name)")
+                return player
+            } else {
+                print("Jogador não encontrado.")
+                return nil
             }
-            print("Jogador encontrado: \(player.name)")
         } catch {
-            print("Jogador não encontrado ou erro ao decodificar: \(error.localizedDescription)")
+            print("Erro ao buscar o jogador: \(error.localizedDescription)")
+            return nil
         }
     }
 
-    
     func checkIfPlayerExists() async -> Bool {
         guard let userId = Auth.auth().currentUser?.uid else {
             print("Usuário não está logado.")
@@ -118,5 +123,3 @@ class UserManager: ObservableObject {
         await updatePlayer(isPlaying: isPlaying, currentGameId: currentGameId)
     }
 }
-
-
