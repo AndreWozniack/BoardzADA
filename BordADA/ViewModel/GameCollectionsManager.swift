@@ -8,6 +8,8 @@ import Foundation
 import FirebaseFirestore
 
 class GamesCollectionManager: ObservableObject {
+    
+    static let shared = GamesCollectionManager()
     @Published var gameList: [BoardGame] = []
     @Published var freeGames: [BoardGame] = []
     @Published var occupiedGames: [BoardGame] = []
@@ -119,7 +121,7 @@ class GamesCollectionManager: ObservableObject {
             numPlayersMin: numPlayersMin,
             description: description,
             duration: duration,
-            waitingPlayers: [],
+            waitingPlayerRefs: [],
             imageUrl: imageUrl
         )
         await addGame(newGame)
