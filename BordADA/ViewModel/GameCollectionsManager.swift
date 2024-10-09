@@ -27,7 +27,6 @@ class GamesCollectionManager: ObservableObject {
                     return nil
                 }
 
-                // Atualizar o jogador
                 transaction.updateData([
                     "isPlaying": true,
                 ], forDocument: playerRef)
@@ -126,7 +125,6 @@ class GamesCollectionManager: ObservableObject {
             }
             DispatchQueue.main.async {
                 self.gameList = games
-                print(games)
             }
         } catch {
             print("Erro ao buscar jogos: \(error.localizedDescription)")
@@ -182,4 +180,3 @@ class GamesCollectionManager: ObservableObject {
         return gameList.filter { $0.status == .free }
     }
 }
-

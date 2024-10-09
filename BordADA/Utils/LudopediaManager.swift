@@ -97,7 +97,7 @@ class LudopediaManager {
            request.addValue(appKey, forHTTPHeaderField: "app_key")
 
            do {
-               let (data, response) = try await URLSession.shared.data(for: request)
+               let (data, _) = try await URLSession.shared.data(for: request)
                do {
                    let result = try JSONDecoder().decode(LDGameResponse.self, from: data)
                    return result.jogos

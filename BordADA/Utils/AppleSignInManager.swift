@@ -13,12 +13,11 @@ import CryptoKit
 class AppleSignInManager: NSObject, ObservableObject {
     @Published var currentNonce: String?
     
-    // Função para iniciar o fluxo de login com Apple configurando o request
     func startSignInWithAppleFlow(request: ASAuthorizationAppleIDRequest) {
         let nonce = randomNonceString()
         currentNonce = nonce
         request.requestedScopes = [.fullName, .email]
-        request.nonce = sha256(nonce) // Sempre usar o hash SHA256 do nonce
+        request.nonce = sha256(nonce)
     }
     
     func handle(authorization: ASAuthorization, completion: @escaping (Result<AuthDataResult, Error>) -> Void) {
@@ -38,55 +37,52 @@ class AppleSignInManager: NSObject, ObservableObject {
                 completion(.failure(NSError(domain: "AppleSignIn", code: -1, userInfo: [NSLocalizedDescriptionKey: "Erro ao converter token de identidade"])))
                 return
             }
-            
-            // Configurar credenciais Firebase com o token de identidade
+
             let credential = OAuthProvider.credential(
                 providerID: AuthProviderID.apple,
                 idToken: idTokenString,
                 rawNonce: nonce
             )
-            
-            // Autenticar no Firebase
+
             Auth.auth().signIn(with: credential) { (authResult, error) in
                 if let error = error {
                     print("Erro ao autenticar com Firebase: \(error.localizedDescription)")
                     completion(.failure(error))
                     return
                 }
-                
+
                 if let authResult = authResult {
-                    
-                
-                    // Capturar o nome completo do usuário
-                    if let fullName = appleIDCredential.fullName {
-                        
-                        Task {
-                            do {
-                                if await !UserManager().checkIfPlayerExists() {
-                                    let displayName = [fullName.givenName, fullName.familyName]
-                                        .compactMap { $0 }
-                                        .joined(separator: " ")
-                                    
-                                    let changeRequest = authResult.user.createProfileChangeRequest()
-                                    changeRequest.displayName = displayName
-                                    changeRequest.commitChanges { error in
-                                        if let error = error {
-                                            print("Erro ao atualizar o nome do usuário: \(error.localizedDescription)")
-                                        } else {
-                                            print("Nome do usuário atualizado para: \(displayName)")
-                                        }
-                                    }
-                                }
-                                
-                            }
-                           
+                    Task {
+                        let userManager = UserManager.shared
+
+                        // Capturar o nome completo do usuário, se disponível
+                        var displayName: String?
+                        if let fullName = appleIDCredential.fullName {
+                            displayName = [fullName.givenName, fullName.familyName]
+                                .compactMap { $0 }
+                                .joined(separator: " ")
+
+                            // Atualizar o displayName no Firebase Auth
+                            let changeRequest = authResult.user.createProfileChangeRequest()
+                            changeRequest.displayName = displayName
+                            try await changeRequest.commitChanges()
+                        } else {
+                            displayName = authResult.user.displayName
                         }
 
+                        // Verificar se o jogador existe no Firestore
+                        if await !userManager.checkIfPlayerExists() {
+                            // Criar novo jogador no Firestore com displayName
+                            await userManager.createPlayer()
+                        }
+
+                        // Buscar os dados do jogador e atualizar currentUser
+                        await userManager.fetchPlayer()
+
+                        // Autenticação bem-sucedida
+                        print("Usuário autenticado com sucesso: \(authResult.user.uid)")
+                        completion(.success(authResult))
                     }
-                    
-                    // Autenticação bem-sucedida
-                    print("Usuário autenticado com sucesso: \(authResult.user.uid)")
-                    completion(.success(authResult))
                 }
             }
         }

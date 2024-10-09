@@ -10,8 +10,18 @@ import FirebaseFirestore
 import FirebaseAuth
 
 class UserManager: ObservableObject {
+    static let shared = UserManager()
     private var db = Firestore.firestore()
-    @Published var name = ""
+    @Published var currentUser: Player?
+    
+    private init() {
+        if Auth.auth().currentUser != nil {
+            Task {
+                await fetchPlayer()
+            }
+        }
+    }
+    
     
     func createPlayer() async {
         guard let user = Auth.auth().currentUser else {
@@ -38,6 +48,40 @@ class UserManager: ObservableObject {
             print("Erro ao criar o jogador: \(error.localizedDescription)")
         }
     }
+
+    func fetchPlayer() async {
+        guard let userId = Auth.auth().currentUser?.uid else {
+            print("Usuário não está logado.")
+            return
+        }
+
+        do {
+            let document = try await db.collection("players").document(userId).getDocument()
+            let player = try document.data(as: Player.self)
+            
+            await MainActor.run {
+                self.currentUser = player
+            }
+            print("Jogador encontrado: \(player.name)")
+        } catch {
+            print("Jogador não encontrado ou erro ao decodificar: \(error.localizedDescription)")
+        }
+    }
+
+    
+    func checkIfPlayerExists() async -> Bool {
+        guard let userId = Auth.auth().currentUser?.uid else {
+            print("Usuário não está logado.")
+            return false
+        }
+        do {
+            let document = try await db.collection("players").document(userId).getDocument()
+            return document.exists
+        } catch let error {
+            print("Erro ao verificar se o jogador existe: \(error.localizedDescription)")
+            return false
+        }
+    }
     
     func updatePlayer(name: String? = nil, email: String? = nil, isPlaying: Bool? = nil, currentGameId: String? = nil) async {
         guard let userId = Auth.auth().currentUser?.uid else {
@@ -48,7 +92,6 @@ class UserManager: ObservableObject {
             var dataToUpdate: [String: Any] = [:]
             if let name = name {
                 dataToUpdate["name"] = name
-                self.name = name
             }
             if let email = email {
                 dataToUpdate["email"] = email
@@ -71,50 +114,8 @@ class UserManager: ObservableObject {
         }
     }
     
-    func checkIfPlayerExists() async -> Bool {
-        guard let userId = Auth.auth().currentUser?.uid else {
-            print("Usuário não está logado.")
-            return false
-        }
-        do {
-            let document = try await db.collection("players").document(userId).getDocument()
-            return document.exists
-        } catch let error {
-            print("Erro ao verificar se o jogador existe: \(error.localizedDescription)")
-            return false
-        }
-    }
-    
-    func fetchPlayer() async throws -> Player? {
-        guard let userId = Auth.auth().currentUser?.uid else {
-            print("Usuário não está logado.")
-            return nil
-        }
-
-        let document = try await db.collection("players").document(userId).getDocument()
-        if let player = try? document.data(as: Player.self) {
-            self.name = player.name
-            return player
-        } else {
-            return nil
-        }
-    }
-    
-    // Função para atualizar o status do jogador
     func updatePlayerStatus(isPlaying: Bool, currentGameId: String?) async {
-        guard let userId = Auth.auth().currentUser?.uid else {
-            print("Usuário não está logado.")
-            return
-        }
-        do {
-            let document = db.collection("players").document(userId)
-            try await document.updateData([
-                "isPlaying": isPlaying
-            ])
-            print("Status do jogador atualizado.")
-        } catch let error {
-            print("Erro ao atualizar o status do jogador: \(error.localizedDescription)")
-        }
+        await updatePlayer(isPlaying: isPlaying, currentGameId: currentGameId)
     }
 }
 
