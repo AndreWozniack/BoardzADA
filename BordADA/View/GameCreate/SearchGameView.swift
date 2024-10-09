@@ -12,8 +12,24 @@ struct SearchGameView: View {
     
     var body: some View {
         HStack(alignment: .center, spacing: 12){
-            GameImageView(imageUrl: game.thumb ?? "")
-                .frame(width: 150, height: 150)
+            AsyncImage(url: URL(string: game.thumb ?? "")) { result in
+                switch result {
+                case .success(let image):
+                    image
+                        .resizable()
+                        .frame(width: 150, height: 150)
+                        .scaledToFit()
+                case .empty, .failure(_):
+                    Rectangle()
+                        .frame(width: 150, height: 150)
+                        .foregroundStyle(.purple)
+                @unknown default:
+                    Rectangle()
+                        .frame(width: 150, height: 150)
+                        .foregroundStyle(.purple)
+                }
+            }
+            .clipShape(RoundedRectangle(cornerRadius: 12))
             Spacer()
             Text(game.nm_jogo)
                 .font(.title2)

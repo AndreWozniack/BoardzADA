@@ -36,7 +36,6 @@ struct FormTextField: View {
                     .padding(8)
                     .background(Color(UIColor.secondarySystemBackground))
                     .cornerRadius(10)
-                    .autocorrectionDisabled(true)
                     .textInputAutocapitalization(.never)
                     .onSubmit {
                         onSubmitAction?()
@@ -50,7 +49,6 @@ struct FormTextField: View {
                     .padding(8)
                     .background(Color(UIColor.secondarySystemBackground))
                     .cornerRadius(10)
-                    .autocorrectionDisabled(true)
                     .textInputAutocapitalization(.never)
                     .onSubmit {
                         onSubmitAction?()

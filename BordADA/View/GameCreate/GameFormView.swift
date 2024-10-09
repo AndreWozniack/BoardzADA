@@ -46,7 +46,24 @@ struct GameFormView: View {
                     Spacer()
                     Group {
                         HStack(alignment: .top){
-                            GameImageView(imageUrl: selectedGame.thumb ?? "")
+                            AsyncImage(url: URL(string: selectedGame.thumb ?? "")) { result in
+                                switch result {
+                                case .success(let image):
+                                    image
+                                        .resizable()
+                                        .frame(width: 150, height: 150)
+                                        .scaledToFit()
+                                case .empty, .failure(_):
+                                    Rectangle()
+                                        .frame(width: 150, height: 150)
+                                        .foregroundStyle(.purple)
+                                @unknown default:
+                                    Rectangle()
+                                        .frame(width: 150, height: 150)
+                                        .foregroundStyle(.purple)
+                                }
+                            }
+                            .clipShape(RoundedRectangle(cornerRadius: 12))
                             VStack{
                                 FormTextField(title: "Nome", text: $name)
                                     .onAppear {
