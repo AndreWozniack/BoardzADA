@@ -9,77 +9,88 @@ import RouterKit
 import SwiftUI
 
 struct GameView: View {
-    var game: BoardGame
-
-    @State private var apiResult: String = ""
+    @StateObject var viewModel: GameViewModel
+    @EnvironmentObject var router: Router<AppRoute>
     @State private var isShowing: Bool = false
-    @State private var currentPlayer: Player?
-    @State private var waitingPlayers: [Player] = []
     @State private var showSuccess = false
     @State private var showError = false
 
-    @EnvironmentObject var router: Router<AppRoute>
+    init(game: BoardGame) {
+        _viewModel = StateObject(wrappedValue: GameViewModel(game: game))
+    }
 
     var body: some View {
         VStack {
-            GameHeaderView(gameName: game.name)
-            
             ScrollView {
-                GameImageView(imageUrl: game.imageUrl)
-                
-                GameInfoSection(title: "Dono", text: game.owner, systemImage: "checkmark.seal.fill")
-
-                GameDescriptionSection(description: game.description)
-
-                GameInfoSection(
-                    title: "Jogadores",
-                    text: "\(game.numPlayersMin) - \(game.numPlayersMax) jogadores",
-                    systemImage: "person.2.fill"
-                )
-                
-                if game.status == .occupied, let currentPlayer = currentPlayer {
-                    GameInfoSection(title: "Jogador Atual", text: currentPlayer.name, systemImage: "person.fill")
-                    
-                    GameQueueView(currentPlayer: currentPlayer, waitingPlayers: waitingPlayers)
-                }
-                
-                if game.status == .occupied && currentPlayer?.id == UserManager.shared.currentUser.id {
-                    DefaultButton(action: {
-                        Task {
-                            await GamesCollectionManager.shared.removeCurrentPlayer(
-                                from: game.id.uuidString
-                            )
-                            router.pop()
-                        }
-                    }, text: "Sair do jogo", isDestructive: true)
-
-                } else if game.status == .occupied {
-                    DefaultButton(
-                        action: {
-                            if currentPlayer?.id != UserManager.shared.currentUser.id && !waitingPlayers.contains(where: { $0.id == UserManager.shared.currentUser.id }) {
-                                Task {
-                                    await GamesCollectionManager.shared.addPlayerToWaitingList(
-                                        gameId: game.id.uuidString,
-                                        playerID: UserManager.shared.currentUser.id ?? ""
-                                    )
-                                    print("Você foi adicionado à lista de espera")
-                                }
-                            } else {
-                                print("Jogador já está jogando ou na fila!")
+                VStack(spacing: 24) {
+                    VStack(alignment: .leading){
+                        HStack(alignment: .top, spacing: 8){
+                            gameImageView
+                            VStack(alignment: .leading, spacing: 16){
+                                TittleWithText(title: "Nome", text: viewModel.game.name)
+                                TittleWithText(title: "Dono", titleSize: 17, text: viewModel.game.owner, textSize: 13)
                             }
-                        },
-                        text: "Entrar na fila")
-                    
-                } else if game.status == .free {
-                    DefaultButton(action: {self.isShowing.toggle()}, text: "Entrar no jogo")
+                        }
+                        VStack(alignment:.leading, spacing: 32) {
+                            TittleWithText(title: "Descrição", text: viewModel.game.description, isMultiline: true)
+                            TittleWithText(title: "Jogadores", sfSymbolTitle: "person.2.fill", text: "\(viewModel.game.numPlayersMin) - \(viewModel.game.numPlayersMax)")
+                            TittleWithText(title: "Dificuldade", sfSymbolTitle: "chart.bar.fill", text: viewModel.game.difficult.text)
+                            
+                                GameQueueView(currentPlayer: viewModel.currentPlayer, waitingPlayers: viewModel.waitingPlayers)
+                            
+                            VStack(alignment: .center){
+                                switch viewModel.game.status {
+                                case .occupied:
+                                    if viewModel.currentPlayer?.id == UserManager.shared.currentUser!.id {
+                                        DefaultButton(
+                                            action: {
+                                                Task {
+                                                    await viewModel.leaveGame()
+                                                    router.pop()
+                                                }
+                                            },
+                                            text: "Sair do jogo",
+                                            isDestructive: true)
+                                        
+                                    } else if !viewModel.waitingPlayers.contains(
+                                        where: { $0.id == UserManager.shared.currentUser!.id
+                                        }) {
+                                        DefaultButton(
+                                            action: {
+                                                Task {
+                                                    await viewModel.joinWaitingList()
+                                                    print("Você foi adicionado à lista de espera")
+                                                }
+                                            },
+                                            text: "Entrar na fila")
+                                    } else {
+                                        Text("Jogador já está jogando ou na fila!")
+                                    }
+                                case .free:
+                                    DefaultButton(
+                                        action: { self.isShowing.toggle()
+                                        },
+                                        text: "Entrar no jogo")
+                                default:
+                                    EmptyView()
+                                }
+                            }
+                        }
+                        
+                    }
+                    .padding(.vertical, 12)
                 }
+                .frame(maxWidth: .infinity)
+                .padding()
             }
-            .padding(24)
         }
-        .background(Color.uiBackground)
-        .task {
-            await loadCurrentPlayerAndWaitingList()
+        .refreshable {
+            viewModel.loadCurrentPlayerAndWaitingList()
         }
+        .defaultNavigationAppearence()
+        .toolbarTitleDisplayMode(.inlineLarge)
+        .navigationTitle(viewModel.game.name)
+        .background(Color.uiBackground.ignoresSafeArea())
         .sheet(isPresented: $isShowing) {
             ScannerView(isShowing: $isShowing) { value in
                 Task {
@@ -96,26 +107,30 @@ struct GameView: View {
         }
     }
     
-    func loadCurrentPlayerAndWaitingList() async {
-        if game.status == .occupied {
-            // Carregar o jogador atual através da referência
-            GamesCollectionManager.shared.fetchPlayer(from: game.currentPlayerRef!) { player in
-                self.currentPlayer = player
-            }
-            // Carregar os jogadores da fila de espera
-            GamesCollectionManager.shared.fetchWaitingPlayers(from: game.waitingPlayerRefs) { players in
-                self.waitingPlayers = players
+    private var gameImageView: some View {
+        AsyncImage(url: URL(string: viewModel.game.imageUrl)) { result in
+            switch result {
+            case .success(let image):
+                image
+                    .resizable()
+                    .frame(width: 174, height: 174)
+                    .scaledToFit()
+            case .empty, .failure(_):
+                Rectangle()
+                    .frame(width: 174, height: 174)
+                    .foregroundStyle(.purple)
+            @unknown default:
+                Rectangle()
+                    .frame(width: 174, height: 174)
+                    .foregroundStyle(.purple)
             }
         }
+        .clipShape(RoundedRectangle(cornerRadius: 12))
     }
     
-    func handleQRCodeScan(_ qrCode: String) async {
-        if let scannedGame = GamesCollectionManager.shared.freeGames.first(where: { $0.id.uuidString == qrCode }) {
-            print(scannedGame.name)
-            await GamesCollectionManager.shared.addCurrentPlayer(
-                to: scannedGame.id.uuidString,
-                playerID: UserManager.shared.currentUser.id ?? ""
-            )
+    private func handleQRCodeScan(_ qrCode: String) async {
+        if qrCode == viewModel.game.id.uuidString {
+            await viewModel.joinGame()
             showSuccess = true
         } else {
             print("Jogo não encontrado.")
@@ -123,6 +138,7 @@ struct GameView: View {
         }
     }
 }
+
 
 #Preview {
     GameView(
@@ -140,4 +156,3 @@ struct GameView: View {
         )
     )
 }
-

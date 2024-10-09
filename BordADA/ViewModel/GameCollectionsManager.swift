@@ -11,7 +11,7 @@ class GamesCollectionManager: ObservableObject {
     static let shared = GamesCollectionManager()
     @Published var gameList: [BoardGame] = []
     @Published var freeGames: [BoardGame] = []
-    @Published var occupiedGames: [OccupiedGames] = []
+    @Published var occupiedGames: [BoardGame] = []
 
     private var db = Firestore.firestore()
     private var listener: ListenerRegistration?
@@ -54,19 +54,7 @@ class GamesCollectionManager: ObservableObject {
     
     func updateFilteredLists() {
         self.freeGames = self.gameList.filter { $0.status == .free }
-        self.occupiedGames = self.gameList
-            .filter { $0.status == .occupied }
-            .compactMap { game in
-                // Converter referência de jogador para objeto Player
-                guard let currentPlayerRef = game.currentPlayerRef else { return nil }
-                fetchPlayer(from: currentPlayerRef) { player in
-                    guard let player = player else { return }
-                    DispatchQueue.main.async {
-                        self.occupiedGames.append(OccupiedGames(player: player, game: game))
-                    }
-                }
-                return nil
-            }
+        self.occupiedGames = self.gameList.filter { $0.status == .occupied }
     }
 
     func addGame(_ game: BoardGame) async {
@@ -286,15 +274,30 @@ class GamesCollectionManager: ObservableObject {
             for game in games {
                 if game.status == .occupied, let currentPlayerRef = game.currentPlayerRef {
                     fetchPlayer(from: currentPlayerRef) { player in
-                        if let player = player {
+                        if player != nil {
                             DispatchQueue.main.async {
-                                self.occupiedGames.append(OccupiedGames(player: player, game: game))
+                                self.gameList.append(
+                                    BoardGame(
+                                        name: game.name,
+                                        owner: game.owner,
+                                        status: game.status,
+                                        difficult: game.difficult,
+                                        numPlayersMax: game.numPlayersMax,
+                                        numPlayersMin: game.numPlayersMin,
+                                        description: game.description,
+                                        duration: game.duration,
+                                        currentPlayerRef: game.currentPlayerRef,
+                                        waitingPlayerRefs: game.waitingPlayerRefs,
+                                        imageUrl: game.imageUrl
+                                    )
+                                )
                             }
                         }
                     }
                 } else {
                     DispatchQueue.main.async {
-                        self.freeGames.append(game)
+//                        self.freeGames.append(game)
+                        self.gameList.append(game)
                     }
                 }
             }

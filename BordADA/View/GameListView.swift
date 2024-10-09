@@ -18,67 +18,34 @@ struct GameListView: View {
 
     var body: some View {
         VStack {
-            HStack {
-                Text(userManager.currentUser.name)
-                    .font(.title)
-                    .foregroundStyle(.white)
-                    .bold()
-                
-                Spacer()
-                
-                Button {
-                    isShowing = true
-                } label: {
-                    Image(systemName: "qrcode.viewfinder")
-                        .font(.title)
-                        .foregroundStyle(.white)
-                }
-            }
-            .padding(.horizontal, 24)
-            .padding(.vertical, 24)
-            .background(.roxo)
-            
             ScrollView {
-
-                VStack(alignment: .leading) {
-                    DefaultText(text: "Jogos livres")
-                    LazyVStack {
-                        ForEach(vm.freeGames) { game in
-                            Button {
-                                router.push(to: .game(game))
-                            } label: {
-                                BoardGameListTile(game: game)
-                            }
-                            .buttonStyle(.plain)
-                        }
-                    }
-                }
-                .padding(.bottom, 16)
-                if !vm.occupiedGames.isEmpty {
-                    VStack(alignment: .leading){
-                        DefaultText(text: "Jogos Ocupados")
-                        LazyVStack {
-                            ForEach(vm.occupiedGames) { occupiedGame in
-                                Button {
-                                    router.push(to: .game(occupiedGame.game))
-                                } label: {
-                                    BoardGameListTile(game: occupiedGame.game)
+                Group {
+                    Section {
+                        VStack(alignment: .leading) {
+                            LazyVStack {
+                                ForEach(vm.gameList, id: \.id) { game in
+                                    
+                                    Button {
+                                        router.push(to: .game(game))
+                                    } label: {
+                                        BoardGameListTile(game: game)
+                                    }
+                                    .buttonStyle(.plain)
                                 }
-                                
                             }
                         }
+                        .padding(.vertical)
                     }
+
                 }
 
             }
-            .padding(.top, 16)
             .padding(.horizontal, 24)
             .refreshable {
                 Task {
-                    await vm.fetchGamesWithPlayers()
+                    await vm.fetchGames()
                 }
             }
-            
             HStack{
                 DefaultButton(action: { self.isShowing.toggle() }, text: "Scan")
                     .shadow(radius: 5)
@@ -88,10 +55,13 @@ struct GameListView: View {
             .padding(.horizontal)
             .padding(.vertical)
         }
+        .defaultNavigationAppearence()
+        .navigationTitle("BoardzADA")
+        .navigationBarTitleDisplayMode(.large)
         .background(Color.uiBackground)
         .onAppear {
             Task {
-                await vm.fetchGamesWithPlayers()
+                await vm.fetchGames()
             }
         }
         .sheet(isPresented: $isShowing) {
@@ -103,14 +73,13 @@ struct GameListView: View {
                     }
                     await GamesCollectionManager.shared.addCurrentPlayer(
                         to: game.id.uuidString,
-                        playerID: userManager.currentUser.id ?? ""
+                        playerID: userManager.currentUser!.id ?? ""
                     )
                     router.push(to: .game(game))
                 }
             }
             .presentationDetents([.medium, .large])
         }
-        .navigationBarBackButtonHidden()
     }
 }
 
