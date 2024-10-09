@@ -17,11 +17,12 @@ struct SignInView: View {
     @EnvironmentObject var router: Router<AppRoute>
     @State private var isLoading = false
     @State private var errorMessage: String?
+    @State private var foundPlayer: Bool = false
     
     var body: some View {
         VStack {
             if isLoading {
-                ProgressView("Autenticando...")
+                ProgressView()
             } else {
                 VStack {
                     Text("BoardzADA")
@@ -34,7 +35,7 @@ struct SignInView: View {
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 160)
                 }
-
+                
                 if let errorMessage = errorMessage {
                     Text(errorMessage)
                         .foregroundColor(.red)
@@ -58,8 +59,22 @@ struct SignInView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .ignoresSafeArea()
         .background(Color.roxo)
+        .onAppear {
+            Task {
+                await checkForExistingPlayer()
+            }
+        }
+        
     }
     
+    private func checkForExistingPlayer() async {
+        isLoading = true
+        if let player = await userManager.fetchPlayer() {
+            router.push(to: .gameList)
+        } else {
+            isLoading = false
+        }
+    }
     private func handleAuthorization(result: Result<ASAuthorization, Error>) {
         isLoading = true
         switch result {
