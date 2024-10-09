@@ -1,3 +1,11 @@
+//
+//  NevAppearencemodifier.swift
+//  BordADA
+//
+//  Created by André Wozniack on 08/10/24.
+//
+import SwiftUI
+
 struct NevAppearencemodifier: ViewModifier {
     init(background: UIColor, foreground: UIColor, tint: UIColor?, hidesShadow: Bool) {
         let navigationBarAppearance = UINavigationBarAppearance()
@@ -18,7 +26,6 @@ struct NevAppearencemodifier: ViewModifier {
     func body(content: Content) -> some View {
         content
     }
-    
 }
 
 extension View {
@@ -30,4 +37,14 @@ extension View {
     ) -> some View {
         self.modifier(NevAppearencemodifier(background: background, foreground: foreground, tint: tint, hidesShadow: hidesShadow))
     }
+    
+    func defaultNavigationAppearence() -> some View {
+        navigationAppearence(
+            background: .roxo,
+            foreground: .uiBackground,
+            tint: .uiBackground,
+            hidesShadow: false
+        )
+    }
 }
+
