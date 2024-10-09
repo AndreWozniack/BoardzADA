@@ -17,63 +17,64 @@ struct SignInView: View {
     @EnvironmentObject var router: Router<AppRoute>
     @State private var isLoading = false
     @State private var errorMessage: String?
-    @State private var isFetchUser = false
+    @State private var foundPlayer: Bool = false
     
     var body: some View {
         VStack {
-            if isFetchUser {
-                if isLoading {
-                    ProgressView("Autenticando...")
-                } else {
-                    VStack {
-                        Text("BoardzADA")
-                            .font(.title)
-                            .fontDesign(.rounded)
-                            .bold()
-                            .padding()
-                        Image("boardzada")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 160)
-                    }
-
-                    if let errorMessage = errorMessage {
-                        Text(errorMessage)
-                            .foregroundColor(.red)
-                            .padding()
-                    }
-                    
-                    SignInWithAppleButton(
-                        .signIn,
-                        onRequest: { request in
-                            signInManager.startSignInWithAppleFlow(request: request)
-                        },
-                        onCompletion: { result in
-                            handleAuthorization(result: result)
-                        }
-                    )
-                    .signInWithAppleButtonStyle(.black)
-                    .frame(width: 280, height: 45)
-                    .padding()
-                }
+            if isLoading {
+                ProgressView()
             } else {
-                ProgressView("Entrando...")
-            }
-            
-        }
-        .onAppear(perform: {
-            Task {
-                isFetchUser = await userManager.fetchPlayer()
-                if isFetchUser {
-                    router.push(to: .gameList)
+                VStack {
+                    Text("BoardzADA")
+                        .font(.title)
+                        .fontDesign(.rounded)
+                        .bold()
+                        .padding()
+                    Image("boardzada")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 160)
                 }
+                
+                if let errorMessage = errorMessage {
+                    Text(errorMessage)
+                        .foregroundColor(.red)
+                        .padding()
+                }
+                
+                SignInWithAppleButton(
+                    .signIn,
+                    onRequest: { request in
+                        signInManager.startSignInWithAppleFlow(request: request)
+                    },
+                    onCompletion: { result in
+                        handleAuthorization(result: result)
+                    }
+                )
+                .signInWithAppleButtonStyle(.black)
+                .frame(width: 280, height: 45)
+                .padding()
             }
-        })
+        }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .ignoresSafeArea()
         .background(Color.roxo)
+        .onAppear {
+            Task {
+                await checkForExistingPlayer()
+            }
+        }
+        
     }
     
+    private func checkForExistingPlayer() async {
+        isLoading = true
+        if let player = await userManager.fetchPlayer() {
+            router.push(to: .gameList)
+        } else {
+            isLoading = false
+        }
+    }
     private func handleAuthorization(result: Result<ASAuthorization, Error>) {
         isLoading = true
         switch result {
