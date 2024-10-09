@@ -33,49 +33,45 @@ struct GameQueueView: View {
                     .padding(.bottom, 6)
                     
             }
-            .frame(width: 342)
             .overlay {
                 RoundedRectangle(cornerRadius: 12)
                     .stroke(lineWidth: 4)
                     .foregroundColor(.roxo)
             }
-            .padding(.horizontal)
             .padding(.top)
 
-
-            // Fila de Jogadores
-            VStack(alignment: .leading) {
-                Text("Fila")
-                    .font(.title2)
-                    .bold()
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 3)
-                    .multilineTextAlignment(.leading)
-                    .foregroundColor(.white)
-                    .background(Color.roxo)
-                    .cornerRadius(10, corners: [.topLeft, .topRight])
-
+            if !waitingPlayers.isEmpty {
                 VStack(alignment: .leading) {
-                    ForEach(waitingPlayers, id: \.id) { player in
-                        Text(player.name)
-                            .font(.body)
-                            .padding(.horizontal, 10)
-                            .foregroundStyle(Color.roxo)
-                            .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
+                    Text("Fila")
+                        .font(.title2)
+                        .bold()
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 3)
+                        .multilineTextAlignment(.leading)
+                        .foregroundColor(.white)
+                        .background(Color.roxo)
+                        .cornerRadius(10, corners: [.topLeft, .topRight])
+
+                    VStack(alignment: .leading) {
+                        ForEach(waitingPlayers, id: \.id) { player in
+                            Text(player.name)
+                                .font(.body)
+                                .padding(.horizontal, 10)
+                                .foregroundStyle(Color.roxo)
+                                .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
+                        }
+                        .padding(.vertical, 1)
                     }
-                    .padding(.vertical, 1)
+                    .padding(.bottom, 6)
+                    .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
                 }
-                .padding(.bottom, 6)
-                .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
+                .overlay {
+                    RoundedRectangle(cornerRadius: 12)
+                        .stroke(lineWidth: 4)
+                        .foregroundColor(.roxo)
+                }
+                .padding(.top)
             }
-            .frame(width: 342)
-            .overlay {
-                RoundedRectangle(cornerRadius: 12)
-                    .stroke(lineWidth: 4)
-                    .foregroundColor(.roxo)
-            }
-            .padding(.horizontal)
-            .padding(.top)
 
             Spacer()
         }
