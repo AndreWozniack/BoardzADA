@@ -4,6 +4,9 @@
 //
 //  Created by André Wozniack on 08/10/24.
 //
-
 // Configuration settings file format documentation can be found at:
 // https://help.apple.com/xcode/#/dev745c5c974
+
+LUDOPEDIA_APP_ID = "dbd21ab8f20a64de"
+LUDOPEDIA_APP_KEY = "f4d37c06a607a4f0fa501453d291cd64"
+LUDOPEDIA_ACESS_TOKEN = "803a4569d210a5d3e15016c8d831cf1f"
