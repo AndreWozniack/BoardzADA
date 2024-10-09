@@ -66,5 +66,16 @@ enum GameDifficult: String, Codable, CaseIterable, Hashable {
     case easy
     case medium
     case hard
+    
+    var text: String {
+        switch self {
+        case .easy:
+            return "Fácil"
+        case .medium:
+            return "Medio"
+        case .hard:
+            return "Dificil"
+        }
+    }
 }
 
