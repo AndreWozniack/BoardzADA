@@ -34,9 +34,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		AF362C8B2CACAAB400506443 /* BordADA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BordADA.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		AF362C9B2CACAAB700506443 /* BordADATests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BordADATests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		AF362CA52CACAAB700506443 /* BordADAUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BordADAUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF362C8B2CACAAB400506443 /* BoardzADA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoardzADA.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF362C9B2CACAAB700506443 /* BoardzADATests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BoardzADATests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF362CA52CACAAB700506443 /* BoardzADAUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BoardzADAUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF41FB642CB5D8FC00C6E7A5 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		AFD6E87A2CB0D2D70079F460 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -105,9 +105,9 @@
 		AF362C8C2CACAAB400506443 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				AF362C8B2CACAAB400506443 /* BordADA.app */,
-				AF362C9B2CACAAB700506443 /* BordADATests.xctest */,
-				AF362CA52CACAAB700506443 /* BordADAUITests.xctest */,
+				AF362C8B2CACAAB400506443 /* BoardzADA.app */,
+				AF362C9B2CACAAB700506443 /* BoardzADATests.xctest */,
+				AF362CA52CACAAB700506443 /* BoardzADAUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -122,9 +122,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		AF362C8A2CACAAB400506443 /* BordADA */ = {
+		AF362C8A2CACAAB400506443 /* BoardzADA */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AF362CAF2CACAAB700506443 /* Build configuration list for PBXNativeTarget "BordADA" */;
+			buildConfigurationList = AF362CAF2CACAAB700506443 /* Build configuration list for PBXNativeTarget "BoardzADA" */;
 			buildPhases = (
 				AF362C872CACAAB400506443 /* Sources */,
 				AF362C882CACAAB400506443 /* Frameworks */,
@@ -137,7 +137,7 @@
 			fileSystemSynchronizedGroups = (
 				AF362C8D2CACAAB400506443 /* BordADA */,
 			);
-			name = BordADA;
+			name = BoardzADA;
 			packageProductDependencies = (
 				A912DE472CACB06700E9DE4E /* CarBode */,
 				F7756DF42CACB951008B1389 /* RouterKit */,
@@ -146,12 +146,12 @@
 				AFD6E87F2CB0E6420079F460 /* FirebaseFirestore */,
 			);
 			productName = BordADA;
-			productReference = AF362C8B2CACAAB400506443 /* BordADA.app */;
+			productReference = AF362C8B2CACAAB400506443 /* BoardzADA.app */;
 			productType = "com.apple.product-type.application";
 		};
-		AF362C9A2CACAAB700506443 /* BordADATests */ = {
+		AF362C9A2CACAAB700506443 /* BoardzADATests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AF362CB22CACAAB700506443 /* Build configuration list for PBXNativeTarget "BordADATests" */;
+			buildConfigurationList = AF362CB22CACAAB700506443 /* Build configuration list for PBXNativeTarget "BoardzADATests" */;
 			buildPhases = (
 				AF362C972CACAAB700506443 /* Sources */,
 				AF362C982CACAAB700506443 /* Frameworks */,
@@ -165,16 +165,16 @@
 			fileSystemSynchronizedGroups = (
 				AF362C9E2CACAAB700506443 /* BordADATests */,
 			);
-			name = BordADATests;
+			name = BoardzADATests;
 			packageProductDependencies = (
 			);
 			productName = BordADATests;
-			productReference = AF362C9B2CACAAB700506443 /* BordADATests.xctest */;
+			productReference = AF362C9B2CACAAB700506443 /* BoardzADATests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		AF362CA42CACAAB700506443 /* BordADAUITests */ = {
+		AF362CA42CACAAB700506443 /* BoardzADAUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AF362CB52CACAAB700506443 /* Build configuration list for PBXNativeTarget "BordADAUITests" */;
+			buildConfigurationList = AF362CB52CACAAB700506443 /* Build configuration list for PBXNativeTarget "BoardzADAUITests" */;
 			buildPhases = (
 				AF362CA12CACAAB700506443 /* Sources */,
 				AF362CA22CACAAB700506443 /* Frameworks */,
@@ -188,11 +188,11 @@
 			fileSystemSynchronizedGroups = (
 				AF362CA82CACAAB700506443 /* BordADAUITests */,
 			);
-			name = BordADAUITests;
+			name = BoardzADAUITests;
 			packageProductDependencies = (
 			);
 			productName = BordADAUITests;
-			productReference = AF362CA52CACAAB700506443 /* BordADAUITests.xctest */;
+			productReference = AF362CA52CACAAB700506443 /* BoardzADAUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -218,7 +218,7 @@
 					};
 				};
 			};
-			buildConfigurationList = AF362C862CACAAB400506443 /* Build configuration list for PBXProject "BordADA" */;
+			buildConfigurationList = AF362C862CACAAB400506443 /* Build configuration list for PBXProject "BoardzADA" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -238,9 +238,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				AF362C8A2CACAAB400506443 /* BordADA */,
-				AF362C9A2CACAAB700506443 /* BordADATests */,
-				AF362CA42CACAAB700506443 /* BordADAUITests */,
+				AF362C8A2CACAAB400506443 /* BoardzADA */,
+				AF362C9A2CACAAB700506443 /* BoardzADATests */,
+				AF362CA42CACAAB700506443 /* BoardzADAUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -298,12 +298,12 @@
 /* Begin PBXTargetDependency section */
 		AF362C9D2CACAAB700506443 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = AF362C8A2CACAAB400506443 /* BordADA */;
+			target = AF362C8A2CACAAB400506443 /* BoardzADA */;
 			targetProxy = AF362C9C2CACAAB700506443 /* PBXContainerItemProxy */;
 		};
 		AF362CA72CACAAB700506443 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = AF362C8A2CACAAB400506443 /* BordADA */;
+			target = AF362C8A2CACAAB400506443 /* BoardzADA */;
 			targetProxy = AF362CA62CACAAB700506443 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -523,7 +523,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BordADA.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/BordADA";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BoardzADA.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/BoardzADA";
 			};
 			name = Debug;
 		};
@@ -542,7 +542,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BordADA.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/BordADA";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BoardzADA.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/BoardzADA";
 			};
 			name = Release;
 		};
@@ -583,7 +583,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		AF362C862CACAAB400506443 /* Build configuration list for PBXProject "BordADA" */ = {
+		AF362C862CACAAB400506443 /* Build configuration list for PBXProject "BoardzADA" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AF362CAD2CACAAB700506443 /* Debug */,
@@ -592,7 +592,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AF362CAF2CACAAB700506443 /* Build configuration list for PBXNativeTarget "BordADA" */ = {
+		AF362CAF2CACAAB700506443 /* Build configuration list for PBXNativeTarget "BoardzADA" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AF362CB02CACAAB700506443 /* Debug */,
@@ -601,7 +601,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AF362CB22CACAAB700506443 /* Build configuration list for PBXNativeTarget "BordADATests" */ = {
+		AF362CB22CACAAB700506443 /* Build configuration list for PBXNativeTarget "BoardzADATests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AF362CB32CACAAB700506443 /* Debug */,
@@ -610,7 +610,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AF362CB52CACAAB700506443 /* Build configuration list for PBXNativeTarget "BordADAUITests" */ = {
+		AF362CB52CACAAB700506443 /* Build configuration list for PBXNativeTarget "BoardzADAUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AF362CB62CACAAB700506443 /* Debug */,

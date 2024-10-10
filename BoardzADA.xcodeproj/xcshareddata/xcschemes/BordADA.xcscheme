@@ -16,9 +16,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "AF362C8A2CACAAB400506443"
-               BuildableName = "BordADA.app"
-               BlueprintName = "BordADA"
-               ReferencedContainer = "container:BordADA.xcodeproj">
+               BuildableName = "BoardzADA.app"
+               BlueprintName = "BoardzADA"
+               ReferencedContainer = "container:BoardzADA.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -36,9 +36,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "AF362C9A2CACAAB700506443"
-               BuildableName = "BordADATests.xctest"
-               BlueprintName = "BordADATests"
-               ReferencedContainer = "container:BordADA.xcodeproj">
+               BuildableName = "BoardzADATests.xctest"
+               BlueprintName = "BoardzADATests"
+               ReferencedContainer = "container:BoardzADA.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -47,9 +47,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "AF362CA42CACAAB700506443"
-               BuildableName = "BordADAUITests.xctest"
-               BlueprintName = "BordADAUITests"
-               ReferencedContainer = "container:BordADA.xcodeproj">
+               BuildableName = "BoardzADAUITests.xctest"
+               BlueprintName = "BoardzADAUITests"
+               ReferencedContainer = "container:BoardzADA.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -69,9 +69,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AF362C8A2CACAAB400506443"
-            BuildableName = "BordADA.app"
-            BlueprintName = "BordADA"
-            ReferencedContainer = "container:BordADA.xcodeproj">
+            BuildableName = "BoardzADA.app"
+            BlueprintName = "BoardzADA"
+            ReferencedContainer = "container:BoardzADA.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <EnvironmentVariables>
@@ -93,9 +93,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AF362C8A2CACAAB400506443"
-            BuildableName = "BordADA.app"
-            BlueprintName = "BordADA"
-            ReferencedContainer = "container:BordADA.xcodeproj">
+            BuildableName = "BoardzADA.app"
+            BlueprintName = "BoardzADA"
+            ReferencedContainer = "container:BoardzADA.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
