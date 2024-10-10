@@ -22,83 +22,50 @@ struct GameSearchView: View {
     ]
     
     var body: some View {
-        ZStack{
-            ScrollView {
-                VStack {
-                    HStack(alignment: .top) {
-                        Spacer()
-                        Text("")
-                            .padding()
-                            .font(.title)
-                            .bold()
-                            .foregroundStyle(.white)
-                        Spacer()
-                    }
-                    .padding(.top, 70)
-                    .padding(.vertical, 24)
-                    .background(Color.clear)
-                    .ignoresSafeArea(edges: .top)
+        ScrollView {
+            FormTextField(title: "Buscar jogo:", text: $searchName, onSubmitAction: {
+                Task {
+                    await searchGames()
                 }
-                
-                FormTextField(title: "Buscar jogo:", text: $searchName, onSubmitAction: {
-                    Task {
-                        await searchGames()
-                    }
-                })
-                Text("Selecione um jogo:")
-                    .font(.headline)
-                    .padding(.top)
-                    .background(Color.uiBackground)
+            })
+            Text("Selecione um jogo:")
+                .font(.headline)
+                .padding(.top)
+                .background(Color.uiBackground)
             
-                LazyVGrid(columns: columns, spacing: 12) {
-                    ForEach(searchResults) { game in
-                        Button(action: { router.push(to: .gameForm(game)) }) {
-                            SimpleGameTile(imageUrl: game.thumb!, name: game.nm_jogo)
-                        }
+            LazyVGrid(columns: columns, spacing: 12) {
+                ForEach(searchResults) { game in
+                    Button(action: { router.push(to: .gameForm(game)) }) {
+                        SimpleGameTile(imageUrl: game.thumb!, name: game.nm_jogo)
                     }
                 }
-                .padding(.horizontal)
-                
-                if searchResults.isEmpty {
-                    DefaultButton(
-                        action: {
-                            router.push(
-                                to: .gameForm(
-                                    LDGame(
-                                        id_jogo: 0,
-                                        nm_jogo: "",
-                                        nm_original: "",
-                                        thumb: nil,
-                                        link: nil,
-                                        tp_jogo: nil
-                                    )
+            }
+            .padding(.horizontal)
+            
+            if searchResults.isEmpty {
+                DefaultButton(
+                    action: {
+                        router.push(
+                            to: .gameForm(
+                                LDGame(
+                                    id_jogo: 0,
+                                    nm_jogo: "",
+                                    nm_original: "",
+                                    thumb: nil,
+                                    link: nil,
+                                    tp_jogo: nil
                                 )
                             )
-                        },
-                        text: "Não encontrei meu jogo")
-                }
-                Spacer()
+                        )
+                    },
+                    text: "Não encontrei meu jogo")
             }
-            .padding()
-            .ignoresSafeArea()
-            .background(Color.uiBackground)
-            
-            HStack(alignment: .top) {
-                Spacer()
-                Text("Adicionar Jogo")
-                    .padding()
-                    .font(.title)
-                    .bold()
-                    .foregroundStyle(.white)
-                Spacer()
-            }
-            .padding(.top, 60)
-            .padding(.vertical, 24)
-            .background(Color.roxo)
-            .ignoresSafeArea(edges: .top)
-            .clipShape(RoundedRectangle(cornerRadius: 25.0, style: .continuous))
-            .padding(.bottom, 800)
+            Spacer()
         }
+        .padding()
+        .ignoresSafeArea([.keyboard, .container])
+        .background(Color.uiBackground)
+        
     }
 
     func searchGames() async {
