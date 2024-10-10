@@ -64,7 +64,6 @@ struct SignInView: View {
                 await checkForExistingPlayer()
             }
         }
-        
     }
     
     private func checkForExistingPlayer() async {
@@ -75,6 +74,7 @@ struct SignInView: View {
             isLoading = false
         }
     }
+    
     private func handleAuthorization(result: Result<ASAuthorization, Error>) {
         isLoading = true
         switch result {
