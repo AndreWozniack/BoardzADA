@@ -8,10 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		A912DE482CACB06700E9DE4E /* CarBode in Frameworks */ = {isa = PBXBuildFile; productRef = A912DE472CACB06700E9DE4E /* CarBode */; };
+		AF31770C2CB897BA000D2C0A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AF31770B2CB897BA000D2C0A /* GoogleService-Info.plist */; };
 		AF41FB652CB5D8FC00C6E7A5 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = AF41FB642CB5D8FC00C6E7A5 /* Config.xcconfig */; };
-		AFD6E87B2CB0D2D70079F460 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AFD6E87A2CB0D2D70079F460 /* GoogleService-Info.plist */; };
-		AFD6E87E2CB0E6420079F460 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = AFD6E87D2CB0E6420079F460 /* FirebaseAuth */; };
-		AFD6E8802CB0E6420079F460 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = AFD6E87F2CB0E6420079F460 /* FirebaseFirestore */; };
 		F74327022CACE7EE00E9608F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = F74327012CACE7EE00E9608F /* Alamofire */; };
 		F7756DF52CACB951008B1389 /* RouterKit in Frameworks */ = {isa = PBXBuildFile; productRef = F7756DF42CACB951008B1389 /* RouterKit */; };
 /* End PBXBuildFile section */
@@ -34,27 +32,27 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AF31770B2CB897BA000D2C0A /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AF362C8B2CACAAB400506443 /* BoardzADA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoardzADA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF362C9B2CACAAB700506443 /* BoardzADATests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BoardzADATests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF362CA52CACAAB700506443 /* BoardzADAUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BoardzADAUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF41FB642CB5D8FC00C6E7A5 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
-		AFD6E87A2CB0D2D70079F460 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		AF362C8D2CACAAB400506443 /* BordADA */ = {
+		AF362C8D2CACAAB400506443 /* BoardzADA */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = BordADA;
+			path = BoardzADA;
 			sourceTree = "<group>";
 		};
-		AF362C9E2CACAAB700506443 /* BordADATests */ = {
+		AF362C9E2CACAAB700506443 /* BoardzADATests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = BordADATests;
+			path = BoardzADATests;
 			sourceTree = "<group>";
 		};
-		AF362CA82CACAAB700506443 /* BordADAUITests */ = {
+		AF362CA82CACAAB700506443 /* BoardzADAUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = BordADAUITests;
+			path = BoardzADAUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -67,8 +65,6 @@
 				F74327022CACE7EE00E9608F /* Alamofire in Frameworks */,
 				A912DE482CACB06700E9DE4E /* CarBode in Frameworks */,
 				F7756DF52CACB951008B1389 /* RouterKit in Frameworks */,
-				AFD6E8802CB0E6420079F460 /* FirebaseFirestore in Frameworks */,
-				AFD6E87E2CB0E6420079F460 /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -92,11 +88,11 @@
 		AF362C822CACAAB400506443 = {
 			isa = PBXGroup;
 			children = (
+				AF31770B2CB897BA000D2C0A /* GoogleService-Info.plist */,
 				AF41FB642CB5D8FC00C6E7A5 /* Config.xcconfig */,
-				AFD6E87A2CB0D2D70079F460 /* GoogleService-Info.plist */,
-				AF362C8D2CACAAB400506443 /* BordADA */,
-				AF362C9E2CACAAB700506443 /* BordADATests */,
-				AF362CA82CACAAB700506443 /* BordADAUITests */,
+				AF362C8D2CACAAB400506443 /* BoardzADA */,
+				AF362C9E2CACAAB700506443 /* BoardzADATests */,
+				AF362CA82CACAAB700506443 /* BoardzADAUITests */,
 				AF362C8C2CACAAB400506443 /* Products */,
 				AF362D5D2CACBF9600506443 /* Frameworks */,
 			);
@@ -135,15 +131,13 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				AF362C8D2CACAAB400506443 /* BordADA */,
+				AF362C8D2CACAAB400506443 /* BoardzADA */,
 			);
 			name = BoardzADA;
 			packageProductDependencies = (
 				A912DE472CACB06700E9DE4E /* CarBode */,
 				F7756DF42CACB951008B1389 /* RouterKit */,
 				F74327012CACE7EE00E9608F /* Alamofire */,
-				AFD6E87D2CB0E6420079F460 /* FirebaseAuth */,
-				AFD6E87F2CB0E6420079F460 /* FirebaseFirestore */,
 			);
 			productName = BordADA;
 			productReference = AF362C8B2CACAAB400506443 /* BoardzADA.app */;
@@ -163,7 +157,7 @@
 				AF362C9D2CACAAB700506443 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				AF362C9E2CACAAB700506443 /* BordADATests */,
+				AF362C9E2CACAAB700506443 /* BoardzADATests */,
 			);
 			name = BoardzADATests;
 			packageProductDependencies = (
@@ -186,7 +180,7 @@
 				AF362CA72CACAAB700506443 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				AF362CA82CACAAB700506443 /* BordADAUITests */,
+				AF362CA82CACAAB700506443 /* BoardzADAUITests */,
 			);
 			name = BoardzADAUITests;
 			packageProductDependencies = (
@@ -231,7 +225,6 @@
 				A912DE462CACAFE200E9DE4E /* XCRemoteSwiftPackageReference "CarBode-Barcode-Scanner-For-SwiftUI" */,
 				F7756DF32CACB951008B1389 /* XCRemoteSwiftPackageReference "router-kit" */,
 				F74327002CACE7EE00E9608F /* XCRemoteSwiftPackageReference "Alamofire" */,
-				AFD6E87C2CB0E6420079F460 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = AF362C8C2CACAAB400506443 /* Products */;
@@ -251,7 +244,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF41FB652CB5D8FC00C6E7A5 /* Config.xcconfig in Resources */,
-				AFD6E87B2CB0D2D70079F460 /* GoogleService-Info.plist in Resources */,
+				AF31770C2CB897BA000D2C0A /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -433,11 +426,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = BordADA/BordADA.entitlements;
+				CODE_SIGN_ENTITLEMENTS = BoardzADA/BoardzADA.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"BordADA/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"BoardzADA/Preview Content\"";
 				DEVELOPMENT_TEAM = L2AH2M48T4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -455,7 +448,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = academy.pucpr.BordADA;
+				PRODUCT_BUNDLE_IDENTIFIER = academy.dev.pucpr.BoardzADA;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -473,11 +466,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = BordADA/BordADA.entitlements;
+				CODE_SIGN_ENTITLEMENTS = BoardzADA/BoardzADA.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"BordADA/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"BoardzADA/Preview Content\"";
 				DEVELOPMENT_TEAM = L2AH2M48T4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -495,7 +488,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = academy.pucpr.BordADA;
+				PRODUCT_BUNDLE_IDENTIFIER = academy.dev.pucpr.BoardzADA;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -518,7 +511,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = academy.pucpr.BordADATests;
+				PRODUCT_BUNDLE_IDENTIFIER = academy.dev.pucpr.BoardzADATests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -537,7 +530,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = academy.pucpr.BordADATests;
+				PRODUCT_BUNDLE_IDENTIFIER = academy.dev.pucpr.BoardzADATests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -554,7 +547,7 @@
 				DEVELOPMENT_TEAM = L2AH2M48T4;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = academy.pucpr.BordADAUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = academy.dev.pucpr.BoardzADAUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -571,7 +564,7 @@
 				DEVELOPMENT_TEAM = L2AH2M48T4;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = academy.pucpr.BordADAUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = academy.dev.pucpr.BoardzADAUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -630,14 +623,6 @@
 				minimumVersion = 2.2.3;
 			};
 		};
-		AFD6E87C2CB0E6420079F460 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 11.3.0;
-			};
-		};
 		F74327002CACE7EE00E9608F /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -661,16 +646,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A912DE462CACAFE200E9DE4E /* XCRemoteSwiftPackageReference "CarBode-Barcode-Scanner-For-SwiftUI" */;
 			productName = CarBode;
-		};
-		AFD6E87D2CB0E6420079F460 /* FirebaseAuth */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = AFD6E87C2CB0E6420079F460 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAuth;
-		};
-		AFD6E87F2CB0E6420079F460 /* FirebaseFirestore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = AFD6E87C2CB0E6420079F460 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseFirestore;
 		};
 		F74327012CACE7EE00E9608F /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
