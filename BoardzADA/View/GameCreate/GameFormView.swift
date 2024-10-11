@@ -19,118 +19,86 @@ struct GameFormView: View {
     @State private var difficult: GameDifficult = .easy
     @State private var errorMessage: String?
     @State private var isSaving: Bool = false
-    @State private var duration: Int = 10
+    @State private var duration: Int?
     @StateObject var vm = GamesCollectionManager.shared
     
     @EnvironmentObject var router: Router<AppRoute>
     
     var body: some View {
-        ZStack{
-            ScrollView {
-                VStack {
-                    HStack(alignment: .top) {
-                        Spacer()
-                        Text("")
-                            .padding()
-                            .font(.title)
+        ScrollView {
+            VStack(spacing: 24) {
+                Group {
+                    HStack(alignment: .top){
+                        AsyncImage(url: URL(string: selectedGame.thumb ?? "")) { result in
+                            switch result {
+                            case .success(let image):
+                                image
+                                    .resizable()
+                                    .frame(width: 150, height: 150)
+                                    .scaledToFit()
+                            case .empty, .failure(_):
+                                Rectangle()
+                                    .frame(width: 150, height: 150)
+                                    .foregroundStyle(.purple)
+                            @unknown default:
+                                Rectangle()
+                                    .frame(width: 150, height: 150)
+                                    .foregroundStyle(.purple)
+                            }
+                        }
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                        VStack{
+                            FormTextField(title: "Nome", text: $name)
+                                .onAppear {
+                                    name = selectedGame.nm_jogo
+                                }
+                        }
+                    }
+                    
+                    FormTextField(title: "Responsável", sfSymbol: "checkmark.seal.fill", text: $owner)
+                    
+                    FormTextField(title: "Descrição", text: $description, isMultiline: true)
+                    
+                    
+                    HStack {
+                        FormNumberField(title: "Jogadores", sfSymbol: "person.2.fill", inText: "Mínimo", value: $numPlayersMin)
+                        FormNumberField(title: " ", inText: "Máximo", value: $numPlayersMax)
+                    }
+                    
+                    FormNumberField(title: "Duração", inText: "Duração", value: $duration)
+                    
+                    VStack(alignment: .leading) {
+                        Text("Dificuldade")
+                            .font(.title2)
                             .bold()
-                            .foregroundStyle(.white)
-                        Spacer()
-                    }
-                    .padding(.top, 24)
-                    .padding(.vertical, 24)
-                    .background(Color.clear)
-                    .ignoresSafeArea(edges: .top)
-                }
-                VStack(spacing: 24) {
-                    Spacer()
-                    Group {
-                        HStack(alignment: .top){
-                            AsyncImage(url: URL(string: selectedGame.thumb ?? "")) { result in
-                                switch result {
-                                case .success(let image):
-                                    image
-                                        .resizable()
-                                        .frame(width: 150, height: 150)
-                                        .scaledToFit()
-                                case .empty, .failure(_):
-                                    Rectangle()
-                                        .frame(width: 150, height: 150)
-                                        .foregroundStyle(.purple)
-                                @unknown default:
-                                    Rectangle()
-                                        .frame(width: 150, height: 150)
-                                        .foregroundStyle(.purple)
-                                }
-                            }
-                            .clipShape(RoundedRectangle(cornerRadius: 12))
-                            VStack{
-                                FormTextField(title: "Nome", text: $name)
-                                    .onAppear {
-                                        name = selectedGame.nm_jogo
-                                    }
+                            .foregroundColor(.roxo)
+                        Picker("Dificuldade", selection: $difficult) {
+                            ForEach(GameDifficult.allCases, id: \.self) { difficult in
+                                Text(difficult.rawValue.capitalized).tag(difficult)
                             }
                         }
-                        
-                        FormTextField(title: "Responsável", sfSymbol: "checkmark.seal.fill", text: $owner)
-                        
-                        FormTextField(title: "Descrição", text: $description, isMultiline: true)
-
-                        HStack {
-                            FormNumberField(title: "Jogadores", sfSymbol: "person.2.fill", inText: "Mínimo", value: $numPlayersMin)
-                            FormNumberField(title: " ", inText: "Máximo", value: $numPlayersMax)
-                        }
-                        
-                        VStack(alignment: .leading) {
-                            Text("Dificuldade")
-                                .font(.title2)
-                                .bold()
-                                .foregroundColor(.roxo)
-                            Picker("Dificuldade", selection: $difficult) {
-                                ForEach(GameDifficult.allCases, id: \.self) { difficult in
-                                    Text(difficult.rawValue.capitalized).tag(difficult)
-                                }
-                            }
-                            .pickerStyle(SegmentedPickerStyle())
-                        }
-                    }
-
-                    if let errorMessage = errorMessage {
-                        Text(errorMessage)
-                            .foregroundColor(.red)
-                            .padding()
-                    }
-
-                    if isSaving {
-                        ProgressView("Salvando jogo...")
-                    } else {
-                        DefaultButton(action: {
-                            Task {
-                                await createGame()
-                            }
-                        }, text: "Adicionar")
+                        .pickerStyle(SegmentedPickerStyle())
                     }
                 }
-                .padding()
+                
+                if let errorMessage = errorMessage {
+                    Text(errorMessage)
+                        .foregroundColor(.red)
+                        .padding()
+                }
+                
+                if isSaving {
+                    ProgressView("Salvando jogo...")
+                } else {
+                    DefaultButton(action: {
+                        Task {
+                            await createGame()
+                        }
+                    }, text: "Adicionar")
+                }
             }
-            HStack(alignment: .top) {
-                Spacer()
-                Text("Adicionar Jogo")
-                    .padding()
-                    .font(.title)
-                    .bold()
-                    .foregroundStyle(.white)
-                Spacer()
-            }
-            .padding(.top, 24)
-            .padding(.vertical, 24)
-            .background(Color.roxo)
-            .ignoresSafeArea(edges: .top)
-            .clipShape(RoundedRectangle(cornerRadius: 25.0, style: .continuous))
-            .padding(.bottom, 700)
-
+            .padding()
         }
-        .ignoresSafeArea(.all)
         .background(Color.uiBackground.ignoresSafeArea())
     }
 
@@ -145,7 +113,7 @@ struct GameFormView: View {
                 numPlayersMax: numPlayersMax ?? 1,
                 numPlayersMin: numPlayersMin ?? 4,
                 description: description,
-                duration: duration,
+                duration: duration ?? 10,
                 waitingPlayerRefs: [],
                 imageUrl: selectedGame.thumb ?? "no_image"
             )

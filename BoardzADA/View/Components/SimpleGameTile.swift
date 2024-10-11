@@ -18,7 +18,7 @@ struct SimpleGameTile: View {
                 case .success(let image):
                     image
                         .resizable()
-                        .scaledToFill()
+                        .scaledToFit()
                 case .empty:
                     Rectangle()
                         .foregroundStyle(.yellow)
@@ -38,7 +38,7 @@ struct SimpleGameTile: View {
                 .multilineTextAlignment(.center)
                 .foregroundColor(.primary)
                 .lineLimit(2)
-                .frame(maxWidth: 120) // Ajuste para limitar a largura do texto
+                .frame(maxWidth: .infinity)
         }
         .padding()
         .background(Color.white)

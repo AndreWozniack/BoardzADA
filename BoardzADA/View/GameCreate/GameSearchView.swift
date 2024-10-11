@@ -9,40 +9,46 @@ import SwiftUI
 import RouterKit
 
 struct GameSearchView: View {
-    @State private var searchName: String = "Catan"
+    @State private var searchName: String = ""
     @State private var searchResults: [LDGame] = []
     @State private var selectedGame: LDGame?
+    @State private var isLoading: Bool = false
     @StateObject var vm = GamesCollectionManager.shared
     
     @EnvironmentObject var router: Router<AppRoute>
 
     let columns = [
-        GridItem(.flexible()),
         GridItem(.flexible())
     ]
     
     var body: some View {
         ScrollView {
-            FormTextField(title: "Buscar jogo:", text: $searchName, onSubmitAction: {
-                Task {
-                    await searchGames()
-                }
-            })
-            Text("Selecione um jogo:")
-                .font(.headline)
-                .padding(.top)
-                .background(Color.uiBackground)
-            
-            LazyVGrid(columns: columns, spacing: 12) {
-                ForEach(searchResults) { game in
-                    Button(action: { router.push(to: .gameForm(game)) }) {
-                        SimpleGameTile(imageUrl: game.thumb!, name: game.nm_jogo)
+            VStack(alignment: .leading, spacing: 12){
+                FormTextField(title: "Buscar jogo:", text: $searchName, onSubmitAction: {
+                    Task {
+                        await searchGames()
+                    }
+                })
+                TittleWithText(title: "Selecione um jogo:")
+                
+            }
+            if isLoading {
+                ProgressView("Carregando...")
+                    .padding()
+                    
+            } else {
+                                
+                LazyVGrid(columns: columns, spacing: 12) {
+                    ForEach(searchResults) { game in
+                        Button(action: { router.push(to: .gameForm(game)) }) {
+                            SimpleGameTile(imageUrl: game.thumb!, name: game.nm_jogo)
+                        }
                     }
                 }
+                .padding(.horizontal)
             }
-            .padding(.horizontal)
             
-            if searchResults.isEmpty {
+            if searchResults.isEmpty && !isLoading {
                 DefaultButton(
                     action: {
                         router.push(
@@ -62,19 +68,39 @@ struct GameSearchView: View {
             }
             Spacer()
         }
+        .onAppear(perform: {
+            Task {
+                await initiateGames()
+            }
+        })
         .padding()
-        .ignoresSafeArea([.keyboard, .container])
-        .background(Color.uiBackground)
         
     }
 
     func searchGames() async {
-        guard !searchName.isEmpty else { return }
+        isLoading = true
         let ludopediaManager = LudopediaManager()
+        guard !searchName.isEmpty else {
+            return
+        }
+        
         if let games = await ludopediaManager.buscarJogosPorNome(nome: searchName) {
             print(games.count)
             await MainActor.run {
                 self.searchResults = games
+                isLoading = false
+            }
+        }
+    }
+    
+    func initiateGames() async {
+        isLoading = true
+        let ludopediaManager = LudopediaManager()
+        
+        if let games = await ludopediaManager.jogos()?.jogos {
+            await MainActor.run {
+                self.searchResults = games
+                isLoading = false
             }
         }
     }

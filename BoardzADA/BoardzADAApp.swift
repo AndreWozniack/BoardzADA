@@ -13,21 +13,21 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
     ) -> Bool {
-    FirebaseApp.configure()
-    return true
-  }
+        FirebaseApp.configure()
+        FirebaseConfiguration.shared.setLoggerLevel(.min)
+        return true
+    }
 }
 
 @main
 struct YourApp: App {
-  // register app delegate for Firebase setup
-  @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
-  var body: some Scene {
-    WindowGroup {
-      NavigationView {
-        ContentView()
-      }
+    var body: some Scene {
+        WindowGroup {
+            NavigationView {
+                ContentView()
+            }
+        }
     }
-  }
 }

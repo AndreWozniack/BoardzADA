@@ -13,6 +13,7 @@ struct Player: Codable, Identifiable, Equatable, Hashable {
     var name: String
     var email: String
     var isPlaying: Bool = false
+    var role: PlayerRole
 }
 
 struct BoardGame: Codable, Identifiable, Equatable, Hashable {
@@ -76,6 +77,21 @@ enum GameDifficult: String, Codable, CaseIterable, Hashable {
             return "Medio"
         case .hard:
             return "Dificil"
+        }
+    }
+}
+
+
+enum PlayerRole: String, Hashable, Codable, CaseIterable {
+    case user
+    case admin
+    
+    var text: String {
+        switch self {
+        case .user:
+            return "Player"
+        case .admin:
+            return "Adimin"
         }
     }
 }

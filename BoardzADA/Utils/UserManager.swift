@@ -38,7 +38,7 @@ class UserManager: ObservableObject {
                 return
             }
             
-            let newPlayer = Player(id: userId, name: name, email: email)
+            let newPlayer = Player(id: userId, name: name, email: email, role: PlayerRole.user)
             try playerRef.setData(from: newPlayer)
             await MainActor.run {
                 self.currentUser = newPlayer
@@ -62,6 +62,22 @@ class UserManager: ObservableObject {
                 await MainActor.run {
                     self.currentUser = player
                 }
+                print("Jogador encontrado: \(player.name)")
+                return player
+            } else {
+                print("Jogador não encontrado.")
+                return nil
+            }
+        } catch {
+            print("Erro ao buscar o jogador: \(error.localizedDescription)")
+            return nil
+        }
+    }
+    
+    func fetchPlayer(from playerRef: DocumentReference) async -> Player? {
+        do {
+            let document = try await playerRef.getDocument()
+            if let player = try? document.data(as: Player.self) {
                 print("Jogador encontrado: \(player.name)")
                 return player
             } else {

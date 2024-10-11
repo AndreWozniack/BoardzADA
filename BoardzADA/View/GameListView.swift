@@ -24,7 +24,6 @@ struct GameListView: View {
                         VStack(alignment: .leading) {
                             LazyVStack {
                                 ForEach(vm.gameList, id: \.id) { game in
-                                    
                                     Button {
                                         router.push(to: .game(game))
                                     } label: {
@@ -36,9 +35,7 @@ struct GameListView: View {
                         }
                         .padding(.vertical)
                     }
-
                 }
-
             }
             .padding(.horizontal, 24)
             .refreshable {
@@ -80,6 +77,7 @@ struct GameListView: View {
             }
             .presentationDetents([.medium, .large])
         }
+        .navigationBarBackButtonHidden(true)
     }
 }
 

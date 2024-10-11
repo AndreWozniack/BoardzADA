@@ -28,6 +28,7 @@ struct SignInView: View {
                     Text("BoardzADA")
                         .font(.title)
                         .fontDesign(.rounded)
+                        .foregroundStyle(.uiBackground)
                         .bold()
                         .padding()
                     Image("boardzada")
@@ -68,7 +69,7 @@ struct SignInView: View {
     
     private func checkForExistingPlayer() async {
         isLoading = true
-        if let player = await userManager.fetchPlayer() {
+        if await userManager.fetchPlayer() != nil {
             router.push(to: .gameList)
         } else {
             isLoading = false

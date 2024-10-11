@@ -39,6 +39,7 @@ struct FormTextField: View {
                     .textInputAutocapitalization(.never)
                     .onSubmit {
                         onSubmitAction?()
+                        hideKeyboard()
                     }
                     .onChange(of: text) {
                         onChangeAction?()
@@ -52,12 +53,16 @@ struct FormTextField: View {
                     .textInputAutocapitalization(.never)
                     .onSubmit {
                         onSubmitAction?()
+                        hideKeyboard()
                     }
                     .onChange(of: text) {
                         onChangeAction?()
                     }
             }
-                
+        }
+        .contentShape(Rectangle())
+        .onTapGesture {
+            hideKeyboard()
         }
     }
 }
@@ -88,15 +93,25 @@ struct FormNumberField: View {
                 .background(Color(UIColor.secondarySystemBackground))
                 .cornerRadius(10)
                 .keyboardType(.numberPad)
-                .autocorrectionDisabled(true)
                 .textInputAutocapitalization(.never)
                 .onSubmit {
                     onSubmitAction?()
+                    hideKeyboard()
                 }
                 .onChange(of: value) {
                     onChangeAction?()
                 }
         }
+        .contentShape(Rectangle())
+        .onTapGesture {
+            hideKeyboard()
+        }
+    }
+}
+
+extension View {
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }
 
@@ -114,4 +129,3 @@ struct FormNumberField: View {
         }
     )
 }
-

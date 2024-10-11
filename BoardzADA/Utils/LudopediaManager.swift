@@ -35,25 +35,32 @@ class LudopediaManager {
 
 
     func jogos() async -> LDGameResponse? {
-        let parameters: Parameters = [
-            "app_id": appId,
-            "app_key": appKey
-        ]
+        let urlComponents = URLComponents(string: "\(url)/jogos")
 
-        let result = await AF.request(
-            "\(url)/jogos",
-            method: .get,
-            parameters: parameters,
-            encoding: URLEncoding.default
-        )
-        .serializingDecodable(LDGameResponse.self)
-        .result
 
-        switch(result) {
-            case .success(let value): return value
-            case .failure(let error):
-                print("Erro ao obter jogos: \(error.localizedDescription)")
+        guard let url = urlComponents?.url else {
+            print("URL inválida.")
+            return nil
+        }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+        request.addValue(appId, forHTTPHeaderField: "app_id")
+        request.addValue(appKey, forHTTPHeaderField: "app_key")
+
+        do {
+            let (data, _) = try await URLSession.shared.data(for: request)
+            do {
+                let result = try JSONDecoder().decode(LDGameResponse.self, from: data)
+                return result
+            } catch {
+                print("Erro ao decodificar a resposta: \(error.localizedDescription)")
                 return nil
+            }
+        } catch {
+            print("Erro na requisição: \(error.localizedDescription)")
+            return nil
         }
     }
 
@@ -79,6 +86,7 @@ class LudopediaManager {
                 return nil
         }
     }
+    
     func buscarJogosPorNome(nome: String) async -> [LDGame]? {
            var urlComponents = URLComponents(string: "\(url)/jogos")
            urlComponents?.queryItems = [

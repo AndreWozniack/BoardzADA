@@ -13,32 +13,35 @@ struct GameQueueView: View {
 
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading) {
-                Text("Em uso por")
-                    .font(.title2)
-                    .bold()
-                    .frame(maxWidth: .infinity)
-                    .multilineTextAlignment(.leading)
-                    .padding(.vertical, 6)
-                    .foregroundColor(.white)
-                    .background(Color.roxo)
-                    .cornerRadius(10, corners: [.topLeft, .topRight])
+            if currentPlayer != nil {
+                VStack(alignment: .leading) {
+                    Text("Em uso por")
+                        .font(.title2)
+                        .bold()
+                        .frame(maxWidth: .infinity)
+                        .multilineTextAlignment(.leading)
+                        .padding(.vertical, 6)
+                        .foregroundColor(.white)
+                        .background(Color.roxo)
+                        .cornerRadius(10, corners: [.topLeft, .topRight])
 
-                Text(currentPlayer?.name ?? "Nenhum jogador")
-                    .font(.title2)
-                    .foregroundStyle(Color.roxo)
-                    .padding(.horizontal, 10)
-                    .padding(.vertical, 3)
-                    .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
-                    .padding(.bottom, 6)
-                    
+                    Text(currentPlayer?.name ?? "Nenhum jogador")
+                        .font(.title2)
+                        .foregroundStyle(Color.roxo)
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 3)
+                        .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
+                        .padding(.bottom, 6)
+                        
+                }
+                .overlay {
+                    RoundedRectangle(cornerRadius: 12)
+                        .stroke(lineWidth: 4)
+                        .foregroundColor(.roxo)
+                }
+                .padding(.top)
+                .padding(.horizontal)
             }
-            .overlay {
-                RoundedRectangle(cornerRadius: 12)
-                    .stroke(lineWidth: 4)
-                    .foregroundColor(.roxo)
-            }
-            .padding(.top)
 
             if !waitingPlayers.isEmpty {
                 VStack(alignment: .leading) {
@@ -71,6 +74,7 @@ struct GameQueueView: View {
                         .foregroundColor(.roxo)
                 }
                 .padding(.top)
+                .padding(.horizontal)
             }
 
             Spacer()
@@ -96,12 +100,17 @@ struct RoundedCorner: Shape {
 
 #Preview {
     GameQueueView(
-        currentPlayer: Player(id: "1", name: "Afonso", email: "afonso@example.com"),
+        currentPlayer: Player(
+            id: "1",
+            name: "Afonso",
+            email: "afonso@example.com",
+            role: PlayerRole.user
+        ),
         waitingPlayers: [
-            Player(id: "2", name: "André", email: "andre@example.com"),
-            Player(id: "3", name: "Alves", email: "alves@example.com"),
-            Player(id: "4", name: "Michels", email: "michels@example.com"),
-            Player(id: "5", name: "Sei lá quem", email: "seila@example.com")
+            Player(id: "2", name: "André", email: "andre@example.com", role: PlayerRole.user),
+            Player(id: "3", name: "Alves", email: "alves@example.com", role: PlayerRole.user),
+            Player(id: "4", name: "Michels", email: "michels@example.com", role: PlayerRole.user),
+            Player(id: "5", name: "Sei lá quem", email: "seila@example.com", role: PlayerRole.user)
         ]
     )
 }
