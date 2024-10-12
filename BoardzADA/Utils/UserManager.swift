@@ -62,7 +62,6 @@ class UserManager: ObservableObject {
                 await MainActor.run {
                     self.currentUser = player
                 }
-                print("Jogador encontrado: \(player.name)")
                 return player
             } else {
                 print("Jogador não encontrado.")
@@ -78,7 +77,6 @@ class UserManager: ObservableObject {
         do {
             let document = try await playerRef.getDocument()
             if let player = try? document.data(as: Player.self) {
-                print("Jogador encontrado: \(player.name)")
                 return player
             } else {
                 print("Jogador não encontrado.")
