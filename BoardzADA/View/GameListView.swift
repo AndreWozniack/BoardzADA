@@ -19,23 +19,19 @@ struct GameListView: View {
     var body: some View {
         VStack {
             ScrollView {
-                Group {
-                    Section {
-                        VStack(alignment: .leading) {
-                            LazyVStack {
-                                ForEach(vm.gameList, id: \.id) { game in
-                                    Button {
-                                        router.push(to: .game(game))
-                                    } label: {
-                                        BoardGameListTile(game: game)
-                                    }
-                                    .buttonStyle(.plain)
-                                }
+                VStack(alignment: .leading) {
+                    LazyVStack {
+                        ForEach(vm.gameList, id: \.id) { game in
+                            Button {
+                                router.push(to: .game(game))
+                            } label: {
+                                BoardGameListTile(game: game)
                             }
+                            .buttonStyle(.plain)
                         }
-                        .padding(.vertical)
                     }
                 }
+                .padding(.vertical)
             }
             .padding(.horizontal, 24)
             .refreshable {
@@ -43,11 +39,15 @@ struct GameListView: View {
                     await vm.fetchGames()
                 }
             }
-            HStack{
+            HStack {
                 DefaultButton(action: { self.isShowing.toggle() }, text: "Scan")
                     .shadow(radius: 5)
-                DefaultButton(action: { router.push(to: .gameSearch) }, text: "Criar Jogo")
-                    .shadow(radius: 5)
+                if let player = UserManager.shared.currentUser {
+                    if player.role == .admin {
+                        DefaultButton(action: { router.push(to: .gameSearch) }, text: "Criar Jogo")
+                            .shadow(radius: 5)
+                    }
+                }
             }
             .padding(.horizontal)
             .padding(.vertical)

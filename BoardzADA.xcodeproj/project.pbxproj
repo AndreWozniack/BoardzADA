@@ -63,9 +63,22 @@
 		AF41FB642CB5D8FC00C6E7A5 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		AF3177892CBADD7E000D2C0A /* Exceptions for "BoardzADA" folder in "BoardzADA" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = AF362C8A2CACAAB400506443 /* BoardzADA */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		AF362C8D2CACAAB400506443 /* BoardzADA */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				AF3177892CBADD7E000D2C0A /* Exceptions for "BoardzADA" folder in "BoardzADA" target */,
+			);
 			path = BoardzADA;
 			sourceTree = "<group>";
 		};
@@ -377,6 +390,7 @@
 /* Begin XCBuildConfiguration section */
 		AF362CAD2CACAAB700506443 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AF41FB642CB5D8FC00C6E7A5 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -440,6 +454,7 @@
 		};
 		AF362CAE2CACAAB700506443 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AF41FB642CB5D8FC00C6E7A5 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -496,6 +511,7 @@
 		};
 		AF362CB02CACAAB700506443 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AF41FB642CB5D8FC00C6E7A5 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -507,6 +523,7 @@
 				DEVELOPMENT_TEAM = L2AH2M48T4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = BoardzADA/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = BoardzADA;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.board-games";
 				INFOPLIST_KEY_NSCameraUsageDescription = "We want to add the game to the library";
@@ -516,6 +533,7 @@
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -536,6 +554,7 @@
 		};
 		AF362CB12CACAAB700506443 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AF41FB642CB5D8FC00C6E7A5 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -547,6 +566,7 @@
 				DEVELOPMENT_TEAM = L2AH2M48T4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = BoardzADA/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = BoardzADA;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.board-games";
 				INFOPLIST_KEY_NSCameraUsageDescription = "We want to add the game to the library";
@@ -556,6 +576,7 @@
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -595,6 +616,7 @@
 		};
 		AF362CB42CACAAB700506443 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AF41FB642CB5D8FC00C6E7A5 /* Config.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -631,6 +653,7 @@
 		};
 		AF362CB72CACAAB700506443 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AF41FB642CB5D8FC00C6E7A5 /* Config.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;

@@ -56,7 +56,7 @@ struct GameQueueView: View {
                         .cornerRadius(10, corners: [.topLeft, .topRight])
 
                     VStack(alignment: .leading) {
-                        ForEach(waitingPlayers, id: \.id) { player in
+                        ForEach(waitingPlayers.reversed(), id: \.id) { player in
                             Text(player.name)
                                 .font(.body)
                                 .padding(.horizontal, 10)

@@ -24,14 +24,30 @@ struct LDGameResponse: Codable {
     let total: Int
 }
 
-//APP_ID: dbd21ab8f20a64de
-//APP_KEY: f4d37c06a607a4f0fa501453d291cd64
-//ACESS_TOKEN (Usuário): 803a4569d210a5d3e15016c8d831cf1f
 class LudopediaManager {
+    
     let url = "https://ludopedia.com.br/api/v1"
-        let appId = "dbd21ab8f20a64de"   // Substitua pelo seu APP_ID
-        let appKey = "f4d37c06a607a4f0fa501453d291cd64" // Substitua pelo seu APP_KEY
-        let accessToken = "803a4569d210a5d3e15016c8d831cf1f" // Substitua pelo seu ACCESS_TOKEN
+    
+    let appId: String = {
+        guard let id = Bundle.main.object(forInfoDictionaryKey: "LUDOPEDIA_APP_ID") as? String else {
+            fatalError("LUDOPEDIA_APP_ID não foi configurado no Info.plist")
+        }
+        return id
+    }()
+    
+    let appKey: String = {
+        guard let key = Bundle.main.object(forInfoDictionaryKey: "LUDOPEDIA_APP_KEY") as? String else {
+            fatalError("LUDOPEDIA_APP_KEY não foi configurado no Info.plist")
+        }
+        return key
+    }()
+    
+    let accessToken: String = {
+        guard let token = Bundle.main.object(forInfoDictionaryKey: "LUDOPEDIA_ACCESS_TOKEN") as? String else {
+            fatalError("LUDOPEDIA_ACCESS_TOKEN não foi configurado no Info.plist")
+        }
+        return token
+    }()
 
 
     func jogos() async -> LDGameResponse? {
