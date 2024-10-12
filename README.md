@@ -1,7 +1,7 @@
 
 <h1 align="center">BoardzADA</h1>
 <h3 align="center">
-  <a href="https://github.com/AndreWozniack/Bordada"><img src="/BoarzADA.png" alt="OctoCoin Logo" width="300"></a>
+  <a href="https://github.com/AndreWozniack/Bordada"><img src="/Logo.jpg" alt="OctoCoin Logo" width="300"></a>
 </h3>
 
 <p align="center">
