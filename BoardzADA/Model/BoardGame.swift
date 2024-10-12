@@ -91,7 +91,7 @@ enum PlayerRole: String, Hashable, Codable, CaseIterable {
         case .user:
             return "Player"
         case .admin:
-            return "Adimin"
+            return "Admin"
         }
     }
 }
