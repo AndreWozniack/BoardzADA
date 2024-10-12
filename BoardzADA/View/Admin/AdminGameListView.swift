@@ -8,6 +8,7 @@
 
 import SwiftUI
 import RouterKit
+import FirebaseAuth
 
 struct AdminGameListView: View {
     @StateObject var vm = GamesCollectionManager.shared
@@ -23,7 +24,7 @@ struct AdminGameListView: View {
                     LazyVStack {
                         ForEach(vm.gameList, id: \.id) { game in
                             Button {
-                                router.push(to: .game(game))
+                                router.push(to: .adminGame(game))
                             } label: {
                                 BoardGameListTile(game: game)
                             }
@@ -39,13 +40,14 @@ struct AdminGameListView: View {
                     await vm.fetchGames()
                 }
             }
+            
             HStack {
                 DefaultButton(action: { self.isShowing.toggle() }, text: "Scan")
                     .shadow(radius: 5)
-                
-                DefaultButton(action: { router.push(to: .gameSearch) }, text: "Criar Jogo")
+                DefaultButton(action: { router.push(to: .gameSearch) }, text: "Adicionar Jogo")
                     .shadow(radius: 5)
             }
+            
             .padding(.horizontal)
             .padding(.vertical)
         }
@@ -56,12 +58,10 @@ struct AdminGameListView: View {
         .sheet(isPresented: $isShowing) {
             ScannerView(isShowing: $isShowing) { value in
                 Task {
-                    
                     guard let game = vm.freeGames.first(where: { $0.id.uuidString == value}) else {
                         print("Jogo não encontrado")
                         return
                     }
-                    
                     router.push(to: .game(game))
                     await GamesCollectionManager.shared.addCurrentPlayer(
                         to: game.id.uuidString,
@@ -79,6 +79,15 @@ struct AdminGameListView: View {
             vm.stopListening()
         }
         .navigationBarBackButtonHidden(true)
+    }
+
+    private func deleteGame(at offsets: IndexSet) {
+        offsets.forEach { index in
+            let game = vm.gameList[index]
+            Task {
+                await vm.removeGame(by: game.id.uuidString)
+            }
+        }
     }
 }
 

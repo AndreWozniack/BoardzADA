@@ -77,6 +77,7 @@ class GameViewModel: ObservableObject {
             }
         }
     }
+    
     func joinGame() async {
         await GamesCollectionManager.shared.addCurrentPlayer(
             to: game.id.uuidString,
@@ -109,6 +110,8 @@ class GameViewModel: ObservableObject {
     }
     
     func updateGame() async {
-        // Implementar a lógica para atualizar o jogo, se necessário
+        Task {
+           await GamesCollectionManager.shared.addGame(game)
+        }
     }
 }
