@@ -1,15 +1,16 @@
 //
-//  GameListView.swift
-//  BordADA
+//  AdminGameListView.swift
+//  BoardzADA
 //
-//  Created by Felipe Passos on 01/10/24.
+//  Created by André Wozniack on 12/10/24.
 //
 
-import RouterKit
+
 import SwiftUI
+import RouterKit
 import FirebaseAuth
 
-struct GameListView: View {
+struct AdminGameListView: View {
     @StateObject var vm = GamesCollectionManager.shared
     @ObservedObject var userManager = UserManager.shared
     @State var isShowing: Bool = false
@@ -23,7 +24,7 @@ struct GameListView: View {
                     LazyVStack {
                         ForEach(vm.gameList, id: \.id) { game in
                             Button {
-                                router.push(to: .game(game))
+                                router.push(to: .adminGame(game))
                             } label: {
                                 BoardGameListTile(game: game)
                             }
@@ -39,8 +40,13 @@ struct GameListView: View {
                     await vm.fetchGames()
                 }
             }
-            DefaultButton(action: { self.isShowing.toggle() }, text: "Scan")
-                .shadow(radius: 5)
+            
+            HStack {
+                DefaultButton(action: { self.isShowing.toggle() }, text: "Scan")
+                    .shadow(radius: 5)
+                DefaultButton(action: { router.push(to: .gameSearch) }, text: "Adicionar Jogo")
+                    .shadow(radius: 5)
+            }
             
             .padding(.horizontal)
             .padding(.vertical)
@@ -52,12 +58,10 @@ struct GameListView: View {
         .sheet(isPresented: $isShowing) {
             ScannerView(isShowing: $isShowing) { value in
                 Task {
-                    
                     guard let game = vm.freeGames.first(where: { $0.id.uuidString == value}) else {
                         print("Jogo não encontrado")
                         return
                     }
-                    
                     router.push(to: .game(game))
                     await GamesCollectionManager.shared.addCurrentPlayer(
                         to: game.id.uuidString,
@@ -76,8 +80,17 @@ struct GameListView: View {
         }
         .navigationBarBackButtonHidden(true)
     }
+
+    private func deleteGame(at offsets: IndexSet) {
+        offsets.forEach { index in
+            let game = vm.gameList[index]
+            Task {
+                await vm.removeGame(by: game.id.uuidString)
+            }
+        }
+    }
 }
 
 #Preview {
-    GameListView()
+    AdminGameListView()
 }

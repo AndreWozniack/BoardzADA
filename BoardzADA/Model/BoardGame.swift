@@ -62,6 +62,19 @@ enum GameStatus: String, Codable, CaseIterable, Hashable {
     case occupied
     case reserved
     case waiting
+    
+    var text: String {
+        switch self {
+        case .free:
+            return "Livre"
+        case .occupied:
+            return "Ocupado"
+        case .reserved:
+            return "Reservado"
+        case .waiting:
+            return "Esperando"
+        }
+    }
 }
 
 enum GameDifficult: String, Codable, CaseIterable, Hashable {
@@ -91,7 +104,7 @@ enum PlayerRole: String, Hashable, Codable, CaseIterable {
         case .user:
             return "Player"
         case .admin:
-            return "Adimin"
+            return "Admin"
         }
     }
 }

@@ -1,19 +1,21 @@
 //
-//  GameQueueView.swift
-//  BordADA
+//  AdminGameQueueView.swift
+//  BoardzADA
 //
-//  Created by André Wozniack on 08/10/24.
+//  Created by André Wozniack on 12/10/24.
 //
+
 
 import SwiftUI
 
-struct GameQueueView: View {
+struct AdminGameQueueView: View {
     var currentPlayer: Player?
     var waitingPlayers: [Player]
+    var gameId: String
 
     var body: some View {
         ScrollView {
-            if currentPlayer != nil {
+            if let currentPlayer = currentPlayer {
                 VStack(alignment: .leading) {
                     Text("Em uso por")
                         .font(.title2)
@@ -25,14 +27,28 @@ struct GameQueueView: View {
                         .background(Color.roxo)
                         .cornerRadius(10, corners: [.topLeft, .topRight])
 
-                    Text(currentPlayer?.name ?? "Nenhum jogador")
-                        .font(.title2)
-                        .foregroundStyle(Color.roxo)
-                        .padding(.horizontal, 10)
-                        .padding(.vertical, 3)
-                        .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
-                        .padding(.bottom, 6)
-                        
+                    HStack {
+                        Text(currentPlayer.name)
+                            .font(.title2)
+                            .foregroundStyle(Color.roxo)
+                            .padding(.horizontal, 10)
+                            .padding(.vertical, 3)
+                            .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
+
+                        Spacer()
+
+                        // Botão para remover o jogador atual
+                        Button(action: {
+                            Task {
+                                await GamesCollectionManager.shared.removeCurrentPlayer(from: gameId)
+                            }
+                        }) {
+                            Image(systemName: "trash")
+                                .foregroundColor(.red)
+                                .padding(8)
+                        }
+                    }
+                    .padding(.bottom, 6)
                 }
                 .overlay {
                     RoundedRectangle(cornerRadius: 12)
@@ -57,13 +73,27 @@ struct GameQueueView: View {
 
                     VStack(alignment: .leading) {
                         ForEach(waitingPlayers, id: \.id) { player in
-                            Text(player.name)
-                                .font(.body)
-                                .padding(.horizontal, 10)
-                                .foregroundStyle(Color.roxo)
-                                .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
+                            HStack {
+                                Text(player.name)
+                                    .font(.body)
+                                    .padding(.horizontal, 10)
+                                    .foregroundStyle(Color.roxo)
+                                    .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
+
+                                Spacer()
+
+                                Button(action: {
+                                    Task {
+                                        await GamesCollectionManager.shared.removePlayerFromWaitingList(gameId: gameId, playerID: player.id ?? "")
+                                    }
+                                }) {
+                                    Image(systemName: "trash")
+                                        .foregroundColor(.red)
+                                        .padding(8)
+                                }
+                            }
+                            .padding(.vertical, 1)
                         }
-                        .padding(.vertical, 1)
                     }
                     .padding(.bottom, 6)
                     .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
@@ -82,24 +112,8 @@ struct GameQueueView: View {
     }
 }
 
-extension View {
-    func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
-        clipShape(RoundedCorner(radius: radius, corners: corners))
-    }
-}
-
-struct RoundedCorner: Shape {
-    var radius: CGFloat = .infinity
-    var corners: UIRectCorner = .allCorners
-
-    func path(in rect: CGRect) -> Path {
-        let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
-        return Path(path.cgPath)
-    }
-}
-
 #Preview {
-    GameQueueView(
+    AdminGameQueueView(
         currentPlayer: Player(
             id: "1",
             name: "Afonso",
@@ -111,7 +125,7 @@ struct RoundedCorner: Shape {
             Player(id: "3", name: "Alves", email: "alves@example.com", role: PlayerRole.user),
             Player(id: "4", name: "Michels", email: "michels@example.com", role: PlayerRole.user),
             Player(id: "5", name: "Sei lá quem", email: "seila@example.com", role: PlayerRole.user)
-        ]
+        ],
+        gameId: "gameIdExample"
     )
 }
-

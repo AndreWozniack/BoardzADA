@@ -16,11 +16,12 @@ class GamesCollectionManager: ObservableObject {
 
     private var db = Firestore.firestore()
     private var listener: ListenerRegistration?
+    private var gameListeners: [ListenerRegistration] = []
     
     init() {
         startListening()
     }
-    
+
     func listenForGameChanges() {
         listener = db.collection("games").addSnapshotListener { snapshot, error in
             if let error = error {
@@ -40,22 +41,60 @@ class GamesCollectionManager: ObservableObject {
             DispatchQueue.main.async {
                 self.gameList = games
                 self.updateFilteredLists()
+
+                self.addListenersToGames(games: games)
             }
         }
     }
     
-    func startListening() {
-        listenForGameChanges()
+    private func addListenersToGames(games: [BoardGame]) {
+        for listener in gameListeners {
+            listener.remove()
+        }
+        gameListeners.removeAll()
+
+        for game in games {
+            let gameListener = db.collection("games").document(game.id.uuidString).addSnapshotListener { documentSnapshot, error in
+                if let error = error {
+                    print("Erro ao escutar mudanças no jogo \(game.name): \(error.localizedDescription)")
+                    return
+                }
+
+                guard let documentSnapshot = documentSnapshot, documentSnapshot.exists else {
+                    print("Documento do jogo não encontrado.")
+                    return
+                }
+
+                if let updatedGame = try? documentSnapshot.data(as: BoardGame.self) {
+                    DispatchQueue.main.async {
+                        if let index = self.gameList.firstIndex(where: { $0.id == updatedGame.id }) {
+                            self.gameList[index] = updatedGame
+                            self.updateFilteredLists()
+                        }
+                    }
+                }
+            }
+            
+            gameListeners.append(gameListener)
+        }
     }
     
     func stopListening() {
         listener?.remove()
         listener = nil
+        for listener in gameListeners {
+            listener.remove()
+        }
+        gameListeners.removeAll()
     }
     
     func updateFilteredLists() {
         self.freeGames = self.gameList.filter { $0.status == .free }
         self.occupiedGames = self.gameList.filter { $0.status == .occupied }
+    }
+    
+    func startListening() {
+        listenForGameChanges()
     }
     
     func addGame(_ game: BoardGame) async {
@@ -126,7 +165,6 @@ class GamesCollectionManager: ObservableObject {
         )
         await addGame(newGame)
     }
-
     
     func getAvailableGames() -> [BoardGame] {
         return gameList.filter { $0.status == .free }
@@ -154,7 +192,6 @@ class GamesCollectionManager: ObservableObject {
         }
     }
     
-    // Converter referência de jogador em objeto Player
     func fetchPlayer(from reference: DocumentReference, completion: @escaping (Player?) -> Void) {
         reference.getDocument { snapshot, error in
             guard let document = snapshot, document.exists, let player = try? document.data(as: Player.self) else {
@@ -166,6 +203,7 @@ class GamesCollectionManager: ObservableObject {
         }
     }
 
+    
     func addCurrentPlayer(to gameId: String, playerID: String) async {
         let gameRef = db.collection("games").document(gameId)
         let playerRef = db.collection("players").document(playerID)
@@ -183,25 +221,6 @@ class GamesCollectionManager: ObservableObject {
             print("Jogador definido como currentPlayer do jogo \(gameId).")
         } catch {
             print("Erro ao adicionar currentPlayer: \(error.localizedDescription)")
-        }
-    }
-
-    func removeCurrentPlayer(from gameId: String) async {
-        let gameRef = db.collection("games").document(gameId)
-
-        do {
-            let result = try await db.runTransaction { (transaction, errorPointer) -> Any? in
-                transaction.updateData([
-                    "currentPlayerRef": FieldValue.delete(),
-                    "status": GameStatus.free.rawValue
-                ], forDocument: gameRef)
-
-                return nil
-            }
-            print(result ?? "")
-            print("currentPlayer removido do jogo \(gameId).")
-        } catch {
-            print("Erro ao remover currentPlayer: \(error.localizedDescription)")
         }
     }
 
@@ -233,7 +252,6 @@ class GamesCollectionManager: ObservableObject {
         }
     }
 
-    // Fetch all players in the waiting list
     func fetchWaitingPlayers(from references: [DocumentReference], completion: @escaping ([Player]) -> Void) {
         var players: [Player] = []
         let group = DispatchGroup()
@@ -253,7 +271,6 @@ class GamesCollectionManager: ObservableObject {
         }
     }
 
-    // Fetch games and their players
     func fetchGamesWithPlayers() async {
         do {
             let snapshot = try await db.collection("games").getDocuments()
@@ -298,5 +315,52 @@ class GamesCollectionManager: ObservableObject {
         } catch {
             print("Erro ao buscar jogos: \(error.localizedDescription)")
         }
+    }
+
+    func removeCurrentPlayer(from gameId: String) async {
+        let gameRef = db.collection("games").document(gameId)
+
+        do {
+            let result = try await db.runTransaction { (transaction, errorPointer) -> Any? in
+                let gameSnapshot: DocumentSnapshot
+                do {
+                    gameSnapshot = try transaction.getDocument(gameRef)
+                } catch {
+                    errorPointer?.pointee = NSError(domain: "GameError", code: 0, userInfo: [NSLocalizedDescriptionKey: "Erro ao obter documento do jogo."])
+                    return nil
+                }
+                
+                guard let gameData = gameSnapshot.data(),
+                      let waitingPlayerRefs = gameData["waitingPlayerRefs"] as? [DocumentReference] else {
+                    errorPointer?.pointee = NSError(domain: "GameError", code: 0, userInfo: [NSLocalizedDescriptionKey: "Dados do jogo inválidos."])
+                    return nil
+                }
+                
+                if !waitingPlayerRefs.isEmpty {
+                    let nextPlayerRef = waitingPlayerRefs[0]
+
+                    transaction.updateData([
+                        "currentPlayerRef": nextPlayerRef,
+                        "waitingPlayerRefs": FieldValue.arrayRemove([nextPlayerRef])
+                    ], forDocument: gameRef)
+                    
+                } else {
+                    transaction.updateData([
+                        "currentPlayerRef": FieldValue.delete(),
+                        "status": GameStatus.free.rawValue
+                    ], forDocument: gameRef)
+                }
+                return nil
+            }
+            print(result ?? "")
+            print("currentPlayer removido e fila atualizada para o jogo \(gameId).")
+        } catch {
+            print("Erro ao remover currentPlayer: \(error.localizedDescription)")
+        }
+    }
+
+    func promoteNextPlayer(in game: BoardGame) async {
+        let gameId = game.id.uuidString
+        await removeCurrentPlayer(from: gameId)
     }
 }

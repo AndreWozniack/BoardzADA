@@ -70,7 +70,13 @@ struct SignInView: View {
     private func checkForExistingPlayer() async {
         isLoading = true
         if await userManager.fetchPlayer() != nil {
-            router.push(to: .gameList)
+            if let player = userManager.currentUser {
+                if player.role == .admin {
+                    router.push(to: .adminGameList)
+                } else {
+                    router.push(to: .gameList)
+                }
+            }
         } else {
             isLoading = false
         }
@@ -85,12 +91,15 @@ struct SignInView: View {
                 switch firebaseResult {
                 case .success(_):
                     Task {
-                        let playerExists = await userManager.checkIfPlayerExists()
-                        if !playerExists {
+
+                        if await !userManager.checkIfPlayerExists() {
                             await userManager.createPlayer()
                         }
+                        
+                        
                         router.push(to: .gameList)
                     }
+                    
                 case .failure(let error):
                     errorMessage = error.localizedDescription
                 }
