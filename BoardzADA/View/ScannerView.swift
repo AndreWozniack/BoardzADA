@@ -33,7 +33,7 @@ struct ScannerView: View {
 				.opacity(0.5)
 				.reverseMask{
 					Rectangle()
-						.frame(width: 150, height: 150)
+						.frame(width: 250, height: 250)
 				}
 		}
     }

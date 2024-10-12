@@ -1,15 +1,15 @@
 //
-//  GameListView.swift
-//  BordADA
+//  AdminGameListView.swift
+//  BoardzADA
 //
-//  Created by Felipe Passos on 01/10/24.
+//  Created by André Wozniack on 12/10/24.
 //
 
-import RouterKit
+
 import SwiftUI
-import FirebaseAuth
+import RouterKit
 
-struct GameListView: View {
+struct AdminGameListView: View {
     @StateObject var vm = GamesCollectionManager.shared
     @ObservedObject var userManager = UserManager.shared
     @State var isShowing: Bool = false
@@ -39,9 +39,13 @@ struct GameListView: View {
                     await vm.fetchGames()
                 }
             }
-            DefaultButton(action: { self.isShowing.toggle() }, text: "Scan")
-                .shadow(radius: 5)
-            
+            HStack {
+                DefaultButton(action: { self.isShowing.toggle() }, text: "Scan")
+                    .shadow(radius: 5)
+                
+                DefaultButton(action: { router.push(to: .gameSearch) }, text: "Criar Jogo")
+                    .shadow(radius: 5)
+            }
             .padding(.horizontal)
             .padding(.vertical)
         }
@@ -79,5 +83,5 @@ struct GameListView: View {
 }
 
 #Preview {
-    GameListView()
+    AdminGameListView()
 }

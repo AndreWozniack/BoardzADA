@@ -86,7 +86,6 @@ struct GameView: View {
                                             action: {
                                                 Task {
                                                     await viewModel.leaveGame()
-                                                    router.pop()
                                                 }
                                             },
                                             text: "Sair do jogo",
@@ -107,10 +106,13 @@ struct GameView: View {
 
                                         DefaultButton(
                                             action: {
+                                                Task {
+                                                    await viewModel.leaveWaitingList()
+                                                }
                                             },
-                                            text: "Jogador já entrou na fila",
+                                            text: "Sair da fila",
                                             isDestructive: true)
-                                            .disabled(true)
+
                                     }
                                 case .free:
                                     DefaultButton(
@@ -133,12 +135,14 @@ struct GameView: View {
             viewModel.loadCurrentPlayerAndWaitingList()
         }
         .defaultNavigationAppearence()
+        .navigationTitle(viewModel.game.name)
+        .navigationBarTitleDisplayMode(.large)
         .toolbarTitleDisplayMode(.inlineLarge)
         .toolbar {
             ToolbarItem(placement: .principal) {
                 HStack {
-                    Text(viewModel.game.name)
-                        .font(.largeTitle)
+                    Text(viewModel.game.status.rawValue)
+                        .font(.title)
                         .foregroundStyle(.uiBackground)
                         .bold()
                         

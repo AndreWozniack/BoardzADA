@@ -14,7 +14,6 @@ struct BoardGameListTile: View {
         _viewModel = StateObject(wrappedValue: BoardGameListTileViewModel(game: game))
     }
     
-    // Corrige o método getColor para retornar a cor correta com base no status do jogo
     func getColor() -> Color {
         switch(viewModel.game.status) {
             case .free: return .green
