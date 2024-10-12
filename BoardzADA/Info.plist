@@ -2,14 +2,11 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>LUDOPEDIA_APP_ID</key>
-    <string>$(LUDOPEDIA_APP_ID)</string>
-
-    <key>LUDOPEDIA_APP_KEY</key>
-    <string>$(LUDOPEDIA_APP_KEY)</string>
-
-    <key>LUDOPEDIA_ACCESS_TOKEN</key>
-    <string>$(LUDOPEDIA_ACCESS_TOKEN)</string>
-
+	<key>LUDOPEDIA_ACCESS_TOKEN</key>
+	<string>$(LUDOPEDIA_ACCESS_TOKEN)</string>
+	<key>LUDOPEDIA_APP_ID</key>
+	<string>$(LUDOPEDIA_APP_ID)</string>
+	<key>LUDOPEDIA_APP_KEY</key>
+	<string>$(LUDOPEDIA_APP_KEY)</string>
 </dict>
 </plist>

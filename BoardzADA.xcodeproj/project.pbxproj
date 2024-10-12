@@ -33,7 +33,8 @@
 		AF3177812CB89960000D2C0A /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = AF3177802CB89960000D2C0A /* FirebaseStorage */; };
 		AF3177832CB89960000D2C0A /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = AF3177822CB89960000D2C0A /* FirebaseStorageCombine-Community */; };
 		AF3177852CB89960000D2C0A /* FirebaseVertexAI-Preview in Frameworks */ = {isa = PBXBuildFile; productRef = AF3177842CB89960000D2C0A /* FirebaseVertexAI-Preview */; };
-		AF41FB652CB5D8FC00C6E7A5 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = AF41FB642CB5D8FC00C6E7A5 /* Config.xcconfig */; };
+		AFDA974A2CBAE1CD0004304C /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = AFDA97492CBAE1CD0004304C /* Config.xcconfig */; };
+		AFDA974C2CBAE2390004304C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AFDA974B2CBAE2390004304C /* GoogleService-Info.plist */; };
 		F74327022CACE7EE00E9608F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = F74327012CACE7EE00E9608F /* Alamofire */; };
 		F7756DF52CACB951008B1389 /* RouterKit in Frameworks */ = {isa = PBXBuildFile; productRef = F7756DF42CACB951008B1389 /* RouterKit */; };
 /* End PBXBuildFile section */
@@ -60,7 +61,8 @@
 		AF362C8B2CACAAB400506443 /* BoardzADA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoardzADA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF362C9B2CACAAB700506443 /* BoardzADATests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BoardzADATests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF362CA52CACAAB700506443 /* BoardzADAUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BoardzADAUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		AF41FB642CB5D8FC00C6E7A5 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		AFDA97492CBAE1CD0004304C /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		AFDA974B2CBAE2390004304C /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -150,12 +152,13 @@
 			isa = PBXGroup;
 			children = (
 				AF31770B2CB897BA000D2C0A /* GoogleService-Info.plist */,
-				AF41FB642CB5D8FC00C6E7A5 /* Config.xcconfig */,
+				AFDA97492CBAE1CD0004304C /* Config.xcconfig */,
 				AF362C8D2CACAAB400506443 /* BoardzADA */,
 				AF362C9E2CACAAB700506443 /* BoardzADATests */,
 				AF362CA82CACAAB700506443 /* BoardzADAUITests */,
 				AF362C8C2CACAAB400506443 /* Products */,
 				AF362D5D2CACBF9600506443 /* Frameworks */,
+				AFDA974B2CBAE2390004304C /* GoogleService-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -329,7 +332,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AF41FB652CB5D8FC00C6E7A5 /* Config.xcconfig in Resources */,
+				AFDA974A2CBAE1CD0004304C /* Config.xcconfig in Resources */,
+				AFDA974C2CBAE2390004304C /* GoogleService-Info.plist in Resources */,
 				AF31770C2CB897BA000D2C0A /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -390,7 +394,6 @@
 /* Begin XCBuildConfiguration section */
 		AF362CAD2CACAAB700506443 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AF41FB642CB5D8FC00C6E7A5 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -454,7 +457,6 @@
 		};
 		AF362CAE2CACAAB700506443 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AF41FB642CB5D8FC00C6E7A5 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -511,7 +513,6 @@
 		};
 		AF362CB02CACAAB700506443 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AF41FB642CB5D8FC00C6E7A5 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -554,7 +555,6 @@
 		};
 		AF362CB12CACAAB700506443 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AF41FB642CB5D8FC00C6E7A5 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -616,7 +616,6 @@
 		};
 		AF362CB42CACAAB700506443 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AF41FB642CB5D8FC00C6E7A5 /* Config.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -653,7 +652,6 @@
 		};
 		AF362CB72CACAAB700506443 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AF41FB642CB5D8FC00C6E7A5 /* Config.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
