@@ -144,59 +144,61 @@ struct AdminGameView: View {
                                     text: "\(viewModel.game.duration) min"
                                 )
                             }
-
-                            VStack(alignment: .center){
-                                switch viewModel.game.status {
-                                case .occupied:
-                                    GameQueueView(
-                                        currentPlayer: viewModel.currentPlayer,
-                                        waitingPlayers: viewModel.waitingPlayers
-                                    )
-                                    if viewModel.currentPlayer?.id == UserManager.shared.currentUser!.id {
-                                        DefaultButton(
-                                            action: {
-                                                Task {
-                                                    await viewModel.leaveGame()
-                                                }
-                                            },
-                                            text: "Sair do jogo",
-                                            isDestructive: true)
-                                        
-                                    } else if !viewModel.waitingPlayers.contains(
-                                        where: { $0.id == UserManager.shared.currentUser!.id
-                                        }) {
-                                        DefaultButton(
-                                            action: {
-                                                Task {
-                                                    await viewModel.joinWaitingList()
-                                                }
-                                            },
-                                            text: "Entrar na fila")
-                                        
-                                    } else {
-
-                                        DefaultButton(
-                                            action: {
-                                                Task {
-                                                    await viewModel.leaveWaitingList()
-                                                }
-                                            },
-                                            text: "Sair da fila",
-                                            isDestructive: true)
-
-                                    }
-                                case .free:
-                                    DefaultButton(
-                                        action: { self.isShowing.toggle()
-                                        },
-                                        text: "Entrar no jogo")
-                                default:
-                                    EmptyView()
-                                }
-                            }
                         }
                     }
                     .padding(.vertical, 12)
+                    
+                    Spacer()
+                    VStack(alignment: .center){
+                        switch viewModel.game.status {
+                        case .occupied:
+                            GameQueueView(
+                                currentPlayer: viewModel.currentPlayer,
+                                waitingPlayers: viewModel.waitingPlayers
+                            )
+                            if viewModel.currentPlayer?.id == UserManager.shared.currentUser!.id {
+                                DefaultButton(
+                                    action: {
+                                        Task {
+                                            await viewModel.leaveGame()
+                                        }
+                                    },
+                                    text: "Sair do jogo",
+                                    isDestructive: true)
+                                
+                            } else if !viewModel.waitingPlayers.contains(
+                                where: { $0.id == UserManager.shared.currentUser!.id
+                                }) {
+                                DefaultButton(
+                                    action: {
+                                        Task {
+                                            await viewModel.joinWaitingList()
+                                        }
+                                    },
+                                    text: "Entrar na fila")
+                                
+                            } else {
+
+                                DefaultButton(
+                                    action: {
+                                        Task {
+                                            await viewModel.leaveWaitingList()
+                                        }
+                                    },
+                                    text: "Sair da fila",
+                                    isDestructive: true)
+
+                            }
+                        case .free:
+                            DefaultButton(
+                                action: { self.isShowing.toggle()
+                                },
+                                text: "Entrar no jogo")
+                        default:
+                            EmptyView()
+                        }
+                    }
+                    Spacer()
                 }
                 .frame(maxWidth: .infinity)
                 .padding()

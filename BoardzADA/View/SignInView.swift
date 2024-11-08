@@ -65,17 +65,15 @@ struct SignInView: View {
                 await checkForExistingPlayer()
             }
         }
+        .navigationBarBackButtonHidden()
     }
     
     private func checkForExistingPlayer() async {
         isLoading = true
         if await userManager.fetchPlayer() != nil {
             if let player = userManager.currentUser {
-                if player.role == .admin {
-                    router.push(to: .adminGameList)
-                } else {
-                    router.push(to: .gameList)
-                }
+                print(player.role.rawValue)
+                router.replaceRootView(to: .newRoot)
             }
         } else {
             isLoading = false
@@ -83,32 +81,40 @@ struct SignInView: View {
     }
     
     private func handleAuthorization(result: Result<ASAuthorization, Error>) {
-        isLoading = true
+        DispatchQueue.main.async {
+            self.isLoading = true
+        }
         switch result {
         case .success(let authorization):
             signInManager.handle(authorization: authorization) { firebaseResult in
-                isLoading = false
-                switch firebaseResult {
-                case .success(_):
-                    Task {
-
-                        if await !userManager.checkIfPlayerExists() {
-                            await userManager.createPlayer()
+                DispatchQueue.main.async {
+                    self.isLoading = false
+                    switch firebaseResult {
+                    case .success(_):
+                        Task {
+                            if await !userManager.checkIfPlayerExists() {
+                                await userManager.createPlayer()
+                            } else {
+                                await userManager.fetchPlayer()
+                            }
+                            DispatchQueue.main.async {
+                                router.replaceRootView(to: .newRoot)
+                            }
                         }
-                        
-                        
-                        router.push(to: .gameList)
+                    case .failure(let error):
+                        self.errorMessage = error.localizedDescription
                     }
-                    
-                case .failure(let error):
-                    errorMessage = error.localizedDescription
                 }
             }
         case .failure(let error):
-            isLoading = false
-            errorMessage = error.localizedDescription
+            DispatchQueue.main.async {
+                self.isLoading = false
+                self.errorMessage = error.localizedDescription
+            }
         }
     }
+
+
 }
 
 #Preview {

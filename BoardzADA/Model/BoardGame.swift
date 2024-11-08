@@ -26,8 +26,8 @@ struct BoardGame: Codable, Identifiable, Equatable, Hashable {
     var numPlayersMin: Int
     var description: String
     var duration: Int
-    var currentPlayerRef: DocumentReference? // Usando referência ao jogador
-    var waitingPlayerRefs: [DocumentReference] = [] // Referências para a fila de espera
+    var currentPlayerRef: DocumentReference?
+    var waitingPlayerRefs: [DocumentReference] = []
     var imageUrl: String
 
     init(
@@ -39,8 +39,8 @@ struct BoardGame: Codable, Identifiable, Equatable, Hashable {
         numPlayersMin: Int,
         description: String,
         duration: Int,
-        currentPlayerRef: DocumentReference? = nil, // Referência ao jogador
-        waitingPlayerRefs: [DocumentReference] = [], // Lista de referências aos jogadores
+        currentPlayerRef: DocumentReference? = nil,
+        waitingPlayerRefs: [DocumentReference] = [],
         imageUrl: String
     ) {
         self.name = name

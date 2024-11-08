@@ -28,13 +28,17 @@ class AppleSignInManager: NSObject, ObservableObject {
             
             guard let appleIDToken = appleIDCredential.identityToken else {
                 print("Erro ao obter o token de identidade do Apple ID.")
-                completion(.failure(NSError(domain: "AppleSignIn", code: -1, userInfo: [NSLocalizedDescriptionKey: "Erro ao obter token de identidade"])))
+                DispatchQueue.main.async {
+                    completion(.failure(NSError(domain: "AppleSignIn", code: -1, userInfo: [NSLocalizedDescriptionKey: "Erro ao obter token de identidade"])))
+                }
                 return
             }
             
             guard let idTokenString = String(data: appleIDToken, encoding: .utf8) else {
                 print("Não foi possível converter o token de identidade em uma string.")
-                completion(.failure(NSError(domain: "AppleSignIn", code: -1, userInfo: [NSLocalizedDescriptionKey: "Erro ao converter token de identidade"])))
+                DispatchQueue.main.async {
+                    completion(.failure(NSError(domain: "AppleSignIn", code: -1, userInfo: [NSLocalizedDescriptionKey: "Erro ao converter token de identidade"])))
+                }
                 return
             }
 
@@ -47,7 +51,10 @@ class AppleSignInManager: NSObject, ObservableObject {
             Auth.auth().signIn(with: credential) { (authResult, error) in
                 if let error = error {
                     print("Erro ao autenticar com Firebase: \(error.localizedDescription)")
-                    completion(.failure(error))
+                    DispatchQueue.main.async {
+                        self.currentNonce = nil
+                        completion(.failure(error))
+                    }
                     return
                 }
 
@@ -55,14 +62,12 @@ class AppleSignInManager: NSObject, ObservableObject {
                     Task {
                         let userManager = UserManager.shared
 
-                        // Capturar o nome completo do usuário, se disponível
                         var displayName: String?
                         if let fullName = appleIDCredential.fullName {
                             displayName = [fullName.givenName, fullName.familyName]
                                 .compactMap { $0 }
                                 .joined(separator: " ")
 
-                            // Atualizar o displayName no Firebase Auth
                             let changeRequest = authResult.user.createProfileChangeRequest()
                             changeRequest.displayName = displayName
                             try await changeRequest.commitChanges()
@@ -72,14 +77,20 @@ class AppleSignInManager: NSObject, ObservableObject {
 
                         if await !userManager.checkIfPlayerExists() {
                             await userManager.createPlayer()
+                        } else {
+                            await userManager.fetchPlayer()
                         }
                         print("Usuário autenticado com sucesso: \(authResult.user.uid)")
-                        completion(.success(authResult))
+                        await MainActor.run {
+                            self.currentNonce = nil
+                            completion(.success(authResult))
+                        }
                     }
                 }
             }
         }
     }
+
 
     private func randomNonceString(length: Int = 32) -> String {
         precondition(length > 0)
@@ -100,7 +111,6 @@ class AppleSignInManager: NSObject, ObservableObject {
                     return
                 }
 
-                // Seleciona um caractere aleatório do charset
                 let index = Int(randomByte) % charset.count
                 result.append(charset[index])
                 remainingLength -= 1
@@ -113,7 +123,6 @@ class AppleSignInManager: NSObject, ObservableObject {
     private func sha256(_ input: String) -> String {
         let inputData = Data(input.utf8)
         let hashedData = SHA256.hash(data: inputData)
-        // Converte os bytes hash em uma string hexadecimal
         let hashString = hashedData.map { String(format: "%02x", $0) }.joined()
         return hashString
     }

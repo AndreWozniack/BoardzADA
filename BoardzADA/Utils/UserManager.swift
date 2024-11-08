@@ -13,13 +13,13 @@ class UserManager: ObservableObject {
     static let shared = UserManager()
     private var db = Firestore.firestore()
     @Published var currentUser: Player?
-
+    
     private init() {
         Task {
             await fetchPlayer()
         }
     }
-
+    
     func createPlayer() async {
         guard let user = Auth.auth().currentUser else {
             print("Usuário não está logado.")
@@ -29,7 +29,7 @@ class UserManager: ObservableObject {
         let userId = user.uid
         let name = user.displayName ?? "Usuário"
         let email = user.email ?? ""
-
+        
         do {
             let playerRef = db.collection("players").document(userId)
             let document = try await playerRef.getDocument()
@@ -48,14 +48,14 @@ class UserManager: ObservableObject {
             print("Erro ao criar o jogador: \(error.localizedDescription)")
         }
     }
-
+    
     @discardableResult
     func fetchPlayer() async -> Player? {
         guard let userId = Auth.auth().currentUser?.uid else {
             print("Usuário não está logado.")
             return nil
         }
-
+        
         do {
             let document = try await db.collection("players").document(userId).getDocument()
             if let player = try? document.data(as: Player.self) {
@@ -87,7 +87,7 @@ class UserManager: ObservableObject {
             return nil
         }
     }
-
+    
     func checkIfPlayerExists() async -> Bool {
         guard let userId = Auth.auth().currentUser?.uid else {
             print("Usuário não está logado.")
@@ -136,4 +136,45 @@ class UserManager: ObservableObject {
     func updatePlayerStatus(isPlaying: Bool, currentGameId: String?) async {
         await updatePlayer(isPlaying: isPlaying, currentGameId: currentGameId)
     }
+    
+    func logout() async{
+        do {
+            GamesCollectionManager.shared.stopListening()
+            GamesCollectionManager.shared.gameListeners = []
+            try Auth.auth().signOut()
+            await MainActor.run {
+                self.currentUser = nil
+            }
+            print("Usuário desconectado com sucesso.")
+
+        } catch let error {
+            print("Erro ao fazer logout: \(error.localizedDescription)")
+        }
+    }
+    
+    func deleteAccount() async -> Bool {
+        guard let user = Auth.auth().currentUser else {
+            print("Nenhum usuário logado para excluir.")
+            return false
+        }
+
+        do {
+            try await db.collection("players").document(user.uid).delete()
+            print("Dados do usuário removidos do Firestore.")
+
+            try await user.delete()
+            print("Conta excluída com sucesso.")
+            
+            await MainActor.run {
+                self.currentUser = nil
+            }
+            GamesCollectionManager.shared.stopListening()
+            GamesCollectionManager.shared.gameListeners = []
+            return true
+        } catch let error {
+            print("Erro ao excluir a conta: \(error.localizedDescription)")
+            return false
+        }
+    }
+
 }

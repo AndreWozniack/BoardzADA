@@ -58,8 +58,7 @@ struct GameSearchView: View {
                                     nm_jogo: "",
                                     nm_original: "",
                                     thumb: nil,
-                                    link: nil,
-                                    tp_jogo: nil
+                                    link: nil
                                 )
                             )
                         )

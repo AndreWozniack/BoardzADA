@@ -15,11 +15,15 @@ class GamesCollectionManager: ObservableObject {
     @Published var occupiedGames: [BoardGame] = []
 
     private var db = Firestore.firestore()
-    private var listener: ListenerRegistration?
-    private var gameListeners: [ListenerRegistration] = []
+    var listener: ListenerRegistration?
+    var gameListeners: [ListenerRegistration] = []
     
     init() {
         startListening()
+        for game in gameList {
+            print("==============================\nID:\(game.name)\nNome:\(game.id)\n==============================")
+
+        }
     }
 
     func listenForGameChanges() {
@@ -41,7 +45,6 @@ class GamesCollectionManager: ObservableObject {
             DispatchQueue.main.async {
                 self.gameList = games
                 self.updateFilteredLists()
-
                 self.addListenersToGames(games: games)
             }
         }
@@ -114,6 +117,12 @@ class GamesCollectionManager: ObservableObject {
             let games = snapshot.documents.compactMap { document -> BoardGame? in
                 return try? document.data(as: BoardGame.self)
             }
+            
+            for game in games {
+                print("==============================\nID:\(game.name)\nNome:\(game.id)\n==============================")
+
+            }
+                
             DispatchQueue.main.async {
                 self.gameList = games
             }

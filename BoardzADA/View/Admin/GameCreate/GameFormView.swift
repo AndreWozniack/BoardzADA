@@ -133,8 +133,7 @@ struct GameFormView: View {
                 nm_jogo: "Quest",
                 nm_original: "Quest",
                 thumb: "https://storage.googleapis.com/ludopedia-capas/35643_t.jpg",
-                link: "Link de compra",
-                tp_jogo: "Tipo"
+                link: "Link de compra"
             )
         )
     }

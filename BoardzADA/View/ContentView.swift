@@ -12,12 +12,17 @@ import RouterKit
 
 struct ContentView: View {
     var body: some View {
-        RouterView<AppRoute>(rootView: .signIn)
-            .preferredColorScheme(.light)
+        if UserManager.shared.currentUser == nil {
+            RouterView<AppRoute>(rootView: .signIn, showBackButton: false)
+                .preferredColorScheme(.light)
+        } else {
+            RouterView<AppRoute>(rootView: .gameList, showBackButton: true)
+                .preferredColorScheme(.light)
+                
+        }
     }
 }
 
 #Preview {
 	ContentView()
 }
-

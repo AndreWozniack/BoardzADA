@@ -23,8 +23,6 @@ struct DefaultButton: View {
                 .background(isDestructive ? Color.vermelho : Color.roxo)
                 .cornerRadius(16)
         }
-
-        
     }
 }
 

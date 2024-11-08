@@ -15,7 +15,6 @@ struct LDGame: Codable, Identifiable, Equatable, Hashable {
     let nm_original: String?
     let thumb: String?
     let link: String?
-    let tp_jogo: String?
 
 }
 
@@ -29,28 +28,20 @@ class LudopediaManager {
     let url = "https://ludopedia.com.br/api/v1"
     
     let appId: String = {
-        guard let id = Bundle.main.object(forInfoDictionaryKey: "LUDOPEDIA_APP_ID") as? String else {
-            fatalError("LUDOPEDIA_APP_ID não foi configurado no Info.plist")
-        }
-        return id
+        return "dbd21ab8f20a64de"
     }()
     
     let appKey: String = {
-        guard let key = Bundle.main.object(forInfoDictionaryKey: "LUDOPEDIA_APP_KEY") as? String else {
-            fatalError("LUDOPEDIA_APP_KEY não foi configurado no Info.plist")
-        }
-        return key
+        return "f4d37c06a607a4f0fa501453d291cd64"
     }()
     
     let accessToken: String = {
-        guard let token = Bundle.main.object(forInfoDictionaryKey: "LUDOPEDIA_ACCESS_TOKEN") as? String else {
-            fatalError("LUDOPEDIA_ACCESS_TOKEN não foi configurado no Info.plist")
-        }
-        return token
+        return "803a4569d210a5d3e15016c8d831cf1f"
     }()
 
 
     func jogos() async -> LDGameResponse? {
+        
         let urlComponents = URLComponents(string: "\(url)/jogos")
 
 
@@ -68,6 +59,11 @@ class LudopediaManager {
         do {
             let (data, _) = try await URLSession.shared.data(for: request)
             do {
+                
+                if let jsonString = String(data: data, encoding: .utf8) {
+                    print("Response Data: \(jsonString)")
+                }
+                
                 let result = try JSONDecoder().decode(LDGameResponse.self, from: data)
                 return result
             } catch {

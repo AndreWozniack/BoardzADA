@@ -1,5 +1,5 @@
 {
-  "originHash" : "37784fb70a23a9a4870c7580cb445cceb834418998612a6f4096a799ae2a6d85",
+  "originHash" : "d529059f46f7df693075bf7d9d66045974915a39979c589e0862d8487205fad8",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -132,8 +132,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BerkSpar/router-kit.git",
       "state" : {
-        "revision" : "59324f9e7777a747d37625c514f3b3dc7b696184",
-        "version" : "1.0.0"
+        "revision" : "290d0225fee1048f8eb5f894c474078a6c52521b",
+        "version" : "1.3.0"
       }
     },
     {

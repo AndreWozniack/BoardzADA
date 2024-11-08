@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		A912DE482CACB06700E9DE4E /* CarBode in Frameworks */ = {isa = PBXBuildFile; productRef = A912DE472CACB06700E9DE4E /* CarBode */; };
-		AF31770C2CB897BA000D2C0A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AF31770B2CB897BA000D2C0A /* GoogleService-Info.plist */; };
 		AF3177572CB89960000D2C0A /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = AF3177562CB89960000D2C0A /* FirebaseAnalytics */; };
 		AF3177592CB89960000D2C0A /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = AF3177582CB89960000D2C0A /* FirebaseAnalyticsOnDeviceConversion */; };
 		AF31775B2CB89960000D2C0A /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = AF31775A2CB89960000D2C0A /* FirebaseAnalyticsWithoutAdIdSupport */; };
@@ -33,7 +32,7 @@
 		AF3177812CB89960000D2C0A /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = AF3177802CB89960000D2C0A /* FirebaseStorage */; };
 		AF3177832CB89960000D2C0A /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = AF3177822CB89960000D2C0A /* FirebaseStorageCombine-Community */; };
 		AF3177852CB89960000D2C0A /* FirebaseVertexAI-Preview in Frameworks */ = {isa = PBXBuildFile; productRef = AF3177842CB89960000D2C0A /* FirebaseVertexAI-Preview */; };
-		AFDA974A2CBAE1CD0004304C /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = AFDA97492CBAE1CD0004304C /* Config.xcconfig */; };
+		AF34A7CF2CDA8A3600016A7A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AF34A7CE2CDA8A3600016A7A /* GoogleService-Info.plist */; };
 		AFDA974C2CBAE2390004304C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AFDA974B2CBAE2390004304C /* GoogleService-Info.plist */; };
 		F74327022CACE7EE00E9608F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = F74327012CACE7EE00E9608F /* Alamofire */; };
 		F7756DF52CACB951008B1389 /* RouterKit in Frameworks */ = {isa = PBXBuildFile; productRef = F7756DF42CACB951008B1389 /* RouterKit */; };
@@ -57,12 +56,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		AF31770B2CB897BA000D2C0A /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		AF34A7CE2CDA8A3600016A7A /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AF362C8B2CACAAB400506443 /* BoardzADA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoardzADA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF362C9B2CACAAB700506443 /* BoardzADATests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BoardzADATests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF362CA52CACAAB700506443 /* BoardzADAUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BoardzADAUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		AFDA97492CBAE1CD0004304C /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		AFDA974B2CBAE2390004304C /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		AFDA97FA2CBD69CD0004304C /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -151,8 +150,8 @@
 		AF362C822CACAAB400506443 = {
 			isa = PBXGroup;
 			children = (
-				AF31770B2CB897BA000D2C0A /* GoogleService-Info.plist */,
-				AFDA97492CBAE1CD0004304C /* Config.xcconfig */,
+				AF34A7CE2CDA8A3600016A7A /* GoogleService-Info.plist */,
+				AFDA97FA2CBD69CD0004304C /* Config.xcconfig */,
 				AF362C8D2CACAAB400506443 /* BoardzADA */,
 				AF362C9E2CACAAB700506443 /* BoardzADATests */,
 				AF362CA82CACAAB700506443 /* BoardzADAUITests */,
@@ -285,7 +284,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1600;
-				LastUpgradeCheck = 1600;
+				LastUpgradeCheck = 1610;
 				TargetAttributes = {
 					AF362C8A2CACAAB400506443 = {
 						CreatedOnToolsVersion = 16.0;
@@ -332,9 +331,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AFDA974A2CBAE1CD0004304C /* Config.xcconfig in Resources */,
+				AF34A7CF2CDA8A3600016A7A /* GoogleService-Info.plist in Resources */,
 				AFDA974C2CBAE2390004304C /* GoogleService-Info.plist in Resources */,
-				AF31770C2CB897BA000D2C0A /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -738,7 +736,7 @@
 			repositoryURL = "https://github.com/BerkSpar/router-kit.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
+				minimumVersion = 1.3.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
